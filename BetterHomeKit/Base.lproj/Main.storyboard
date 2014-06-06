@@ -223,7 +223,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Characteristic" id="7jv-ny-tZv"/>
+                    <navigationItem key="navigationItem" title="Characteristic" id="7jv-ny-tZv">
+                        <barButtonItem key="rightBarButtonItem" title="Rename" id="zFd-iP-2Ib">
+                            <connections>
+                                <action selector="renameService:" destination="kR0-Yi-XUw" id="ZVm-11-eDk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R64-63-LSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

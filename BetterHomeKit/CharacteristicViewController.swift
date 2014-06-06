@@ -16,14 +16,14 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     var detailItem: HMService? {
     didSet {
-        self.title = detailItem!.serviceType
+        self.title = detailItem!.name
         // Update the view.
         self.configureView()
     }
     }
     
     @IBAction func renameService(sender : AnyObject) {
-        let alert:UIAlertController = UIAlertController(title: "Rename Accessory", message: "Enter the name you want for this accessory", preferredStyle: .Alert)
+        let alert:UIAlertController = UIAlertController(title: "Rename Service", message: "Enter the name you want for this service. Siri should be able to take command with this name.", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(nil)
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
