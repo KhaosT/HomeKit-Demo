@@ -110,6 +110,11 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         
         let object = objects[indexPath.row] as HMAccessory
         NSLog("Reach:\(object.reachable)")
+        if object.reachable {
+            cell.textLabel.textColor = UIColor.greenColor()
+        }else{
+            cell.textLabel.textColor = UIColor.redColor()
+        }
         cell.textLabel.text = object.name
         return cell
     }
