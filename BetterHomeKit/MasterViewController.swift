@@ -9,7 +9,7 @@
 import UIKit
 import HomeKit
 
-class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDelegate {
+class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
     var objects = NSMutableArray()
     
@@ -47,29 +47,37 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     {
         NSLog("DidUpdateHomes:\(manager)")
         if !manager.primaryHome {
-            let alert:UIAlertController = UIAlertController(title: "Create New Home", message: "You need a new home to continue", preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler(nil)
-            alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
-                {
-                    action in
-                    let textField = alert.textFields[0] as UITextField
-                    manager.addHomeWithName(textField.text, completionHandler:
-                        {
-                            home, error in
-                            NSLog("New Home \(home)")
-                        })
-                }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            dispatch_async(dispatch_get_main_queue(),
-                {
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
+            if manager.homes {
+                manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
+                    { error in
+                        NSLog("DidSetPrimaryHome")
+                    })
+            }else{
+                let alert:UIAlertController = UIAlertController(title: "Create New Home", message: "You need a new home to continue", preferredStyle: .Alert)
+                alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
+                    {
+                        action in
+                        let textField = alert.textFields[0] as UITextField
+                        manager.addHomeWithName(textField.text, completionHandler:
+                            {
+                                home, error in
+                                NSLog("New Home \(home)")
+                            })
+                    }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+                dispatch_async(dispatch_get_main_queue(),
+                    {
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+            }
         }else{
             mainHome = manager.primaryHome
             mainHome.delegate = self
             for accessory:HMAccessory! in manager.primaryHome.accessories {
                 if !objects.containsObject(accessory) {
                     objects.insertObject(accessory, atIndex: 0)
+                    accessory.delegate = self
                     tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
                 }
             }
@@ -81,6 +89,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         for accessory:HMAccessory! in homeManager.primaryHome.accessories {
             if !objects.containsObject(accessory) {
                 objects.insertObject(accessory, atIndex: 0)
+                accessory.delegate = self
                 tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
@@ -92,6 +101,35 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
             let index = objects.indexOfObject(accessory)
             objects.removeObjectAtIndex(index)
             tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index, inSection:0)], withRowAnimation: .Fade)
+        }
+    }
+    
+    func accessoryDidUpdateReachability(accessory: HMAccessory!)
+    {
+        if objects.containsObject(accessory) {
+            for service in accessory.services as HMService[] {
+                for characteristic in service.characteristics as HMCharacteristic[] {
+                    if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
+                        characteristic.readValueWithCompletionHandler(
+                            {
+                                error in
+                                if error {
+                                    NSLog("Error read Char: \(characteristic), error: \(error)")
+                                }else{
+                                    NSLog("Successfully update Char :\(characteristic.characteristicType)")
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+            let index = objects.indexOfObject(accessory)
+            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow:index, inSection:0))
+            if accessory.reachable {
+                cell.textLabel.textColor = UIColor.greenColor()
+            }else{
+                cell.textLabel.textColor = UIColor.redColor()
+            }
         }
     }
     
@@ -109,7 +147,6 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = objects[indexPath.row] as HMAccessory
-        NSLog("Reach:\(object.reachable)")
         if object.reachable {
             cell.textLabel.textColor = UIColor.greenColor()
         }else{

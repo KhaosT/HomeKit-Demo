@@ -72,7 +72,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        homeManager.primaryHome.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
+        homeManager.primaryHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
             {
                 error in
                 if error {

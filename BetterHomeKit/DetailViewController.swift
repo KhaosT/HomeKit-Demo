@@ -17,7 +17,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
     var detailItem: HMAccessory? {
         didSet {
             self.title = detailItem!.name
-            detailItem!.delegate = self;
             // Update the view.
             self.configureView()
         }

@@ -16,6 +16,7 @@
 		CCA9232F193FD267001BE28C /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9232E193FD267001BE28C /* HomeKit.framework */; };
 		CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */; };
 		CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9233219402088001BE28C /* CharacteristicViewController.swift */; };
+		CCBD5742194272F5001FCD22 /* OTIHomeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		CCA9232E193FD267001BE28C /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccessoriesViewController.swift; sourceTree = "<group>"; };
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
+		CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTIHomeCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		CCA9230C193FD1FB001BE28C /* BetterHomeKit */ = {
 			isa = PBXGroup;
 			children = (
+				CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
 				CCA92313193FD1FB001BE28C /* DetailViewController.swift */,
@@ -223,6 +226,7 @@
 			files = (
 				CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
+				CCBD5742194272F5001FCD22 /* OTIHomeCore.swift in Sources */,
 				CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */,
 				CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */,
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
@@ -413,6 +417,7 @@
 				CCA9232A193FD1FB001BE28C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CCA9232B193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "BetterHomeKitTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				CCA9232D193FD1FB001BE28C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
