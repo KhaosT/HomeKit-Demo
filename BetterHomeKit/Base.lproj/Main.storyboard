@@ -230,6 +230,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="characteristicTableView" destination="muH-wk-ruT" id="Lkq-FB-xyh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R64-63-LSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
