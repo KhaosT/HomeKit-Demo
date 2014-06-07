@@ -33,7 +33,7 @@ class OTIHomeCore: NSObject,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDele
         NSLog("homeManagerDidUpdateHomes: \(manager)")
         if homeManger.primaryHome {
             primaryHome = homeManger.primaryHome
-            for accessory : AnyObject in primaryHome.accessories{
+            for accessory in primaryHome.accessories as HMAccessory[]{
                 NSLog("Accessory: \(accessory)")
             }
         }

@@ -30,7 +30,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         super.viewWillAppear(animated)
         NSLog("ViewWillAppear")
         if homeManager != nil && homeManager.primaryHome != nil {
-            for accessory:HMAccessory! in homeManager.primaryHome.accessories {
+            for accessory in homeManager.primaryHome.accessories as HMAccessory[] {
                 if !objects.containsObject(accessory) {
                     objects.insertObject(accessory, atIndex: 0)
                     accessory.delegate = self
@@ -91,7 +91,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         }else{
             mainHome = manager.primaryHome
             mainHome.delegate = self
-            for accessory:HMAccessory! in manager.primaryHome.accessories {
+            for accessory in manager.primaryHome.accessories as HMAccessory[] {
                 if !objects.containsObject(accessory) {
                     objects.insertObject(accessory, atIndex: 0)
                     accessory.delegate = self
@@ -103,7 +103,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!)
     {
-        for accessory:HMAccessory! in homeManager.primaryHome.accessories {
+        for accessory in homeManager.primaryHome.accessories as HMAccessory[] {
             if !objects.containsObject(accessory) {
                 objects.insertObject(accessory, atIndex: 0)
                 accessory.delegate = self
