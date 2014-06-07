@@ -26,6 +26,20 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         homeManager.delegate = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSLog("ViewWillAppear")
+        if homeManager != nil && homeManager.primaryHome != nil {
+            for accessory:HMAccessory! in homeManager.primaryHome.accessories {
+                if !objects.containsObject(accessory) {
+                    objects.insertObject(accessory, atIndex: 0)
+                    accessory.delegate = self
+                    tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+                }
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,8 +60,11 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     func homeManagerDidUpdateHomes(manager: HMHomeManager!)
     {
         NSLog("DidUpdateHomes:\(manager)")
+        for home in manager.homes as HMHome[] {
+            NSLog("Home:\(home)")
+        }
         if !manager.primaryHome {
-            if manager.homes {
+            if manager.homes != nil && manager.homes.count > 0 {
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
                     { error in
                         NSLog("DidSetPrimaryHome")
