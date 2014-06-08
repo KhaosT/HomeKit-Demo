@@ -27,11 +27,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         alert.addTextFieldWithConfigurationHandler(nil)
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
-                action in
+                (action:UIAlertAction!) in
                 let textField = alert.textFields[0] as UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
-                        error in
+                        (error:NSError!) in
                         if !error {
                             self.title = textField.text
                         } else {
@@ -97,7 +97,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             if object.value {
                 object.writeValue(!(object.value as Bool), completionHandler:
                     {
-                        error in
+                        (error:NSError!) in
                         if error {
                             NSLog("Change Char Error: \(error)")
                         }else{
@@ -115,11 +115,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             alert.addTextFieldWithConfigurationHandler(nil)
             alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                 {
-                    action in
+                    (action:UIAlertAction!) in
                     let textField = alert.textFields[0] as UITextField
                     object.writeValue("\(textField.text)", completionHandler:
                         {
-                            error in
+                            (error:NSError!) in
                             if error {
                                 NSLog("Change Char Error: \(error)")
                             }else{
@@ -142,11 +142,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             alert.addTextFieldWithConfigurationHandler(nil)
             alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                 {
-                    action in
+                    (action:UIAlertAction!) in
                     let textField = alert.textFields[0] as UITextField
                     object.writeValue("\(textField.text)", completionHandler:
                         {
-                            error in
+                            (error:NSError!) in
                             if error {
                                 NSLog("Change Char Error: \(error)")
                             }else{

@@ -66,7 +66,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         if !manager.primaryHome {
             if manager.homes != nil && manager.homes.count > 0 {
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
-                    { error in
+                    { (error:NSError!) in
                         NSLog("DidSetPrimaryHome")
                     })
             }else{
@@ -74,11 +74,11 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                 alert.addTextFieldWithConfigurationHandler(nil)
                 alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
                     {
-                        action in
+                        (action:UIAlertAction!) in
                         let textField = alert.textFields[0] as UITextField
                         manager.addHomeWithName(textField.text, completionHandler:
                             {
-                                home, error in
+                                (home:HMHome!, error:NSError!) in
                                 NSLog("New Home \(home)")
                             })
                     }))
@@ -129,7 +129,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                     if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
                         characteristic.readValueWithCompletionHandler(
                             {
-                                error in
+                                (error:NSError!) in
                                 if error {
                                     NSLog("Error read Char: \(characteristic), error: \(error)")
                                 }else{
@@ -186,7 +186,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
             let isBridge = (objects.objectAtIndex(indexPath.row) as HMAccessory).identifiersForBridgedAccessories
             homeManager.primaryHome.removeAccessory(objects.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
                 {
-                    error in
+                    (error:NSError!) in
                     if error {
                         NSLog("Delete Accessory error: \(error)")
                     }else{

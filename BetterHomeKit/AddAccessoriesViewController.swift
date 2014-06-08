@@ -74,7 +74,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         homeManager.primaryHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
             {
-                error in
+                (error:NSError!) in
                 if error {
                     NSLog("\(error)")
                 }

@@ -27,11 +27,11 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
         alert.addTextFieldWithConfigurationHandler(nil)
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
-                action in
+                (action:UIAlertAction!) in
                 let textField = alert.textFields[0] as UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
-                        error in
+                        (error:NSError!) in
                         if !error {
                             self.title = textField.text
                         } else {
