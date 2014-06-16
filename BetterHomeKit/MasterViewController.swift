@@ -80,6 +80,10 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                             {
                                 (home:HMHome!, error:NSError!) in
                                 NSLog("New Home \(home)")
+                                manager.updatePrimaryHome(home, completionHandler:
+                                    { (error:NSError!) in
+                                        NSLog("DidSetPrimaryHome")
+                                    })
                             })
                     }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
