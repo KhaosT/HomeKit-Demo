@@ -90,7 +90,19 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let object = characteristics[indexPath.row] as HMCharacteristic
-        NSLog("Char:\(object.characteristicType) \n \(object.metadata) \n\n \(object.properties)")
+        if let charaType = object.characteristicType {
+            NSLog("Char:\(charaType)")
+        }
+        
+        /*if let metadata = object.metadata {
+            NSLog("Meta:\(metadata)")
+        }*/
+        
+        if let properties = object.properties {
+            NSLog("Properties:\(properties)")
+        }
+        
+        //NSLog("Char:\(object.characteristicType) \n \(object.metadata) \n\n \(object.properties)")
         
         switch object.characteristicType as NSString {
         case HMCharacteristicTypeLocked,HMCharacteristicTypePowerState:

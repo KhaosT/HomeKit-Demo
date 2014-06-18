@@ -40,6 +40,27 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         }
     }
     
+    @IBAction func addUserToHome(sender: AnyObject) {
+        let alert = UIAlertController(title: "New User", message: "Enter the iCloud address of user you want to add", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addTextFieldWithConfigurationHandler(nil)
+        alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
+            {
+                (action:UIAlertAction!) in
+                let textField = alert.textFields[0] as UITextField
+                self.mainHome.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
+                    if error {
+                        NSLog("Add user failed: \(error)")
+                    }
+                    
+                    })
+            }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        dispatch_async(dispatch_get_main_queue(),
+            {
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,6 +124,11 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                 }
             }
         }
+    }
+    
+    func home(home: HMHome!, didAddUser userID: String!)
+    {
+        NSLog("Did Add user: \(userID)")
     }
     
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!)
