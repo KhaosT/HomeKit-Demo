@@ -95,7 +95,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
         
         if let metadata = object.metadata {
-            NSLog("Meta:\(metadata.format) \n\(metadata.minimumValue) \n\(metadata.maximumValue) \n\(metadata.stepValue)\n\(metadata.precision)\n\(metadata.maxLength)\n\(metadata.units)\n\(metadata.manufacturerDescription)")
+            println("Meta:\(metadata)")
         }
         
         if let properties = object.properties {
