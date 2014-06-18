@@ -46,7 +46,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Scanning..." id="WsQ-fC-ejc">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="jYb-cC-pO4">
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="jYb-cC-pO4">
                                             <connections>
                                                 <action selector="dismissAddAccessories:" destination="yxG-uM-lt8" id="h6A-ht-zTz"/>
                                             </connections>
