@@ -102,8 +102,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             NSLog("Properties:\(properties)")
         }
         
-        //NSLog("Char:\(object.characteristicType) \n \(object.metadata) \n\n \(object.properties)")
-        
         switch object.characteristicType as NSString {
         case HMCharacteristicTypeLocked,HMCharacteristicTypePowerState,HMCharacteristicTypeIdentify:
             if object.value {
