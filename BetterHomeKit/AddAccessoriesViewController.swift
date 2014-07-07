@@ -30,7 +30,6 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        accessoriesTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         accessoriesManager.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -63,7 +62,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel.text = accessories.objectAtIndex(indexPath.row).name
         
         return cell
@@ -80,6 +79,17 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
                 }
             }
         )
+    }
+    
+    func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
+    {
+        let accessory = accessories.objectAtIndex(indexPath.row) as HMAccessory
+        accessory.identifyWithCompletionHandler({
+                (error:NSError!) in
+                if error {
+                    println("Failed to identify \(error)")
+                }
+            })
     }
     
     func accessoryBrowser(browser: HMAccessoryBrowser!, didFindNewAccessory accessory: HMAccessory!)

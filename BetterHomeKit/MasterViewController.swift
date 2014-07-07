@@ -211,6 +211,17 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         return true
     }
     
+    override func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
+    {
+        let accessory = objects[indexPath.row] as HMAccessory
+        accessory.identifyWithCompletionHandler({
+            (error:NSError!) in
+            if error {
+                println("Failed to identify \(error)")
+            }
+            })
+    }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let isBridge = (objects.objectAtIndex(indexPath.row) as HMAccessory).identifiersForBridgedAccessories
