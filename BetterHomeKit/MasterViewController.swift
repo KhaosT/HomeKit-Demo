@@ -30,7 +30,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         super.viewWillAppear(animated)
         NSLog("ViewWillAppear")
         if homeManager != nil && homeManager.primaryHome != nil {
-            for accessory in homeManager.primaryHome.accessories as HMAccessory[] {
+            for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
                 if !objects.containsObject(accessory) {
                     objects.insertObject(accessory, atIndex: 0)
                     accessory.delegate = self
@@ -81,11 +81,11 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     func homeManagerDidUpdateHomes(manager: HMHomeManager!)
     {
         NSLog("DidUpdateHomes:\(manager)")
-        for home in manager.homes as HMHome[] {
+        for home in manager.homes as [HMHome] {
             NSLog("Home:\(home)")
         }
         if !manager.primaryHome {
-            if manager.homes != nil && manager.homes.count > 0 {
+            if manager.homes?.count > 0 {
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
                     { (error:NSError!) in
                         NSLog("DidSetPrimaryHome")
@@ -116,7 +116,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         }else{
             mainHome = manager.primaryHome
             mainHome.delegate = self
-            for accessory in manager.primaryHome.accessories as HMAccessory[] {
+            for accessory in manager.primaryHome.accessories as [HMAccessory] {
                 if !objects.containsObject(accessory) {
                     objects.insertObject(accessory, atIndex: 0)
                     accessory.delegate = self
@@ -133,7 +133,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!)
     {
-        for accessory in homeManager.primaryHome.accessories as HMAccessory[] {
+        for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
             if !objects.containsObject(accessory) {
                 objects.insertObject(accessory, atIndex: 0)
                 accessory.delegate = self
@@ -154,8 +154,8 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     func accessoryDidUpdateReachability(accessory: HMAccessory!)
     {
         if objects.containsObject(accessory) {
-            for service in accessory.services as HMService[] {
-                for characteristic in service.characteristics as HMCharacteristic[] {
+            for service in accessory.services as [HMService] {
+                for characteristic in service.characteristics as [HMCharacteristic] {
                     if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
                         characteristic.readValueWithCompletionHandler(
                             {
