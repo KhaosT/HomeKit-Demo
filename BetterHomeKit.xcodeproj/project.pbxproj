@@ -27,10 +27,24 @@
 			remoteGlobalIDString = CCA92309193FD1FB001BE28C;
 			remoteInfo = BetterHomeKit;
 		};
+		CCF6B5BD196ED36300E6109D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCA92309193FD1FB001BE28C;
+			remoteInfo = HomeKitDemo;
+		};
+		CCF6B5BF196ED36300E6109D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCA92309193FD1FB001BE28C;
+			remoteInfo = HomeKitDemo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CCA9230A193FD1FB001BE28C /* BetterHomeKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterHomeKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA9230E193FD1FB001BE28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA9230F193FD1FB001BE28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA92311193FD1FB001BE28C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +58,7 @@
 		CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccessoriesViewController.swift; sourceTree = "<group>"; };
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
 		CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTIHomeCore.swift; sourceTree = "<group>"; };
+		CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BetterHomeKit.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +93,7 @@
 		CCA9230B193FD1FB001BE28C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCA9230A193FD1FB001BE28C /* BetterHomeKit.app */,
+				CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */,
 				CCA9231E193FD1FB001BE28C /* BetterHomeKitTests.xctest */,
 			);
 			name = Products;
@@ -87,6 +102,7 @@
 		CCA9230C193FD1FB001BE28C /* BetterHomeKit */ = {
 			isa = PBXGroup;
 			children = (
+				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
 				CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
@@ -128,9 +144,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CCA92309193FD1FB001BE28C /* BetterHomeKit */ = {
+		CCA92309193FD1FB001BE28C /* HomeKitDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "BetterHomeKit" */;
+			buildConfigurationList = CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "HomeKitDemo" */;
 			buildPhases = (
 				CCA92306193FD1FB001BE28C /* Sources */,
 				CCA92307193FD1FB001BE28C /* Frameworks */,
@@ -140,9 +156,9 @@
 			);
 			dependencies = (
 			);
-			name = BetterHomeKit;
+			name = HomeKitDemo;
 			productName = BetterHomeKit;
-			productReference = CCA9230A193FD1FB001BE28C /* BetterHomeKit.app */;
+			productReference = CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CCA9231D193FD1FB001BE28C /* BetterHomeKitTests */ = {
@@ -157,6 +173,8 @@
 			);
 			dependencies = (
 				CCA92320193FD1FB001BE28C /* PBXTargetDependency */,
+				CCF6B5BE196ED36300E6109D /* PBXTargetDependency */,
+				CCF6B5C0196ED36300E6109D /* PBXTargetDependency */,
 			);
 			name = BetterHomeKitTests;
 			productName = BetterHomeKitTests;
@@ -174,6 +192,7 @@
 				TargetAttributes = {
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 7C2EXSD3YV;
 					};
 					CCA9231D193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
@@ -194,7 +213,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CCA92309193FD1FB001BE28C /* BetterHomeKit */,
+				CCA92309193FD1FB001BE28C /* HomeKitDemo */,
 				CCA9231D193FD1FB001BE28C /* BetterHomeKitTests */,
 			);
 		};
@@ -246,8 +265,18 @@
 /* Begin PBXTargetDependency section */
 		CCA92320193FD1FB001BE28C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CCA92309193FD1FB001BE28C /* BetterHomeKit */;
+			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
 			targetProxy = CCA9231F193FD1FB001BE28C /* PBXContainerItemProxy */;
+		};
+		CCF6B5BE196ED36300E6109D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
+			targetProxy = CCF6B5BD196ED36300E6109D /* PBXContainerItemProxy */;
+		};
+		CCF6B5C0196ED36300E6109D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
+			targetProxy = CCF6B5BF196ED36300E6109D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -345,10 +374,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BetterHomeKit/BetterHomeKit.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -358,10 +391,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BetterHomeKit/BetterHomeKit.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -369,7 +406,7 @@
 		CCA9232C193FD1FB001BE28C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BetterHomeKit.app/BetterHomeKit";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HomeKitDemo.app/HomeKitDemo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -389,7 +426,7 @@
 		CCA9232D193FD1FB001BE28C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BetterHomeKit.app/BetterHomeKit";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HomeKitDemo.app/HomeKitDemo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -414,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "BetterHomeKit" */ = {
+		CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "HomeKitDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CCA92329193FD1FB001BE28C /* Debug */,

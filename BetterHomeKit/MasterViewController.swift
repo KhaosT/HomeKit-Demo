@@ -9,11 +9,13 @@
 import UIKit
 import HomeKit
 
-class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
+class MasterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
-    var objects = NSMutableArray()
+    var objects = [HMAccessory]()
     
     var homeManager:HMHomeManager = HMHomeManager()
+    
+    @IBOutlet var accessoriesTableView: UITableView
     
     var mainHome:HMHome!
     
@@ -31,12 +33,12 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         NSLog("ViewWillAppear")
         if homeManager != nil && homeManager.primaryHome != nil {
             for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
-                if !objects.containsObject(accessory) {
-                    objects.insertObject(accessory, atIndex: 0)
+                if !contains(objects, accessory) {
+                    objects.insert(accessory, atIndex: 0)
                     accessory.delegate = self
-                    tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
                 }
             }
+            accessoriesTableView.reloadData()
         }
     }
     
@@ -69,8 +71,9 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            let indexPath = self.tableView.indexPathForSelectedRow()
+            let indexPath = accessoriesTableView.indexPathForSelectedRow()
             let object = objects[indexPath.row] as HMAccessory
+            accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
             (segue.destinationViewController as DetailViewController).detailItem = object
         }
         if segue.identifier == "showAddNewAccessories" {
@@ -116,13 +119,14 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         }else{
             mainHome = manager.primaryHome
             mainHome.delegate = self
+            removeEverything()
             for accessory in manager.primaryHome.accessories as [HMAccessory] {
-                if !objects.containsObject(accessory) {
-                    objects.insertObject(accessory, atIndex: 0)
+                if !contains(objects, accessory) {
+                    objects.insert(accessory, atIndex: 0)
                     accessory.delegate = self
-                    tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
                 }
             }
+            accessoriesTableView.reloadData()
         }
     }
     
@@ -134,26 +138,31 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!)
     {
         for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
-            if !objects.containsObject(accessory) {
-                objects.insertObject(accessory, atIndex: 0)
+            if !contains(objects, accessory) {
+                objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
-                tableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+                accessoriesTableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
     }
     
     func home(home: HMHome!, didRemoveAccessory accessory: HMAccessory!)
     {
-        if objects.containsObject(accessory) {
-            let index = objects.indexOfObject(accessory)
-            objects.removeObjectAtIndex(index)
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index, inSection:0)], withRowAnimation: .Fade)
+        if contains(objects, accessory) {
+            let index = find(objects, accessory)
+            objects.removeAtIndex(index!)
+            accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
         }
+    }
+    
+    func accessoryDidUpdateServices(accessory: HMAccessory!)
+    {
+        NSLog("Did update services for accessory: \(accessory)")
     }
     
     func accessoryDidUpdateReachability(accessory: HMAccessory!)
     {
-        if objects.containsObject(accessory) {
+        if contains(objects, accessory) {
             for service in accessory.services as [HMService] {
                 for characteristic in service.characteristics as [HMCharacteristic] {
                     if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
@@ -170,8 +179,8 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                     }
                 }
             }
-            let index = objects.indexOfObject(accessory)
-            let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow:index, inSection:0))
+            let index = find(objects, accessory)
+            let cell = accessoriesTableView.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
             if accessory.reachable {
                 cell.textLabel.textColor = UIColor.greenColor()
             }else{
@@ -182,15 +191,15 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
     
     // #pragma mark - Table View
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = objects[indexPath.row] as HMAccessory
@@ -203,7 +212,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         if indexPath.row < objects.count && ( objects[indexPath.row] as HMAccessory).bridged {
             return false
@@ -211,7 +220,7 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
         return true
     }
     
-    override func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
+    func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
     {
         let accessory = objects[indexPath.row] as HMAccessory
         accessory.identifyWithCompletionHandler({
@@ -222,11 +231,20 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
             })
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func removeEverything() {
+        self.objects.removeAll(keepCapacity: false)
+        self.objects += (self.homeManager.primaryHome.accessories as [HMAccessory])
+        for accessory in self.objects {
+            accessory.delegate = self
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let isBridge = (objects.objectAtIndex(indexPath.row) as HMAccessory).identifiersForBridgedAccessories
-            homeManager.primaryHome.removeAccessory(objects.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
+            let isBridge = (objects[indexPath.row] as HMAccessory).identifiersForBridgedAccessories
+            homeManager.primaryHome.removeAccessory(objects[indexPath.row] as HMAccessory, completionHandler:
                 {
+                    [weak self]
                     (error:NSError!) in
                     if error {
                         NSLog("Delete Accessory error: \(error)")
@@ -234,11 +252,10 @@ class MasterViewController: UITableViewController,HMHomeManagerDelegate,HMHomeDe
                         dispatch_async(dispatch_get_main_queue(),
                             {
                                 if isBridge {
-                                    self.objects.removeAllObjects()
-                                    self.objects.addObjectsFromArray(self.homeManager.primaryHome.accessories)
-                                    self.tableView.reloadData()
+                                    self?.removeEverything()
+                                    self?.accessoriesTableView.reloadData()
                                 }else{
-                                    self.objects.removeObjectAtIndex(indexPath.row)
+                                    self?.objects.removeAtIndex(indexPath.row)
                                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                                 }
                             }
