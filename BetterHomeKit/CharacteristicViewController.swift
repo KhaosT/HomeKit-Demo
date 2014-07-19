@@ -14,6 +14,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     @IBOutlet var characteristicTableView : UITableView
     var characteristics = [HMCharacteristic]()
     
+    var hueCharacteristic:HMCharacteristic?
+    var brightnessCharacteristic:HMCharacteristic?
+    var saturationCharacteristic:HMCharacteristic?
+    var onCharacteristic:HMCharacteristic?
+    
     var detailItem: HMService? {
     didSet {
         self.title = detailItem!.name
@@ -21,6 +26,8 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         self.configureView()
     }
     }
+    
+    @IBOutlet var colorButton: UIBarButtonItem
     
     @IBAction func renameService(sender : AnyObject) {
         let alert:UIAlertController = UIAlertController(title: "Rename Service", message: "Enter the name you want for this service. Siri should be able to take command with this name.", preferredStyle: .Alert)
@@ -47,9 +54,39 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             })
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier? == "showColorPicker" {
+            (segue.destinationViewController as ColorPickerViewController).delegate = self
+        }
+    }
+    
     func configureView() {
+        if detailItem?.serviceType == (HMServiceTypeLightbulb as String) {
+            colorButton.enabled = true
+        }else{
+            colorButton.enabled = false
+        }
+        
         // Update the user interface for the detail item.
         for characteristic in detailItem!.characteristics as [HMCharacteristic] {
+            if colorButton.enabled == true {
+                if characteristic.characteristicType == (HMCharacteristicTypeBrightness as String) {
+                    brightnessCharacteristic = characteristic
+                }
+                
+                if characteristic.characteristicType == (HMCharacteristicTypeHue as String) {
+                    hueCharacteristic = characteristic
+                }
+                
+                if characteristic.characteristicType == (HMCharacteristicTypeSaturation as String) {
+                    saturationCharacteristic = characteristic
+                }
+                
+                if characteristic.characteristicType == (HMCharacteristicTypePowerState as String) {
+                    onCharacteristic = characteristic
+                }
+            }
+            
             if !contains(characteristics, characteristic) {
                 characteristics += characteristic
                 characteristicTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
@@ -84,6 +121,47 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 )
             }
+        }
+    }
+    
+    func updateLightWithColor(color:UIColor!) {
+        var HSBA = [CGFloat](count: 4, repeatedValue: 0.0)
+        color.getHue(&HSBA[0], saturation: &HSBA[1], brightness: &HSBA[2], alpha: &HSBA[3])
+        
+        if let hueChar = hueCharacteristic {
+            let hueValue = NSNumber(integer: Int(Float(HSBA[0]) * hueChar.metadata.maximumValue.floatValue))
+            hueChar.writeValue(hueValue, completionHandler:
+                {
+                    error in
+                    if let error = error {
+                        NSLog("Failed to update Hue \(error)")
+                    }
+                }
+            )
+        }
+        
+        if let brightChar = brightnessCharacteristic {
+            let brightValue = NSNumber(integer: Int(Float(HSBA[2]) * brightChar.metadata.maximumValue.floatValue))
+            brightChar.writeValue(brightValue, completionHandler:
+                {
+                    error in
+                    if let error = error {
+                        NSLog("Failed to update Brightness \(error)")
+                    }
+                }
+            )
+        }
+        
+        if let satChar = saturationCharacteristic {
+            let satValue = NSNumber(integer: Int(Float(HSBA[1]) * satChar.metadata.maximumValue.floatValue))
+            satChar.writeValue(satValue, completionHandler:
+                {
+                    error in
+                    if let error = error {
+                        NSLog("Failed to update Saturation \(error)")
+                    }
+                }
+            )
         }
     }
     

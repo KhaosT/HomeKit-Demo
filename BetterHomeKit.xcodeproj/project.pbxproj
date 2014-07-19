@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */; };
+		CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */; };
+		CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B072197AC2A600A4A443 /* HRColorCursor.m */; };
+		CC78B080197AC2A600A4A443 /* HRColorInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B074197AC2A600A4A443 /* HRColorInfoView.m */; };
+		CC78B081197AC2A600A4A443 /* HRColorMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B076197AC2A600A4A443 /* HRColorMapView.m */; };
+		CC78B082197AC2A600A4A443 /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B078197AC2A600A4A443 /* HRColorPickerView.m */; };
+		CC78B083197AC2A600A4A443 /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07A197AC2A600A4A443 /* HRHSVColorUtil.m */; };
+		CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */; };
+		CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */; };
 		CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9230F193FD1FB001BE28C /* AppDelegate.swift */; };
 		CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92311193FD1FB001BE28C /* MasterViewController.swift */; };
 		CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92313193FD1FB001BE28C /* DetailViewController.swift */; };
@@ -20,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CC78B087197AC8E700A4A443 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCA92309193FD1FB001BE28C;
+			remoteInfo = HomeKitDemo;
+		};
 		CCA9231F193FD1FB001BE28C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
@@ -44,6 +60,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
+		CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
+		CC78B06F197AC2A600A4A443 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessSlider.h; sourceTree = "<group>"; };
+		CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessSlider.m; sourceTree = "<group>"; };
+		CC78B071197AC2A600A4A443 /* HRColorCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorCursor.h; sourceTree = "<group>"; };
+		CC78B072197AC2A600A4A443 /* HRColorCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorCursor.m; sourceTree = "<group>"; };
+		CC78B073197AC2A600A4A443 /* HRColorInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorInfoView.h; sourceTree = "<group>"; };
+		CC78B074197AC2A600A4A443 /* HRColorInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorInfoView.m; sourceTree = "<group>"; };
+		CC78B075197AC2A600A4A443 /* HRColorMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorMapView.h; sourceTree = "<group>"; };
+		CC78B076197AC2A600A4A443 /* HRColorMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorMapView.m; sourceTree = "<group>"; };
+		CC78B077197AC2A600A4A443 /* HRColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerView.h; sourceTree = "<group>"; };
+		CC78B078197AC2A600A4A443 /* HRColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerView.m; sourceTree = "<group>"; };
+		CC78B079197AC2A600A4A443 /* HRHSVColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRHSVColorUtil.h; sourceTree = "<group>"; };
+		CC78B07A197AC2A600A4A443 /* HRHSVColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRHSVColorUtil.m; sourceTree = "<group>"; };
+		CC78B07B197AC2A600A4A443 /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
+		CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
+		CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA9230E193FD1FB001BE28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA9230F193FD1FB001BE28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +114,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC78B06C197AC2A600A4A443 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */,
+				CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */,
+				CC78B06F197AC2A600A4A443 /* HRBrightnessSlider.h */,
+				CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */,
+				CC78B071197AC2A600A4A443 /* HRColorCursor.h */,
+				CC78B072197AC2A600A4A443 /* HRColorCursor.m */,
+				CC78B073197AC2A600A4A443 /* HRColorInfoView.h */,
+				CC78B074197AC2A600A4A443 /* HRColorInfoView.m */,
+				CC78B075197AC2A600A4A443 /* HRColorMapView.h */,
+				CC78B076197AC2A600A4A443 /* HRColorMapView.m */,
+				CC78B077197AC2A600A4A443 /* HRColorPickerView.h */,
+				CC78B078197AC2A600A4A443 /* HRColorPickerView.m */,
+				CC78B079197AC2A600A4A443 /* HRHSVColorUtil.h */,
+				CC78B07A197AC2A600A4A443 /* HRHSVColorUtil.m */,
+				CC78B07B197AC2A600A4A443 /* UIImage+CoreGraphics.h */,
+				CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
 		CCA92301193FD1FB001BE28C = {
 			isa = PBXGroup;
 			children = (
@@ -102,11 +159,13 @@
 		CCA9230C193FD1FB001BE28C /* BetterHomeKit */ = {
 			isa = PBXGroup;
 			children = (
+				CC78B06C197AC2A600A4A443 /* ColorPicker */,
 				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
 				CCA92313193FD1FB001BE28C /* DetailViewController.swift */,
 				CCA9233219402088001BE28C /* CharacteristicViewController.swift */,
+				CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
 				CCA92315193FD1FB001BE28C /* Main.storyboard */,
@@ -119,6 +178,7 @@
 		CCA9230D193FD1FB001BE28C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */,
 				CCA9230E193FD1FB001BE28C /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -175,6 +235,7 @@
 				CCA92320193FD1FB001BE28C /* PBXTargetDependency */,
 				CCF6B5BE196ED36300E6109D /* PBXTargetDependency */,
 				CCF6B5C0196ED36300E6109D /* PBXTargetDependency */,
+				CC78B088197AC8E700A4A443 /* PBXTargetDependency */,
 			);
 			name = BetterHomeKitTests;
 			productName = BetterHomeKitTests;
@@ -245,10 +306,19 @@
 			files = (
 				CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
+				CC78B080197AC2A600A4A443 /* HRColorInfoView.m in Sources */,
 				CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */,
+				CC78B082197AC2A600A4A443 /* HRColorPickerView.m in Sources */,
+				CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */,
 				CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */,
 				CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */,
+				CC78B081197AC2A600A4A443 /* HRColorMapView.m in Sources */,
+				CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */,
+				CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */,
+				CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */,
+				CC78B083197AC2A600A4A443 /* HRHSVColorUtil.m in Sources */,
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
+				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +333,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CC78B088197AC8E700A4A443 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
+			targetProxy = CC78B087197AC8E700A4A443 /* PBXContainerItemProxy */;
+		};
 		CCA92320193FD1FB001BE28C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
@@ -377,11 +452,13 @@
 				CODE_SIGN_ENTITLEMENTS = BetterHomeKit/BetterHomeKit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BetterHomeKit/HomeKitDemo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -394,11 +471,13 @@
 				CODE_SIGN_ENTITLEMENTS = BetterHomeKit/BetterHomeKit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BetterHomeKit/HomeKitDemo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -259,8 +259,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Kt4-Zc-Tf8">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                            <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Kt4-Zc-Tf8">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="F5X-Yf-PCc" detailTextLabel="Gru-bd-d7m" style="IBUITableViewCellStyleSubtitle" id="5G2-pq-Wcb">
@@ -329,8 +329,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="muH-wk-ruT">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                            <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="muH-wk-ruT">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="byr-Sx-42V" detailTextLabel="gef-k7-utH" style="IBUITableViewCellStyleSubtitle" id="CbB-od-g06">
@@ -369,6 +369,13 @@
                             <constraint firstItem="muH-wk-ruT" firstAttribute="leading" secondItem="kWF-Vi-ZuJ" secondAttribute="leading" id="xHP-mJ-kpK"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Color" id="TAe-4s-FES">
+                            <connections>
+                                <segue destination="zWC-wd-SlN" kind="show" identifier="showColorPicker" id="ZlX-vf-bjJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Characteristic" id="7jv-ny-tZv">
                         <barButtonItem key="rightBarButtonItem" title="Rename" id="zFd-iP-2Ib">
                             <connections>
@@ -378,11 +385,102 @@
                     </navigationItem>
                     <connections>
                         <outlet property="characteristicTableView" destination="muH-wk-ruT" id="Lkq-FB-xyh"/>
+                        <outlet property="colorButton" destination="TAe-4s-FES" id="ej3-vh-2I7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R64-63-LSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1997" y="64"/>
+        </scene>
+        <!--Color-->
+        <scene sceneID="Mbs-iA-wUE">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="zWC-wd-SlN" customClass="ColorPickerViewController" customModule="HomeKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yRG-A0-Dhu"/>
+                        <viewControllerLayoutGuide type="bottom" id="puk-mL-Ghb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bQe-Ss-NBQ">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woa-Jx-vzb" customClass="HRColorPickerView">
+                                <rect key="frame" x="0.0" y="64" width="480" height="372"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UQ-Cv-aEf" customClass="HRColorInfoView">
+                                        <rect key="frame" x="20" y="20" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="kMG-LW-AfK"/>
+                                            <constraint firstAttribute="width" constant="80" id="lDx-wI-6MC"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s74-sr-f7u" customClass="HRBrightnessSlider">
+                                        <rect key="frame" x="120" y="89" width="340" height="11"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="11" id="cBc-Kk-oAf"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="brightnessLowerLimit">
+                                                <real key="value" value="0.40000000000000002"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZH-hi-pF6" customClass="HRColorMapView">
+                                        <rect key="frame" x="0.0" y="140" width="480" height="232"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="saturationUpperLimit">
+                                                <real key="value" value="0.94999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tileSize">
+                                                <integer key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="PZH-hi-pF6" firstAttribute="leading" secondItem="woa-Jx-vzb" secondAttribute="leading" id="0mv-fB-GFu"/>
+                                    <constraint firstItem="1UQ-Cv-aEf" firstAttribute="top" secondItem="woa-Jx-vzb" secondAttribute="top" constant="20" id="TdM-EQ-16f"/>
+                                    <constraint firstItem="s74-sr-f7u" firstAttribute="leading" secondItem="1UQ-Cv-aEf" secondAttribute="trailing" constant="20" id="ToE-ar-ehn"/>
+                                    <constraint firstItem="1UQ-Cv-aEf" firstAttribute="bottom" secondItem="s74-sr-f7u" secondAttribute="bottom" id="VfC-wX-REC"/>
+                                    <constraint firstItem="1UQ-Cv-aEf" firstAttribute="leading" secondItem="woa-Jx-vzb" secondAttribute="leading" constant="20" id="fBN-1n-q5V"/>
+                                    <constraint firstAttribute="trailing" secondItem="PZH-hi-pF6" secondAttribute="trailing" id="frO-lE-zYu"/>
+                                    <constraint firstItem="PZH-hi-pF6" firstAttribute="top" secondItem="1UQ-Cv-aEf" secondAttribute="bottom" constant="40" id="iTX-9F-IqR"/>
+                                    <constraint firstAttribute="trailing" secondItem="s74-sr-f7u" secondAttribute="trailing" constant="20" id="vke-b5-cjq"/>
+                                    <constraint firstAttribute="bottom" secondItem="PZH-hi-pF6" secondAttribute="bottom" id="wuS-2d-izh"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="brightnessSlider" destination="s74-sr-f7u" id="2B7-1g-GyP"/>
+                                    <outlet property="colorInfoView" destination="1UQ-Cv-aEf" id="U6i-vW-XVY"/>
+                                    <outlet property="colorMapView" destination="PZH-hi-pF6" id="Ov6-no-eqT"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="woa-Jx-vzb" firstAttribute="leading" secondItem="bQe-Ss-NBQ" secondAttribute="leading" id="LX0-RK-d4g"/>
+                            <constraint firstItem="puk-mL-Ghb" firstAttribute="top" secondItem="woa-Jx-vzb" secondAttribute="bottom" id="XUa-bp-Jg8"/>
+                            <constraint firstItem="woa-Jx-vzb" firstAttribute="top" secondItem="yRG-A0-Dhu" secondAttribute="bottom" id="hUg-I5-oIb"/>
+                            <constraint firstAttribute="trailing" secondItem="woa-Jx-vzb" secondAttribute="trailing" id="sYl-Gs-w13"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Color" id="ncX-7Y-ojL">
+                        <barButtonItem key="rightBarButtonItem" title="Apply" id="h4w-ZY-IfY">
+                            <connections>
+                                <action selector="updateColor:" destination="zWC-wd-SlN" id="MdY-1T-iB0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="colorPickerView" destination="woa-Jx-vzb" id="mFh-rE-1rV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOj-I2-yI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2606" y="64"/>
         </scene>
     </scenes>
 </document>

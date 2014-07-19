@@ -184,8 +184,6 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                                 (error:NSError!) in
                                 if error {
                                     NSLog("Error read Char: \(characteristic), error: \(error)")
-                                }else{
-                                    NSLog("Successfully update Char :\(characteristic.characteristicType)")
                                 }
                             }
                         )
