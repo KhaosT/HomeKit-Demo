@@ -19,6 +19,8 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     var mainHome:HMHome!
     
+    weak var pendingAccessory:HMAccessory?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -30,7 +32,6 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        NSLog("ViewWillAppear")
         if homeManager != nil && homeManager.primaryHome != nil {
             for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
                 if !contains(objects, accessory) {
@@ -70,14 +71,26 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     // #pragma mark - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier? == "showDetail" {
             let indexPath = accessoriesTableView.indexPathForSelectedRow()
             let object = objects[indexPath.row] as HMAccessory
             accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
             (segue.destinationViewController as DetailViewController).detailItem = object
         }
-        if segue.identifier == "showAddNewAccessories" {
+        if segue.identifier? == "showAddNewAccessories" {
             (segue.destinationViewController as AddAccessoriesViewController).homeManager = homeManager
+        }
+        
+        if segue.identifier? == "presentRoomsVC" {
+            let naviController = segue.destinationViewController as UINavigationController
+            if let naviController = (segue.destinationViewController as? UINavigationController) {
+                let roomVC = naviController.viewControllers?[0] as RoomsViewController
+                roomVC.currentHome = mainHome
+                if let accessory = pendingAccessory {
+                    roomVC.pendingAccessory = accessory
+                    pendingAccessory = nil
+                }
+            }
         }
     }
     
@@ -204,31 +217,19 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         
         let object = objects[indexPath.row] as HMAccessory
         if object.reachable {
-            cell.textLabel.textColor = UIColor.greenColor()
+            cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
         }else{
             cell.textLabel.textColor = UIColor.redColor()
         }
         cell.textLabel.text = object.name
+        
+        cell.detailTextLabel.text = object.room?.name
+        
         return cell
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        if indexPath.row < objects.count && ( objects[indexPath.row] as HMAccessory).bridged {
-            return false
-        }
         return true
-    }
-    
-    func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
-    {
-        let accessory = objects[indexPath.row] as HMAccessory
-        accessory.identifyWithCompletionHandler({
-            (error:NSError!) in
-            if error {
-                println("Failed to identify \(error)")
-            }
-            })
     }
     
     func removeEverything() {
@@ -239,31 +240,90 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let isBridge = (objects[indexPath.row] as HMAccessory).identifiersForBridgedAccessories
-            homeManager.primaryHome.removeAccessory(objects[indexPath.row] as HMAccessory, completionHandler:
+    func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
+        
+        var options = [UITableViewRowAction]()
+        
+        let assignAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Assign", handler:
+            {
+                [weak self]
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                if let strongSelf = self {
+                    strongSelf.pendingAccessory = strongSelf.objects[indexPath.row]
+                    strongSelf.performSegueWithIdentifier("presentRoomsVC", sender: self)
+                    tableView.setEditing(false, animated: true)
+                }
+            }
+        )
+        assignAction.backgroundColor = UIColor.orangeColor()
+        
+        options += assignAction
+        
+        let identifyAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Identify", handler:
+            {
+                [weak self]
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                if let strongSelf = self {
+                    let accessory = strongSelf.objects[indexPath.row] as HMAccessory
+                    accessory.identifyWithCompletionHandler(
+                        {
+                            (error:NSError!) in
+                            if error {
+                                println("Failed to identify \(error)")
+                            }else{
+                                println("Successfully identify accessory")
+                            }
+                        }
+                    )
+                    tableView.setEditing(false, animated: true)
+                }
+            }
+        )
+        identifyAction.backgroundColor = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        
+        options += identifyAction
+        
+        if indexPath.row < objects.count && !( objects[indexPath.row] as HMAccessory).bridged {
+            
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:
                 {
                     [weak self]
-                    (error:NSError!) in
-                    if error {
-                        NSLog("Delete Accessory error: \(error)")
-                    }else{
-                        dispatch_async(dispatch_get_main_queue(),
-                            {
-                                if isBridge {
-                                    self?.removeEverything()
-                                    self?.accessoriesTableView.reloadData()
-                                }else{
-                                    self?.objects.removeAtIndex(indexPath.row)
-                                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                                }
+                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                    let isBridge = (self?.objects[indexPath.row] as HMAccessory).identifiersForBridgedAccessories
+                    self?.homeManager.primaryHome.removeAccessory(self?.objects[indexPath.row] as HMAccessory, completionHandler:
+                        {
+                            [weak self]
+                            (error:NSError!) in
+                            if error {
+                                NSLog("Delete Accessory error: \(error)")
+                            }else{
+                                dispatch_async(dispatch_get_main_queue(),
+                                    {
+                                        if isBridge {
+                                            self?.removeEverything()
+                                            self?.accessoriesTableView.reloadData()
+                                        }else{
+                                            self?.objects.removeAtIndex(indexPath.row)
+                                            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                                        }
+                                    }
+                                )
                             }
-                        )
-                    }
-                })
+                        }
+                    )
+                    tableView.setEditing(false, animated: true)
+                }
+            )
+            
+            options += deleteAction
+            
         }
+        
+        return options
     }
-
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+    }
 }
 

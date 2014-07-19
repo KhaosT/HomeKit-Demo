@@ -12,7 +12,7 @@ import HomeKit
 class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryDelegate {
 
     @IBOutlet var servicesTableView : UITableView
-    var services = NSMutableArray()
+    var services = [HMService]()
 
     var detailItem: HMAccessory? {
         didSet {
@@ -49,9 +49,9 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     func configureView() {
         // Update the user interface for the detail item.
-        for service : HMService! in detailItem!.services {
-            if !services.containsObject(service) {
-                services.addObject(service)
+        for service in detailItem!.services as [HMService] {
+            if !contains(services, service) {
+                services += service
                 servicesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }

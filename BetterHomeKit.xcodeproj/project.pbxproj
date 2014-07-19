@@ -16,7 +16,7 @@
 		CCA9232F193FD267001BE28C /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9232E193FD267001BE28C /* HomeKit.framework */; };
 		CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */; };
 		CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9233219402088001BE28C /* CharacteristicViewController.swift */; };
-		CCBD5742194272F5001FCD22 /* OTIHomeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */; };
+		CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 		CCA9232E193FD267001BE28C /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccessoriesViewController.swift; sourceTree = "<group>"; };
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
-		CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTIHomeCore.swift; sourceTree = "<group>"; };
+		CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
 		CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BetterHomeKit.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,12 +103,12 @@
 			isa = PBXGroup;
 			children = (
 				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
-				CCBD5741194272F5001FCD22 /* OTIHomeCore.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
 				CCA92313193FD1FB001BE28C /* DetailViewController.swift */,
 				CCA9233219402088001BE28C /* CharacteristicViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
+				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
 				CCA92315193FD1FB001BE28C /* Main.storyboard */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
@@ -245,7 +245,7 @@
 			files = (
 				CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
-				CCBD5742194272F5001FCD22 /* OTIHomeCore.swift in Sources */,
+				CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */,
 				CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */,
 				CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */,
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,

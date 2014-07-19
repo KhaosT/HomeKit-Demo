@@ -12,7 +12,7 @@ import HomeKit
 class CharacteristicViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet var characteristicTableView : UITableView
-    var characteristics = NSMutableArray()
+    var characteristics = [HMCharacteristic]()
     
     var detailItem: HMService? {
     didSet {
@@ -49,9 +49,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     func configureView() {
         // Update the user interface for the detail item.
-        for characteristic : HMCharacteristic! in detailItem!.characteristics {
-            if !characteristics.containsObject(characteristic) {
-                characteristics.addObject(characteristic)
+        for characteristic in detailItem!.characteristics as [HMCharacteristic] {
+            if !contains(characteristics, characteristic) {
+                characteristics += characteristic
                 characteristicTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
@@ -62,6 +62,29 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        for characteristic in characteristics {
+            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
+                characteristic.readValueWithCompletionHandler(
+                    {
+                        [weak self]
+                        (error:NSError!) in
+                        if error {
+                            NSLog("Error read Char: \(characteristic), error: \(error)")
+                        }else{
+                            if let strongSelf = self {
+                                let index = find(strongSelf.characteristics, characteristic)
+                                strongSelf.characteristicTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                            }
+                            
+                        }
+                    }
+                )
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,6 +135,35 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 }
             )
+        case HMCharacteristicTypeHue,HMCharacteristicTypeSaturation,HMCharacteristicTypeBrightness:
+            let alert:UIAlertController = UIAlertController(title: "Adjust \(object.characteristicType)", message: "Enter the value from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler(nil)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
+                {
+                    (action:UIAlertAction!) in
+                    let textField = alert.textFields[0] as UITextField
+                    let f = NSNumberFormatter()
+                    f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                    object.writeValue(f.numberFromString(textField.text), completionHandler:
+                        {
+                            (error:NSError!) in
+                            if error {
+                                NSLog("Change Char Error: \(error)")
+                            }else{
+                                dispatch_async(dispatch_get_main_queue(),
+                                    {
+                                        tableView.cellForRowAtIndexPath(indexPath).detailTextLabel.text = "\(object.value)"
+                                    }
+                                )
+                            }
+                        }
+                    )
+                }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            dispatch_async(dispatch_get_main_queue(),
+                {
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
         case HMCharacteristicTypeLocked,HMCharacteristicTypePowerState:
             if object.value {
                 object.writeValue(!(object.value as Bool), completionHandler:

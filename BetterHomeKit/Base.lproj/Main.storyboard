@@ -102,11 +102,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Cell" id="to8-Ne-xQh">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="f3T-og-tFr" detailTextLabel="biU-xR-rZW" style="IBUITableViewCellStyleSubtitle" id="to8-Ne-xQh">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="to8-Ne-xQh" id="0W0-oT-1Wa">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3T-og-tFr">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="biU-xR-rZW">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="Ah7-4n-0Wa" kind="show" identifier="showDetail" id="Bv4-4r-oN2"/>
@@ -133,6 +147,11 @@
                                 <action selector="addUserToHome:" destination="8PO-Mt-JRM" id="08E-RV-omz"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Rooms" id="810-fp-HaA">
+                            <connections>
+                                <segue destination="yk6-bb-K9u" kind="presentation" identifier="presentRoomsVC" id="ght-QC-Lcq"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Accessories" id="v67-8O-Liw">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4iF-gF-2xj">
@@ -150,6 +169,80 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIb-Jp-bRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="533" y="64"/>
+        </scene>
+        <!--Rooms-->
+        <scene sceneID="DVv-iH-Jt1">
+            <objects>
+                <viewController id="VOL-DH-W6B" customClass="RoomsViewController" customModule="HomeKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RaO-7z-zmk"/>
+                        <viewControllerLayoutGuide type="bottom" id="1Wv-EZ-hfN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ysc-7v-vv7">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dBG-vI-UK6">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="roomCell" id="U8A-Va-gwi">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U8A-Va-gwi" id="oDb-fk-mWh">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="VOL-DH-W6B" id="fiD-lQ-1DP"/>
+                                    <outlet property="delegate" destination="VOL-DH-W6B" id="Xt5-Bl-vxr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dBG-vI-UK6" firstAttribute="leading" secondItem="Ysc-7v-vv7" secondAttribute="leading" id="9EC-ua-3Rs"/>
+                            <constraint firstAttribute="trailing" secondItem="dBG-vI-UK6" secondAttribute="trailing" id="CO3-oj-XnP"/>
+                            <constraint firstItem="1Wv-EZ-hfN" firstAttribute="top" secondItem="dBG-vI-UK6" secondAttribute="bottom" id="CXS-tu-Pc7"/>
+                            <constraint firstItem="dBG-vI-UK6" firstAttribute="top" secondItem="Ysc-7v-vv7" secondAttribute="top" id="DZc-7C-mQP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Rooms" id="m3k-cX-XyS">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="5Zj-9p-9PX">
+                            <connections>
+                                <action selector="dismissRoomController:" destination="VOL-DH-W6B" id="rY0-6L-4Mb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="j0n-pL-01k">
+                            <connections>
+                                <action selector="addRoom:" destination="VOL-DH-W6B" id="zh0-mp-v0d"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="roomTableView" destination="dBG-vI-UK6" id="snH-Kx-oan"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BtP-Y5-TVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1107" y="705"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hbo-Qb-Qf9">
+            <objects>
+                <navigationController id="yk6-bb-K9u" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sax-qc-GNX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VOL-DH-W6B" kind="relationship" relationship="rootViewController" id="kos-nW-cBc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4K-4a-hWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533" y="705"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Cn3-H9-jdl">
