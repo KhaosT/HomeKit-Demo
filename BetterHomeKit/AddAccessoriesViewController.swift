@@ -9,8 +9,10 @@
 import UIKit
 import HomeKit
 
-class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryBrowserDelegate {
+let addAccessoryNotificationString = "DidAddHomeAccessory"
 
+class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryBrowserDelegate {
+    
     @IBOutlet var accessoriesTableView : UITableView
     
     var accessories:NSMutableArray = NSMutableArray()
@@ -76,6 +78,8 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
                 (error:NSError!) in
                 if error {
                     NSLog("\(error)")
+                }else{
+                    NSNotificationCenter.defaultCenter().postNotificationName(addAccessoryNotificationString, object: nil)
                 }
             }
         )

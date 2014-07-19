@@ -9,6 +9,8 @@
 import UIKit
 import HomeKit
 
+let assignAccessoryNotificationString = "DidAssignAccessoryToRoom"
+
 class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     weak var currentHome:HMHome?
@@ -46,7 +48,6 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("Roomes:\(currentHome?.rooms)")
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
@@ -78,6 +79,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                         NSLog("Assign Accessory \(accessory) to room \(room) error:\(error)")
                     }else{
                         NSLog("Successfully assigned the accessory")
+                        NSNotificationCenter.defaultCenter().postNotificationName(assignAccessoryNotificationString, object: nil)
                         self?.dismissRoomController(room)
                     }
                 }

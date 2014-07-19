@@ -147,9 +147,12 @@
                                 <action selector="addUserToHome:" destination="8PO-Mt-JRM" id="08E-RV-omz"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="is8-yC-2eZ"/>
                         <barButtonItem title="Rooms" id="810-fp-HaA">
                             <connections>
-                                <segue destination="yk6-bb-K9u" kind="presentation" identifier="presentRoomsVC" id="ght-QC-Lcq"/>
+                                <segue destination="yk6-bb-K9u" kind="popoverPresentation" identifier="presentRoomsVC" popoverAnchorBarButtonItem="810-fp-HaA" id="ght-QC-Lcq">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>

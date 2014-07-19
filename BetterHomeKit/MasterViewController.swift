@@ -27,11 +27,17 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updateHomeAccessories()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHomeAccessories", name: addAccessoryNotificationString, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHomeAccessories", name: assignAccessoryNotificationString, object: nil)
         homeManager.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    func updateHomeAccessories() {
         if homeManager != nil && homeManager.primaryHome != nil {
             for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
                 if !contains(objects, accessory) {
@@ -133,13 +139,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
             mainHome = manager.primaryHome
             mainHome.delegate = self
             removeEverything()
-            for accessory in manager.primaryHome.accessories as [HMAccessory] {
-                if !contains(objects, accessory) {
-                    objects.insert(accessory, atIndex: 0)
-                    accessory.delegate = self
-                }
-            }
-            accessoriesTableView.reloadData()
+            self.updateHomeAccessories()
         }
     }
     
