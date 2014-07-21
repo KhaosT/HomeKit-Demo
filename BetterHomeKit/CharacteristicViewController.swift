@@ -140,6 +140,18 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     override func viewDidDisappear(animated: Bool) {
+        for characteristic in characteristics {
+            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertySupportsEventNotification) {
+                characteristic.enableNotification(false, completionHandler:
+                    {
+                        error in
+                        if error {
+                            NSLog("Cannot disable notifications: \(error)")
+                        }
+                    }
+                )
+            }
+        }
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     

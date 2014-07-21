@@ -210,6 +210,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!)
     {
+        NSLog("didUpdateValueForCharacteristic:\(characteristic)")
         NSNotificationCenter.defaultCenter().postNotificationName(characteristicUpdateNotification, object: nil, userInfo: ["accessory":accessory,"service":service,"characteristic":characteristic])
     }
     
