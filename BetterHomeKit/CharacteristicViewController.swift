@@ -11,7 +11,7 @@ import HomeKit
 
 class CharacteristicViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
-    @IBOutlet var characteristicTableView : UITableView
+    @IBOutlet var characteristicTableView : UITableView?
     var characteristics = [HMCharacteristic]()
     
     var hueCharacteristic:HMCharacteristic?
@@ -27,7 +27,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     }
     
-    @IBOutlet var colorButton: UIBarButtonItem
+    @IBOutlet var colorButton: UIBarButtonItem?
     
     @IBAction func renameService(sender : AnyObject) {
         let alert:UIAlertController = UIAlertController(title: "Rename Service", message: "Enter the name you want for this service. Siri should be able to take command with this name.", preferredStyle: .Alert)
@@ -62,14 +62,18 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     func configureView() {
         if detailItem?.serviceType == (HMServiceTypeLightbulb as String) {
-            colorButton.enabled = true
+            if let colorButton = colorButton {
+                colorButton.enabled = true
+            }
         }else{
-            colorButton.enabled = false
+            if let colorButton = colorButton {
+                colorButton.enabled = false
+            }
         }
         
         // Update the user interface for the detail item.
         for characteristic in detailItem!.characteristics as [HMCharacteristic] {
-            if colorButton.enabled == true {
+            if colorButton?.enabled == true {
                 if characteristic.characteristicType == (HMCharacteristicTypeBrightness as String) {
                     brightnessCharacteristic = characteristic
                 }
@@ -114,7 +118,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         }else{
                             if let strongSelf = self {
                                 let index = find(strongSelf.characteristics, characteristic)
-                                strongSelf.characteristicTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                                strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
                             }
                             
                         }

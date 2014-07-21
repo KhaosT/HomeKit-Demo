@@ -13,7 +13,7 @@ let addAccessoryNotificationString = "DidAddHomeAccessory"
 
 class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryBrowserDelegate {
     
-    @IBOutlet var accessoriesTableView : UITableView
+    @IBOutlet var accessoriesTableView : UITableView?
     
     var accessories:NSMutableArray = NSMutableArray()
     
@@ -101,7 +101,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         if !accessories.containsObject(accessories) {
             accessories.insertObject(accessory, atIndex: 0)
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            accessoriesTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            accessoriesTableView?.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
     
@@ -110,7 +110,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         if accessories.containsObject(accessory) {
             let index = accessories.indexOfObject(accessory)
             accessories.removeObjectAtIndex(index)
-            accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+            accessoriesTableView?.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
         }
     }
 

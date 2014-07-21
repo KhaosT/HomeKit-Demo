@@ -15,7 +15,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     weak var currentHome:HMHome?
     weak var pendingAccessory:HMAccessory?
-    @IBOutlet var roomTableView: UITableView
+    @IBOutlet var roomTableView: UITableView?
     
     @IBAction func dismissRoomController(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -36,7 +36,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                             if let error = error {
                                 NSLog("Add room error:\(error)")
                             }else{
-                                strongSelf.roomTableView.reloadData()
+                                strongSelf.roomTableView?.reloadData()
                             }
                         }
                     )

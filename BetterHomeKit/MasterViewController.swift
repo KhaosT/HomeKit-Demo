@@ -15,7 +15,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     var homeManager:HMHomeManager = HMHomeManager()
     
-    @IBOutlet var accessoriesTableView: UITableView
+    @IBOutlet var accessoriesTableView: UITableView?
     
     var mainHome:HMHome!
     
@@ -45,7 +45,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                     accessory.delegate = self
                 }
             }
-            accessoriesTableView.reloadData()
+            accessoriesTableView?.reloadData()
         }
     }
     
@@ -78,10 +78,12 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier? == "showDetail" {
-            let indexPath = accessoriesTableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as HMAccessory
-            accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
-            (segue.destinationViewController as DetailViewController).detailItem = object
+            let indexPath = accessoriesTableView?.indexPathForSelectedRow()
+            if let indexPath = indexPath {
+                let object = objects[indexPath.row] as HMAccessory
+                accessoriesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
+                (segue.destinationViewController as DetailViewController).detailItem = object
+            }
         }
         if segue.identifier? == "showAddNewAccessories" {
             (segue.destinationViewController as AddAccessoriesViewController).homeManager = homeManager
@@ -154,7 +156,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
             if !contains(objects, accessory) {
                 objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
-                accessoriesTableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+                accessoriesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
     }
@@ -164,7 +166,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         if contains(objects, accessory) {
             let index = find(objects, accessory)
             objects.removeAtIndex(index!)
-            accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
+            accessoriesTableView?.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
         }
     }
     
@@ -191,11 +193,15 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 }
             }
             let index = find(objects, accessory)
-            let cell = accessoriesTableView.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
+            let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
             if accessory.reachable {
-                cell.textLabel.textColor = UIColor.greenColor()
+                if let cell = cell {
+                    cell.textLabel.textColor = UIColor.greenColor()
+                }
             }else{
-                cell.textLabel.textColor = UIColor.redColor()
+                if let cell = cell {
+                    cell.textLabel.textColor = UIColor.redColor()
+                }
             }
         }
     }
@@ -299,7 +305,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                                     {
                                         if isBridge {
                                             self?.removeEverything()
-                                            self?.accessoriesTableView.reloadData()
+                                            self?.accessoriesTableView?.reloadData()
                                         }else{
                                             self?.objects.removeAtIndex(indexPath.row)
                                             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

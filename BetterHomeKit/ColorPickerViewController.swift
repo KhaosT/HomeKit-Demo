@@ -10,7 +10,7 @@ import UIKit
 
 class ColorPickerViewController: UIViewController {
 
-    @IBOutlet var colorPickerView: HRColorPickerView
+    @IBOutlet var colorPickerView: HRColorPickerView?
     
     weak var delegate:AnyObject?
     
@@ -21,13 +21,13 @@ class ColorPickerViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         if let delegate = delegate as? CharacteristicViewController {
-            delegate.updateLightWithColor(colorPickerView.color)
+            delegate.updateLightWithColor(colorPickerView?.color)
         }
     }
     
     @IBAction func updateColor(sender: AnyObject) {
         if let delegate = delegate as? CharacteristicViewController {
-            delegate.updateLightWithColor(colorPickerView.color)
+            delegate.updateLightWithColor(colorPickerView?.color)
         }
     }
 }
