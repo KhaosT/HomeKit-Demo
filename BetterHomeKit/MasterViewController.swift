@@ -9,6 +9,8 @@
 import UIKit
 import HomeKit
 
+let characteristicUpdateNotification = "didUpdateValueForCharacteristic"
+
 class MasterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
     var objects = [HMAccessory]()
@@ -204,6 +206,11 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 }
             }
         }
+    }
+    
+    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!)
+    {
+        NSNotificationCenter.defaultCenter().postNotificationName(characteristicUpdateNotification, object: nil, userInfo: ["accessory":accessory,"service":service,"characteristic":characteristic])
     }
     
     // #pragma mark - Table View

@@ -107,7 +107,18 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
         for characteristic in characteristics {
+            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertySupportsEventNotification) {
+                characteristic.enableNotification(true, completionHandler:
+                    {
+                        error in
+                        if error {
+                            NSLog("Cannot enable notifications: \(error)")
+                        }
+                    }
+                )
+            }
             if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
                 characteristic.readValueWithCompletionHandler(
                     {
@@ -124,6 +135,32 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         }
                     }
                 )
+            }
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func didUpdateValueForCharacteristic(aNote:NSNotification) {
+        if let info = aNote.userInfo {
+            if let characteristic = info["characteristic"] as? HMCharacteristic {
+                if contains(characteristics, characteristic) {
+                    if let index = find(characteristics, characteristic) {
+                        if let cell = self.characteristicTableView?.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? UITableViewCell {
+                            dispatch_async(dispatch_get_main_queue(),
+                                {
+                                    if let value = characteristic.value as? NSObject {
+                                        cell.detailTextLabel.text = "\(value)"
+                                    }else{
+                                        cell.detailTextLabel.text = ""
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
