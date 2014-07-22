@@ -198,7 +198,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
             if accessory.reachable {
                 if let cell = cell {
-                    cell.textLabel.textColor = UIColor.greenColor()
+                    cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
                 }
             }else{
                 if let cell = cell {
