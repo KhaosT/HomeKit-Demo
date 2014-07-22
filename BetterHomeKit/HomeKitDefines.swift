@@ -22,7 +22,7 @@ let HomeKitUUIDs = [
     HMServiceTypeLockManagement:"Lock Management",
     HMCharacteristicTypePowerState:"Power State",
     HMCharacteristicTypeHue:"Hue",
-    HMCharacteristicTypeSaturation:"HMCharacteristicTypeSaturation",
+    HMCharacteristicTypeSaturation:"Saturation",
     HMCharacteristicTypeBrightness:"Brightness",
     HMCharacteristicTypeTemperatureUnits:"Temperature Units",
     HMCharacteristicTypeCurrentTemperature:"Current Temperature",

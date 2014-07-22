@@ -164,9 +164,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             dispatch_async(dispatch_get_main_queue(),
                                 {
                                     if let value = characteristic.value as? NSObject {
-                                        cell.detailTextLabel.text = "\(value)"
+                                        cell.textLabel.text = "\(value)"
                                     }else{
-                                        cell.detailTextLabel.text = ""
+                                        cell.textLabel.text = ""
                                     }
                                 }
                             )
@@ -232,14 +232,14 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         
         let object = characteristics[indexPath.row] as HMCharacteristic
         if let charDesc = HomeKitUUIDs[object.characteristicType] as? String {
-            cell.textLabel.text = charDesc
+            cell.detailTextLabel.text = charDesc
         }else{
-            cell.textLabel.text = object.characteristicType
+            cell.detailTextLabel.text = object.characteristicType
         }
         if object.value {
-            cell.detailTextLabel.text = "\(object.value)"
+            cell.textLabel.text = "\(object.value)"
         }else{
-            cell.detailTextLabel.text = ""
+            cell.textLabel.text = ""
         }
         return cell
     }
@@ -248,6 +248,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let object = characteristics[indexPath.row] as HMCharacteristic
+        
+        if !(object.properties as NSArray).containsObject(HMCharacteristicPropertyWritable) {
+            return
+        }
+        
         if let charaType = object.characteristicType {
             NSLog("Char:\(charaType)")
         }
@@ -270,108 +275,86 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 }
             )
-        case HMCharacteristicTypeHue,HMCharacteristicTypeSaturation,HMCharacteristicTypeBrightness:
-            let alert:UIAlertController = UIAlertController(title: "Adjust \(object.characteristicType)", message: "Enter the value from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler(nil)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
-                {
-                    (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
-                    let f = NSNumberFormatter()
-                    f.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                    object.writeValue(f.numberFromString(textField.text), completionHandler:
-                        {
-                            (error:NSError!) in
-                            if error {
-                                NSLog("Change Char Error: \(error)")
-                            }else{
-                                dispatch_async(dispatch_get_main_queue(),
-                                    {
-                                        tableView.cellForRowAtIndexPath(indexPath).detailTextLabel.text = "\(object.value)"
-                                    }
-                                )
-                            }
-                        }
-                    )
-                }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            dispatch_async(dispatch_get_main_queue(),
-                {
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
-        case HMCharacteristicTypeLocked,HMCharacteristicTypePowerState:
-            if object.value {
-                object.writeValue(!(object.value as Bool), completionHandler:
-                    {
-                        (error:NSError!) in
-                        if error {
-                            NSLog("Change Char Error: \(error)")
-                        }else{
-                            dispatch_async(dispatch_get_main_queue(),
-                                {
-                                    tableView.cellForRowAtIndexPath(indexPath).detailTextLabel.text = "\(object.value)"
-                                }
-                            )
-                        }
-                    }
-                )
-            }
-        case "public.hap.characteristic.endpoint-name":
-            let alert:UIAlertController = UIAlertController(title: "Rename Endpoint", message: "Enter the name you want for this endpoint", preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler(nil)
-            alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
-                {
-                    (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
-                    object.writeValue("\(textField.text)", completionHandler:
-                        {
-                            (error:NSError!) in
-                            if error {
-                                NSLog("Change Char Error: \(error)")
-                            }else{
-                                dispatch_async(dispatch_get_main_queue(),
-                                    {
-                                        tableView.cellForRowAtIndexPath(indexPath).detailTextLabel.text = "\(object.value)"
-                                    }
-                                )
-                            }
-                        }
-                    )
-                }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            dispatch_async(dispatch_get_main_queue(),
-                {
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
-        case HMCharacteristicTypeTargetTemperature:
-            let alert:UIAlertController = UIAlertController(title: "Adjust Temperature", message: "Enter the temperature from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler(nil)
-            alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
-                {
-                    (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
-                    object.writeValue("\(textField.text)", completionHandler:
-                        {
-                            (error:NSError!) in
-                            if error {
-                                NSLog("Change Char Error: \(error)")
-                            }else{
-                                dispatch_async(dispatch_get_main_queue(),
-                                    {
-                                        tableView.cellForRowAtIndexPath(indexPath).detailTextLabel.text = "\(object.value)"
-                                    }
-                                )
-                            }
-                        }
-                    )
-                }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            dispatch_async(dispatch_get_main_queue(),
-                {
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
         default:
-            NSLog("Cannot Identify type")
+            var charDesc = object.characteristicType
+            charDesc = HomeKitUUIDs[object.characteristicType] as? String
+            switch (object.metadata.format as NSString) {
+            case HMCharacteristicMetadataFormatBool:
+                if object.value {
+                    object.writeValue(!(object.value as Bool), completionHandler:
+                        {
+                            (error:NSError!) in
+                            if error {
+                                NSLog("Change Char Error: \(error)")
+                            }else{
+                                dispatch_async(dispatch_get_main_queue(),
+                                    {
+                                        tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                    }
+                                )
+                            }
+                        }
+                    )
+                }
+            case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
+                let alert:UIAlertController = UIAlertController(title: "Adjust \(charDesc)", message: "Enter the value from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+                alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
+                    {
+                        (action:UIAlertAction!) in
+                        let textField = alert.textFields[0] as UITextField
+                        let f = NSNumberFormatter()
+                        f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                        object.writeValue(f.numberFromString(textField.text), completionHandler:
+                            {
+                                (error:NSError!) in
+                                if error {
+                                    NSLog("Change Char Error: \(error)")
+                                }else{
+                                    dispatch_async(dispatch_get_main_queue(),
+                                        {
+                                            tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                        }
+                                    )
+                                }
+                            }
+                        )
+                    }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+                dispatch_async(dispatch_get_main_queue(),
+                    {
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+            case HMCharacteristicMetadataFormatString:
+                let alert:UIAlertController = UIAlertController(title: "Update \(charDesc)", message: "Enter the \(charDesc) from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+                alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
+                    {
+                        (action:UIAlertAction!) in
+                        let textField = alert.textFields[0] as UITextField
+                        object.writeValue("\(textField.text)", completionHandler:
+                            {
+                                (error:NSError!) in
+                                if error {
+                                    NSLog("Change Char Error: \(error)")
+                                }else{
+                                    dispatch_async(dispatch_get_main_queue(),
+                                        {
+                                            tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                        }
+                                    )
+                                }
+                            }
+                        )
+                    }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+                dispatch_async(dispatch_get_main_queue(),
+                    {
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+            default:
+                NSLog("Unsupported")
+            }
         }
     }
     
