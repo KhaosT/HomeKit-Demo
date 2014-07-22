@@ -18,13 +18,6 @@ class ColorPickerViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let delegate = delegate as? CharacteristicViewController {
-            delegate.updateLightWithColor(colorPickerView?.color)
-        }
-    }
-    
     @IBAction func updateColor(sender: AnyObject) {
         if let delegate = delegate as? CharacteristicViewController {
             delegate.updateLightWithColor(colorPickerView?.color)

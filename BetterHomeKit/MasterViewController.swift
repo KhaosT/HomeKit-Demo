@@ -179,32 +179,35 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
     
     func accessoryDidUpdateReachability(accessory: HMAccessory!)
     {
-        if contains(objects, accessory) {
-            for service in accessory.services as [HMService] {
-                for characteristic in service.characteristics as [HMCharacteristic] {
-                    if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
-                        characteristic.readValueWithCompletionHandler(
-                            {
-                                (error:NSError!) in
-                                if error {
-                                    NSLog("Error read Char: \(characteristic), error: \(error)")
+        if accessory.reachable {
+            if contains(objects, accessory) {
+                for service in accessory.services as [HMService] {
+                    for characteristic in service.characteristics as [HMCharacteristic] {
+                        if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
+                            characteristic.readValueWithCompletionHandler(
+                                {
+                                    (error:NSError!) in
+                                    if error {
+                                        NSLog("Error read Char: \(characteristic), error: \(error)")
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
+                    }
+                }
+                let index = find(objects, accessory)
+                let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
+                if accessory.reachable {
+                    if let cell = cell {
+                        cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+                    }
+                }else{
+                    if let cell = cell {
+                        cell.textLabel.textColor = UIColor.redColor()
                     }
                 }
             }
-            let index = find(objects, accessory)
-            let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
-            if accessory.reachable {
-                if let cell = cell {
-                    cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
-                }
-            }else{
-                if let cell = cell {
-                    cell.textLabel.textColor = UIColor.redColor()
-                }
-            }
+
         }
     }
     
