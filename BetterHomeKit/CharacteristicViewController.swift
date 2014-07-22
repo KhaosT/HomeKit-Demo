@@ -231,7 +231,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = characteristics[indexPath.row] as HMCharacteristic
-        cell.textLabel.text = object.characteristicType
+        if let charDesc = HomeKitUUIDs[object.characteristicType] as? String {
+            cell.textLabel.text = charDesc
+        }else{
+            cell.textLabel.text = object.characteristicType
+        }
         if object.value {
             cell.detailTextLabel.text = "\(object.value)"
         }else{

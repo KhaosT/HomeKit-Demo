@@ -90,9 +90,17 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let object = services[indexPath.row] as HMService
         if object.name {
             cell.textLabel.text = object.name
-            cell.detailTextLabel.text = object.serviceType
+            if let serviceDesc = HomeKitUUIDs[object.serviceType] as? String {
+                cell.detailTextLabel.text = serviceDesc
+            }else{
+                cell.detailTextLabel.text = object.serviceType
+            }
         }else{
-            cell.textLabel.text = object.serviceType
+            if let serviceDesc = HomeKitUUIDs[object.serviceType] as? String {
+                cell.detailTextLabel.text = serviceDesc
+            }else{
+                cell.detailTextLabel.text = object.serviceType
+            }
             cell.detailTextLabel.text = ""
         }
         return cell

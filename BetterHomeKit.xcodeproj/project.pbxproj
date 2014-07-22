@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */; };
 		CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */; };
 		CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */; };
 		CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B072197AC2A600A4A443 /* HRColorCursor.m */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
 		CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
 		CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
 		CC78B06F197AC2A600A4A443 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessSlider.h; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				CC78B06C197AC2A600A4A443 /* ColorPicker */,
 				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
+				CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
 				CCA92313193FD1FB001BE28C /* DetailViewController.swift */,
@@ -318,6 +321,7 @@
 				CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */,
 				CC78B083197AC2A600A4A443 /* HRHSVColorUtil.m in Sources */,
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
+				CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */,
 				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
