@@ -85,8 +85,10 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 let object = objects[indexPath.row] as HMAccessory
                 accessoriesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as DetailViewController).detailItem = object
+                (segue.destinationViewController as DetailViewController).currentHome = mainHome
             }
         }
+        
         if segue.identifier? == "showAddNewAccessories" {
             (segue.destinationViewController as AddAccessoriesViewController).homeManager = homeManager
         }
@@ -100,6 +102,14 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                     roomVC.pendingAccessory = accessory
                     pendingAccessory = nil
                 }
+            }
+        }
+        
+        if segue.identifier? == "presentTriggersVC" {
+            let naviController = segue.destinationViewController as UINavigationController
+            if let naviController = (segue.destinationViewController as? UINavigationController) {
+                let taaVC = naviController.viewControllers?[0] as TriggersAndActionsViewController
+                taaVC.currentHome = mainHome
             }
         }
     }

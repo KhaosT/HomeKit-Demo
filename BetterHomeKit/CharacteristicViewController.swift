@@ -19,6 +19,8 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     var saturationCharacteristic:HMCharacteristic?
     var onCharacteristic:HMCharacteristic?
     
+    weak var currentHome:HMHome?
+    
     var detailItem: HMService? {
     didSet {
         self.title = detailItem!.name
@@ -57,6 +59,12 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier? == "showColorPicker" {
             (segue.destinationViewController as ColorPickerViewController).delegate = self
+        }
+        if segue.identifier? == "presentTriggerView" {
+            if let characteristic = sender as? HMCharacteristic {
+                (segue.destinationViewController as TriggerViewController).currentHome = currentHome
+                (segue.destinationViewController as TriggerViewController).targetCharacteristic = characteristic
+            }
         }
     }
     
@@ -242,6 +250,37 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             cell.textLabel.text = ""
         }
         return cell
+    }
+    
+    func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
+        
+        var options = [UITableViewRowAction]()
+        
+        let triggerAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Trigger", handler:
+            {
+                [weak self]
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                if let strongSelf = self {
+                    let characteristic = strongSelf.characteristics[indexPath.row] as HMCharacteristic
+                    NSLog("Setup Trigger for \(characteristic)")
+                    strongSelf.performSegueWithIdentifier("presentTriggerView", sender: characteristic)
+                    tableView.setEditing(false, animated: true)
+                }
+            }
+        )
+        triggerAction.backgroundColor = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        
+        options += triggerAction
+        
+        return options
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)

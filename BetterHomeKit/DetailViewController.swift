@@ -14,6 +14,8 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
     @IBOutlet var servicesTableView : UITableView?
     var services = [HMService]()
 
+    weak var currentHome:HMHome?
+    
     var detailItem: HMAccessory? {
         didSet {
             self.title = detailItem!.name
@@ -65,6 +67,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 let object = services[indexPath.row] as HMService
                 servicesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as CharacteristicViewController).detailItem = object
+                (segue.destinationViewController as CharacteristicViewController).currentHome = currentHome
             }
         }
     }
