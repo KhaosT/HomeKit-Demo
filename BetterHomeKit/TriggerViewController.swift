@@ -77,7 +77,8 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
                                 let calendar = NSCalendar.currentCalendar()
                                 let selectedDate = self.datePicker.date
                                 let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
-                                let trigger = HMTimerTrigger(name: self.nameField.text.stringByAppendingString("Trigger"), fireDate: calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0), timeZone: nil, recurrence: nil, recurrenceCalendar: nil)
+                                let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
+                                let trigger = HMTimerTrigger(name: self.nameField.text.stringByAppendingString("Trigger"), fireDate: fireDate, timeZone: nil, recurrence: nil, recurrenceCalendar: nil)
                                 NSLog("Trigger FireDate:\(trigger.fireDate)")
                                 self.currentHome?.addTrigger(trigger) {
                                     error in
