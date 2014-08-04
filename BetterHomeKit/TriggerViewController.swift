@@ -22,6 +22,10 @@ class TriggerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if targetCharacteristic?.metadata.format == (HMCharacteristicMetadataFormatBool as String) {
+            targetValueField.hidden = true
+            targetState.hidden = false
+        }
         // Do any additional setup after loading the view.
     }
 

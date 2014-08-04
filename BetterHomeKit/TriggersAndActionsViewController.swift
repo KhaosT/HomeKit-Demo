@@ -36,6 +36,7 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
     }
     
     @IBAction func dismissView(sender: AnyObject) {
+        self.atTableView.setEditing(false, animated: true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

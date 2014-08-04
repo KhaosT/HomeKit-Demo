@@ -148,6 +148,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         for characteristic in characteristics {
             if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
                 characteristic.enableNotification(false, completionHandler:
@@ -160,6 +161,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 )
             }
         }
+        self.characteristicTableView?.setEditing(false, animated: true)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -281,7 +283,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        let characteristic = characteristics[indexPath.row] as HMCharacteristic
+        if contains((characteristic.properties as [String]), (HMCharacteristicPropertyWritable as String)) {
+            return true
+        }
+        return false
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
