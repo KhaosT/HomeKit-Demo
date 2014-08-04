@@ -21,12 +21,12 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     var accessoriesManager:HMAccessoryBrowser = HMAccessoryBrowser()
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
     
-    init(coder aDecoder: NSCoder!){
+    required init(coder aDecoder: NSCoder!){
         super.init(coder: aDecoder)
     }
 
@@ -76,7 +76,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         homeManager.primaryHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
             {
                 (error:NSError!) in
-                if error {
+                if error != nil {
                     NSLog("\(error)")
                 }else{
                     NSNotificationCenter.defaultCenter().postNotificationName(addAccessoryNotificationString, object: nil)
@@ -90,7 +90,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         let accessory = accessories.objectAtIndex(indexPath.row) as HMAccessory
         accessory.identifyWithCompletionHandler({
                 (error:NSError!) in
-                if error {
+                if error != nil {
                     println("Failed to identify \(error)")
                 }
             })

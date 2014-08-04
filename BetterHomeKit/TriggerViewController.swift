@@ -51,29 +51,31 @@ class TriggerViewController: UIViewController {
             if let currentHome = currentHome {
                 currentHome.addActionSetWithName(nameField.text) {
                     (actionSet: HMActionSet!, error: NSError!) in
-                    if error {
+                    if error != nil {
                         NSLog("Failed to add action set, Error: \(error)")
                     } else {
                         actionSet.addAction(action) {
                             error in
-                            if error {
+                            if error != nil {
                                 NSLog("Failed to add Action to Action Set Error: \(error)")
                             }else {
-                                NSLog("Date:\(self.datePicker.date)")
-                                let trigger = HMTimerTrigger(name: self.nameField.text, fireDate: self.datePicker.date, timeZone: NSTimeZone.systemTimeZone(), recurrence: nil, recurrenceCalendar: nil)
+                                let date = NSDate(timeIntervalSinceNow: 60)
+                                NSLog("Date:\(date)")
+                                let trigger = HMTimerTrigger(name: self.nameField.text, fireDate: date, timeZone: nil, recurrence: nil, recurrenceCalendar: nil)
+                                NSLog("Trigger FireDate:\(trigger.fireDate)")
                                 self.currentHome?.addTrigger(trigger) {
                                     error in
-                                    if error {
+                                    if error != nil {
                                         NSLog("Failed to add Time Trigger, Error: \(error)")
                                     } else {
                                         trigger.addActionSet(actionSet) {
                                             error in
-                                            if error {
+                                            if error != nil {
                                                 NSLog("Failed to add action set to Time Trigger, Error: \(error)")
                                             }else{
                                                 trigger.enable(true) {
                                                     error in
-                                                    if error {
+                                                    if error != nil {
                                                         NSLog("Failed to enable the trigger, Error: \(error)")
                                                     } else {
                                                         self.navigationController.popViewControllerAnimated(true)

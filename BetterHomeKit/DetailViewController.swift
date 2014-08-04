@@ -34,7 +34,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
-                        if !error {
+                        if (error == nil) {
                             self.title = textField.text
                         } else {
                             NSLog("Error:\(error)")
@@ -51,13 +51,14 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     func configureView() {
         // Update the user interface for the detail item.
-        for service in detailItem!.services as [HMService] {
-            if !contains(services, service) {
-                services += service
-                servicesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+        if let detailItem = detailItem {
+            for service in detailItem.services as [HMService] {
+                if !contains(services, service) {
+                    services.append(service)
+                    servicesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+                }
             }
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -91,7 +92,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = services[indexPath.row] as HMService
-        if object.name {
+        if (object.name != nil) {
             cell.textLabel.text = object.name
             if let serviceDesc = HomeKitUUIDs[object.serviceType] as? String {
                 cell.detailTextLabel.text = serviceDesc

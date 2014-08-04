@@ -79,7 +79,7 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
                 currentHome?.removeActionSet(action) {
                     [weak self]
                     error in
-                    if error {
+                    if error != nil {
                         NSLog("Failed to remove ActionSet: \(error)")
                     }else{
                         self?.updateLocalArray()
@@ -90,7 +90,7 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
                 currentHome?.removeTrigger(trigger) {
                     [weak self]
                     error in
-                    if error {
+                    if error != nil {
                         NSLog("Failed to remove Trigger: \(error)")
                     }else{
                         self?.updateLocalArray()

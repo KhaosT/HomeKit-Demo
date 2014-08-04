@@ -41,7 +41,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
-                        if !error {
+                        if error == nil {
                             self.title = textField.text
                         } else {
                             NSLog("Error:\(error)")
@@ -100,7 +100,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             }
             
             if !contains(characteristics, characteristic) {
-                characteristics += characteristic
+                characteristics.append(characteristic)
                 characteristicTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
@@ -121,7 +121,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 characteristic.enableNotification(true, completionHandler:
                     {
                         error in
-                        if error {
+                        if (error != nil) {
                             NSLog("Cannot enable notifications: \(error)")
                         }
                     }
@@ -132,7 +132,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     {
                         [weak self]
                         (error:NSError!) in
-                        if error {
+                        if (error != nil) {
                             NSLog("Error read Char: \(characteristic), error: \(error)")
                         }else{
                             if let strongSelf = self {
@@ -149,15 +149,17 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     override func viewDidDisappear(animated: Bool) {
         for characteristic in characteristics {
-            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertySupportsEventNotification) {
-                characteristic.enableNotification(false, completionHandler:
-                    {
-                        error in
-                        if error {
-                            NSLog("Cannot disable notifications: \(error)")
+            if characteristic.properties != nil {
+                if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+                    characteristic.enableNotification(false, completionHandler:
+                        {
+                            error in
+                            if (error != nil) {
+                                NSLog("Cannot disable notifications: \(error)")
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -166,9 +168,10 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     func didUpdateValueForCharacteristic(aNote:NSNotification) {
         if let info = aNote.userInfo {
             if let characteristic = info["characteristic"] as? HMCharacteristic {
+                NSLog("DidUpdate Value for Chara:\(characteristic), value:\(characteristic.value)")
                 if contains(characteristics, characteristic) {
                     if let index = find(characteristics, characteristic) {
-                        if let cell = self.characteristicTableView?.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? UITableViewCell {
+                        if let cell = self.characteristicTableView?.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) {
                             dispatch_async(dispatch_get_main_queue(),
                                 {
                                     if let value = characteristic.value as? NSObject {
@@ -244,7 +247,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }else{
             cell.detailTextLabel.text = object.characteristicType
         }
-        if object.value {
+        if (object.value != nil) {
             cell.textLabel.text = "\(object.value)"
         }else{
             cell.textLabel.text = ""
@@ -270,7 +273,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         )
         triggerAction.backgroundColor = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
         
-        options += triggerAction
+        options.append(triggerAction)
         
         return options
     }
@@ -309,7 +312,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             object.writeValue(true, completionHandler:
                 {
                     (error:NSError!) in
-                    if error {
+                    if (error != nil) {
                         NSLog("Change Char Error: \(error)")
                     }
                 }
@@ -319,11 +322,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             charDesc = HomeKitUUIDs[object.characteristicType] as? String
             switch (object.metadata.format as NSString) {
             case HMCharacteristicMetadataFormatBool:
-                if object.value {
+                if (object.value != nil) {
                     object.writeValue(!(object.value as Bool), completionHandler:
                         {
                             (error:NSError!) in
-                            if error {
+                            if (error != nil) {
                                 NSLog("Change Char Error: \(error)")
                             }else{
                                 dispatch_async(dispatch_get_main_queue(),
@@ -347,7 +350,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         object.writeValue(f.numberFromString(textField.text), completionHandler:
                             {
                                 (error:NSError!) in
-                                if error {
+                                if (error != nil) {
                                     NSLog("Change Char Error: \(error)")
                                 }else{
                                     dispatch_async(dispatch_get_main_queue(),
@@ -374,7 +377,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         object.writeValue("\(textField.text)", completionHandler:
                             {
                                 (error:NSError!) in
-                                if error {
+                                if (error != nil) {
                                     NSLog("Change Char Error: \(error)")
                                 }else{
                                     dispatch_async(dispatch_get_main_queue(),

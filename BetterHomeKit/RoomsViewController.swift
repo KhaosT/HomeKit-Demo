@@ -51,7 +51,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        if let rooms = currentHome?.rooms as? NSArray as? [HMRoom] {
+        if let rooms = currentHome?.rooms {
             return rooms.count
         }else{
             return 0
@@ -61,7 +61,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as UITableViewCell
         
-        let rooms = currentHome?.rooms as? NSArray as? [HMRoom]
+        let rooms = currentHome?.rooms
         
         cell.textLabel.text = rooms?[indexPath.row].name
         

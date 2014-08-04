@@ -59,7 +59,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 (action:UIAlertAction!) in
                 let textField = alert.textFields[0] as UITextField
                 self.mainHome.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
-                    if error {
+                    if error != nil {
                         NSLog("Add user failed: \(error)")
                     }
                     
@@ -197,7 +197,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                             characteristic.readValueWithCompletionHandler(
                                 {
                                     (error:NSError!) in
-                                    if error {
+                                    if error != nil {
                                         NSLog("Error read Char: \(characteristic), error: \(error)")
                                     }
                                 }
@@ -282,7 +282,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         )
         assignAction.backgroundColor = UIColor.orangeColor()
         
-        options += assignAction
+        options.append(assignAction)
         
         let identifyAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Identify", handler:
             {
@@ -293,7 +293,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                     accessory.identifyWithCompletionHandler(
                         {
                             (error:NSError!) in
-                            if error {
+                            if (error != nil) {
                                 println("Failed to identify \(error)")
                             }else{
                                 println("Successfully identify accessory")
@@ -306,7 +306,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         )
         identifyAction.backgroundColor = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
         
-        options += identifyAction
+        options.append(identifyAction)
         
         if indexPath.row < objects.count && !( objects[indexPath.row] as HMAccessory).bridged {
             
@@ -314,17 +314,17 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 {
                     [weak self]
                     (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
-                    let isBridge = (self?.objects[indexPath.row] as HMAccessory).identifiersForBridgedAccessories
-                    self?.homeManager.primaryHome.removeAccessory(self?.objects[indexPath.row] as HMAccessory, completionHandler:
+                    let isBridge = self?.objects[indexPath.row].identifiersForBridgedAccessories
+                    self?.homeManager.primaryHome.removeAccessory(self?.objects[indexPath.row], completionHandler:
                         {
                             [weak self]
                             (error:NSError!) in
-                            if error {
+                            if error != nil {
                                 NSLog("Delete Accessory error: \(error)")
                             }else{
                                 dispatch_async(dispatch_get_main_queue(),
                                     {
-                                        if isBridge {
+                                        if (isBridge != nil) {
                                             self?.removeEverything()
                                             self?.accessoriesTableView?.reloadData()
                                         }else{
@@ -340,7 +340,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 }
             )
             
-            options += deleteAction
+            options.append(deleteAction)
             
         }
         

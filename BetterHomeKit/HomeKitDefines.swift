@@ -13,7 +13,6 @@ let HomeKitUUIDs = [
     HMServiceTypeLightbulb:"Light Bulb",
     HMServiceTypeSwitch:"Switch",
     HMServiceTypeThermostat:"Thermostat",
-    HMServiceTypeLock:"Lock",
     HMServiceTypeGarageDoorOpener:"Garage Door Opener",
     HMServiceTypeAccessoryInformation:"Accessory Information",
     HMServiceTypeFan:"Fan",
@@ -36,7 +35,6 @@ let HomeKitUUIDs = [
     HMCharacteristicTypeCurrentDoorState:"Current Door State",
     HMCharacteristicTypeTargetDoorState:"Target Door State",
     HMCharacteristicTypeObstructionDetected:"Obstruction Detected",
-    HMCharacteristicTypeLocked:"Locked",
     HMCharacteristicTypeName:"Name",
     HMCharacteristicTypeManufacturer:"Manufacturer",
     HMCharacteristicTypeModel:"Model",
@@ -52,7 +50,6 @@ let HomeKitUUIDs = [
     HMCharacteristicTypeMotionDetected:"Motion Detected",
     HMCharacteristicTypeCurrentLockMechanismState:"Current Lock Mechanism State",
     HMCharacteristicTypeTargetLockMechanismState:"Target Lock Mechanism State",
-    HMCharacteristicTypeLockMechanismAdditionalAuthorization:"Lock Mechanism Additional Authorization",
     HMCharacteristicTypeLockMechanismLastKnownAction:"Lock Mechanism Last Known Action",
     HMCharacteristicTypeLockManagementControlPoint:"Lock Management Control Point",
     HMCharacteristicTypeLockManagementAutoSecureTimeout:"Lock Management Auto Secure Timeout"
