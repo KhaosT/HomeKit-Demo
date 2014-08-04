@@ -149,17 +149,15 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     override func viewDidDisappear(animated: Bool) {
         for characteristic in characteristics {
-            if characteristic.properties != nil {
-                if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
-                    characteristic.enableNotification(false, completionHandler:
-                        {
-                            error in
-                            if (error != nil) {
-                                NSLog("Cannot disable notifications: \(error)")
-                            }
+            if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+                characteristic.enableNotification(false, completionHandler:
+                    {
+                        error in
+                        if (error != nil) {
+                            NSLog("Cannot disable notifications: \(error)")
                         }
-                    )
-                }
+                    }
+                )
             }
         }
         NSNotificationCenter.defaultCenter().removeObserver(self)
