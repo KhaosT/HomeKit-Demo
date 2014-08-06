@@ -439,7 +439,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZH-hi-pF6" customClass="HRColorMapView">
-                                        <rect key="frame" x="0.0" y="140" width="600" height="396"/>
+                                        <rect key="frame" x="0.0" y="152" width="600" height="384"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="saturationUpperLimit">
@@ -459,7 +459,7 @@
                                     <constraint firstItem="1UQ-Cv-aEf" firstAttribute="bottom" secondItem="s74-sr-f7u" secondAttribute="bottom" id="VfC-wX-REC"/>
                                     <constraint firstItem="1UQ-Cv-aEf" firstAttribute="leading" secondItem="woa-Jx-vzb" secondAttribute="leading" constant="20" id="fBN-1n-q5V"/>
                                     <constraint firstAttribute="trailing" secondItem="PZH-hi-pF6" secondAttribute="trailing" id="frO-lE-zYu"/>
-                                    <constraint firstItem="PZH-hi-pF6" firstAttribute="top" secondItem="1UQ-Cv-aEf" secondAttribute="bottom" constant="40" id="iTX-9F-IqR"/>
+                                    <constraint firstItem="PZH-hi-pF6" firstAttribute="top" secondItem="1UQ-Cv-aEf" secondAttribute="bottom" constant="52" id="iTX-9F-IqR"/>
                                     <constraint firstAttribute="trailing" secondItem="s74-sr-f7u" secondAttribute="trailing" constant="20" id="vke-b5-cjq"/>
                                     <constraint firstAttribute="bottom" secondItem="PZH-hi-pF6" secondAttribute="bottom" id="wuS-2d-izh"/>
                                 </constraints>
