@@ -174,7 +174,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             if contains(objects, accessory) {
                 for service in accessory.services as [HMService] {
                     for characteristic in service.characteristics as [HMCharacteristic] {
-                        if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
+                        if contains(characteristic.properties as [String], HMCharacteristicPropertyReadable as String) {
                             characteristic.readValueWithCompletionHandler(
                                 {
                                     (error:NSError!) in

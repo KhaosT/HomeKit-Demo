@@ -20,7 +20,10 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         updateActionSets()
     }
     
@@ -97,19 +100,6 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         } else if let pendingChar = pendingCharacteristic {
             let object = pendingChar
-
-            if let charaType = object.characteristicType {
-                NSLog("Char:\(charaType)")
-            }
-            
-            if let metadata = object.metadata {
-                println("Meta:\(metadata)")
-            }
-            
-            if let properties = object.properties {
-                NSLog("Properties:\(properties)")
-            }
-            
             var charDesc = object.characteristicType
             charDesc = HomeKitUUIDs[object.characteristicType] as? String
             switch (object.metadata.format as NSString) {

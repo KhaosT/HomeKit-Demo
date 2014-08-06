@@ -15,6 +15,7 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var repeatSwitch: UISwitch!
+    @IBOutlet weak var repeatDaily: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,18 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
         if let pendingTrigger = pendingTrigger {
             nameField.text = pendingTrigger.name
             datePicker.date = pendingTrigger.fireDate
-            if pendingTrigger.recurrence != nil && pendingTrigger.recurrence.minute == 5 {
-                repeatSwitch.on = true
+            if pendingTrigger.recurrence != nil {
+                if pendingTrigger.recurrence.minute == 5 {
+                    repeatSwitch.on = true
+                }
+                
+                if pendingTrigger.recurrence.day == 1 {
+                    repeatDaily.on = true
+                }
+                
             } else {
                 repeatSwitch.on = false
+                repeatDaily.on = false
             }
         }
     }
@@ -51,11 +60,16 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
             let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
             var recurrenceComp:NSDateComponents?
             
-            if repeatSwitch.on {
+            if repeatSwitch.on || repeatDaily.on {
                 recurrenceComp = NSDateComponents()
-                recurrenceComp?.minute = 5
+                if repeatSwitch.on {
+                    recurrenceComp?.minute = 5
+                }
+                if repeatDaily.on {
+                    recurrenceComp?.day = 1
+                }
             }
-            
+
             pendingTrigger.updateRecurrence(recurrenceComp) {
                 error in
                 if error != nil {
@@ -86,9 +100,14 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
                 
                 var recurrenceComp:NSDateComponents?
                 
-                if repeatSwitch.on {
+                if repeatSwitch.on || repeatDaily.on {
                     recurrenceComp = NSDateComponents()
-                    recurrenceComp?.minute = 5
+                    if repeatSwitch.on {
+                        recurrenceComp?.minute = 5
+                    }
+                    if repeatDaily.on {
+                        recurrenceComp?.day = 1
+                    }
                 }
                 
                 let trigger = HMTimerTrigger(name: triggerName, fireDate: fireDate, timeZone: nil, recurrence: recurrenceComp, recurrenceCalendar: nil)

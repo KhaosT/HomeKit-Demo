@@ -15,7 +15,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     @IBOutlet var accessoriesTableView : UITableView?
     
-    var accessories:NSMutableArray = NSMutableArray()
+    lazy var accessories = [HMAccessory]()
     
     var accessoriesManager:HMAccessoryBrowser = HMAccessoryBrowser()
     
@@ -63,7 +63,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel.text = accessories.objectAtIndex(indexPath.row).name
+        cell.textLabel.text = accessories[indexPath.row].name
         
         return cell
     }
@@ -71,7 +71,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        Core.sharedInstance.currentHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
+        Core.sharedInstance.currentHome?.addAccessory(accessories[indexPath.row], completionHandler:
             {
                 (error:NSError!) in
                 if error != nil {
@@ -85,7 +85,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
     {
-        let accessory = accessories.objectAtIndex(indexPath.row) as HMAccessory
+        let accessory = accessories[indexPath.row]
         accessory.identifyWithCompletionHandler({
                 (error:NSError!) in
                 if error != nil {
@@ -96,8 +96,8 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func accessoryBrowser(browser: HMAccessoryBrowser!, didFindNewAccessory accessory: HMAccessory!)
     {
-        if !accessories.containsObject(accessories) {
-            accessories.insertObject(accessory, atIndex: 0)
+        if !contains(accessories, accessory) {
+            accessories.insert(accessory, atIndex: 0)
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             accessoriesTableView?.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
@@ -105,21 +105,10 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func accessoryBrowser(browser: HMAccessoryBrowser!, didRemoveNewAccessory accessory: HMAccessory!)
     {
-        if accessories.containsObject(accessory) {
-            let index = accessories.indexOfObject(accessory)
-            accessories.removeObjectAtIndex(index)
+        if let index = find(accessories, accessory) {
+            accessories.removeAtIndex(index)
             accessoriesTableView?.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
         }
     }
-
-    /*
-    // #pragma mark - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

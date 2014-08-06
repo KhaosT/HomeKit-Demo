@@ -514,7 +514,7 @@
                                 </date>
                             </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UMj-HE-SVT">
-                                <rect key="frame" x="304" y="135" width="100" height="30"/>
+                                <rect key="frame" x="304" y="90" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Ztp-Dl-jcL"/>
                                     <constraint firstAttribute="width" constant="100" id="dN8-Rz-dPt"/>
@@ -526,34 +526,47 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRY-IR-c74">
-                                <rect key="frame" x="245" y="139" width="51" height="21"/>
+                                <rect key="frame" x="245" y="94" width="51" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat every 5 mins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5H-dU-cnD">
-                                <rect key="frame" x="222" y="189" width="157" height="21"/>
+                                <rect key="frame" x="222" y="144" width="157" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mfo-qa-VIz">
-                                <rect key="frame" x="276" y="228" width="51" height="31"/>
+                                <rect key="frame" x="276" y="183" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat every day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1X1-EH-QCL">
+                                <rect key="frame" x="233" y="222" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KJw-fa-ZJY">
+                                <rect key="frame" x="276" y="251" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eRY-IR-c74" firstAttribute="top" secondItem="h8P-0F-Uiw" secondAttribute="bottom" constant="75" id="0Tv-5I-Xln"/>
+                            <constraint firstItem="eRY-IR-c74" firstAttribute="top" secondItem="h8P-0F-Uiw" secondAttribute="bottom" constant="30" id="0Tv-5I-Xln"/>
                             <constraint firstItem="UMj-HE-SVT" firstAttribute="baseline" secondItem="eRY-IR-c74" secondAttribute="baseline" constant="-1" id="3Fk-gW-c28"/>
                             <constraint firstAttribute="centerX" secondItem="v5H-dU-cnD" secondAttribute="centerX" id="4So-vu-GXJ"/>
                             <constraint firstItem="Xsz-8B-ghX" firstAttribute="top" secondItem="PGq-UQ-pb0" secondAttribute="bottom" id="Djz-u1-305"/>
                             <constraint firstItem="PGq-UQ-pb0" firstAttribute="leading" secondItem="RXt-GY-ZEt" secondAttribute="leading" id="Egq-4e-tY7"/>
+                            <constraint firstItem="1X1-EH-QCL" firstAttribute="centerX" secondItem="KJw-fa-ZJY" secondAttribute="centerX" constant="-0.5" id="FMR-sf-KOy"/>
                             <constraint firstAttribute="centerX" secondItem="eRY-IR-c74" secondAttribute="centerX" constant="29.5" id="Kb4-8W-pq8"/>
                             <constraint firstItem="Mfo-qa-VIz" firstAttribute="centerX" secondItem="v5H-dU-cnD" secondAttribute="centerX" id="LCK-Bf-duh"/>
                             <constraint firstItem="Mfo-qa-VIz" firstAttribute="top" secondItem="v5H-dU-cnD" secondAttribute="bottom" constant="18" id="Mzc-do-7bL"/>
                             <constraint firstItem="UMj-HE-SVT" firstAttribute="leading" secondItem="eRY-IR-c74" secondAttribute="trailing" constant="8" id="Okf-Om-2SW"/>
+                            <constraint firstItem="KJw-fa-ZJY" firstAttribute="top" secondItem="1X1-EH-QCL" secondAttribute="bottom" constant="8" id="Tes-Hu-Lys"/>
+                            <constraint firstAttribute="centerX" secondItem="1X1-EH-QCL" secondAttribute="centerX" id="asQ-rB-zWe"/>
                             <constraint firstAttribute="trailing" secondItem="PGq-UQ-pb0" secondAttribute="trailing" id="bc4-KB-fyW"/>
                             <constraint firstItem="v5H-dU-cnD" firstAttribute="top" secondItem="eRY-IR-c74" secondAttribute="bottom" constant="29" id="jRh-vZ-0hw"/>
+                            <constraint firstItem="1X1-EH-QCL" firstAttribute="top" secondItem="Mfo-qa-VIz" secondAttribute="bottom" constant="8" id="vfW-F9-MxB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Trigger" id="19R-Nx-A27">
@@ -566,6 +579,7 @@
                     <connections>
                         <outlet property="datePicker" destination="PGq-UQ-pb0" id="FP5-uh-fmT"/>
                         <outlet property="nameField" destination="UMj-HE-SVT" id="A7g-yg-ObQ"/>
+                        <outlet property="repeatDaily" destination="KJw-fa-ZJY" id="xJd-7B-POK"/>
                         <outlet property="repeatSwitch" destination="Mfo-qa-VIz" id="pW2-IW-hFV"/>
                     </connections>
                 </viewController>

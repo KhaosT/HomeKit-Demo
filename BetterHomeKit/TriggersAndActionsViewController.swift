@@ -13,10 +13,6 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var atTableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func dismissView(sender: AnyObject) {
         self.atTableView.setEditing(false, animated: true)
         self.dismissViewControllerAnimated(true, completion: nil)

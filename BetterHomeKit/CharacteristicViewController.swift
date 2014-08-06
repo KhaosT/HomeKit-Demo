@@ -140,7 +140,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         super.viewDidAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
         for characteristic in characteristics {
-            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertySupportsEventNotification) {
+            if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
                 characteristic.enableNotification(true, completionHandler:
                     {
                         error in
@@ -150,7 +150,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 )
             }
-            if (characteristic.properties as NSArray).containsObject(HMCharacteristicPropertyReadable) {
+            if contains(characteristic.properties as [String], HMCharacteristicPropertyReadable as String) {
                 characteristic.readValueWithCompletionHandler(
                     {
                         [weak self]
@@ -317,7 +317,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let object = characteristics[indexPath.row] as HMCharacteristic
         
-        if !(object.properties as NSArray).containsObject(HMCharacteristicPropertyWritable) {
+        if !contains(object.properties as [String], HMCharacteristicPropertyWritable as String) {
             return
         }
         
