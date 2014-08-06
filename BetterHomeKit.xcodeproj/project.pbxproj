@@ -24,7 +24,6 @@
 		CCA8C5B71992354B00D297CE /* TriggersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B61992354B00D297CE /* TriggersViewController.swift */; };
 		CCA8C5B9199237E400D297CE /* ActionSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */; };
 		CCA8C5BC19923B9100D297CE /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5BB19923B9100D297CE /* Core.swift */; };
-		CCA8C5C019924A9600D297CE /* TriggerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */; };
 		CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9230F193FD1FB001BE28C /* AppDelegate.swift */; };
 		CCA92312193FD1FB001BE28C /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92311193FD1FB001BE28C /* AccessoryViewController.swift */; };
 		CCA92314193FD1FB001BE28C /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92313193FD1FB001BE28C /* ServiceViewController.swift */; };
@@ -34,6 +33,7 @@
 		CCA9232F193FD267001BE28C /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9232E193FD267001BE28C /* HomeKit.framework */; };
 		CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */; };
 		CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9233219402088001BE28C /* CharacteristicViewController.swift */; };
+		CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4800B1992971000363818 /* TriggerDetailViewController.swift */; };
 		CCBD291E19928D27009231C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBD291D19928D27009231C9 /* Cache.swift */; };
 		CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -96,7 +96,6 @@
 		CCA8C5B61992354B00D297CE /* TriggersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersViewController.swift; sourceTree = "<group>"; };
 		CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetViewController.swift; sourceTree = "<group>"; };
 		CCA8C5BB19923B9100D297CE /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
-		CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TriggerDetailViewController.swift; path = ../TriggerDetailViewController.swift; sourceTree = "<group>"; };
 		CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA9230E193FD1FB001BE28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA9230F193FD1FB001BE28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		CCA9232E193FD267001BE28C /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccessoriesViewController.swift; sourceTree = "<group>"; };
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
+		CCB4800B1992971000363818 /* TriggerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerDetailViewController.swift; sourceTree = "<group>"; };
 		CCBD291D19928D27009231C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
 		CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BetterHomeKit.entitlements; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */,
 				CCA8C5B61992354B00D297CE /* TriggersViewController.swift */,
 				CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */,
-				CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */,
+				CCB4800B1992971000363818 /* TriggerDetailViewController.swift */,
 				CCA92315193FD1FB001BE28C /* Main.storyboard */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
@@ -340,6 +340,7 @@
 				CC1BE94A198CB008008E9193 /* TriggerViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
 				CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */,
+				CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */,
 				CC78B080197AC2A600A4A443 /* HRColorInfoView.m in Sources */,
 				CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */,
 				CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */,
@@ -357,7 +358,6 @@
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
 				CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */,
 				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
-				CCA8C5C019924A9600D297CE /* TriggerDetailViewController.swift in Sources */,
 				CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
