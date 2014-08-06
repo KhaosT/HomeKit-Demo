@@ -122,6 +122,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 }
             }
             
+            characteristics.removeAll(keepCapacity: true)
             if !contains(characteristics, characteristic) {
                 characteristics.append(characteristic)
                 characteristicTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
@@ -136,12 +137,12 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         self.configureView()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
-        for characteristic in characteristics {
-            if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
-                characteristic.enableNotification(true, completionHandler:
+        for aChar in characteristics {
+            if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+                aChar.enableNotification(true, completionHandler:
                     {
                         error in
                         if (error != nil) {
@@ -150,16 +151,16 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 )
             }
-            if contains(characteristic.properties as [String], HMCharacteristicPropertyReadable as String) {
-                characteristic.readValueWithCompletionHandler(
+            if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
+                aChar.readValueWithCompletionHandler(
                     {
                         [weak self]
                         (error:NSError!) in
                         if (error != nil) {
-                            NSLog("Error read Char: \(characteristic), error: \(error)")
+                            NSLog("Error read Char: \(aChar), error: \(error)")
                         }else{
                             if let strongSelf = self {
-                                let index = find(strongSelf.characteristics, characteristic)
+                                let index = find(strongSelf.characteristics, aChar)
                                 strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
                             }
                             

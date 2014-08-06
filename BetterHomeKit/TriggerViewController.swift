@@ -26,10 +26,12 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
             if pendingTrigger.recurrence != nil {
                 if pendingTrigger.recurrence.minute == 5 {
                     repeatSwitch.on = true
+                    repeatDaily.enabled = false
                 }
                 
                 if pendingTrigger.recurrence.day == 1 {
                     repeatDaily.on = true
+                    repeatSwitch.enabled = false
                 }
                 
             } else {
@@ -49,6 +51,17 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
             nameField.resignFirstResponder()
         }
         return false
+    }
+    
+    @IBAction func switchStateChanged(sender: UISwitch) {
+        if sender == repeatSwitch {
+            repeatDaily.on = false
+            repeatDaily.enabled = !sender.on
+        }
+        if sender == repeatDaily {
+            repeatSwitch.on = false
+            repeatSwitch.enabled = !sender.on
+        }
     }
     
     @IBAction func saveTrigger(sender: AnyObject) {
