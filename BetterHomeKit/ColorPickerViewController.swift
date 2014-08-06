@@ -10,9 +10,18 @@ import UIKit
 
 class ColorPickerViewController: UIViewController {
 
-    @IBOutlet var colorPickerView: HRColorPickerView?
+    @IBOutlet var colorPickerView: HRColorPickerView!
+    
+    var initialColor:UIColor?
     
     weak var delegate:AnyObject?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let initialColor = initialColor {
+            colorPickerView.color = initialColor
+        }
+    }
     
     override func viewWillAppear(animated: Bool)  {
         super.viewWillAppear(animated)

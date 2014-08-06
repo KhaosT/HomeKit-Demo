@@ -59,6 +59,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier? == "showColorPicker" {
             (segue.destinationViewController as ColorPickerViewController).delegate = self
+            (segue.destinationViewController as ColorPickerViewController).initialColor = currentLightColor()
         }
         if segue.identifier? == "presentTriggerView" {
             if let characteristic = sender as? HMCharacteristic {
@@ -66,6 +67,32 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 (segue.destinationViewController as TriggerViewController).targetCharacteristic = characteristic
             }
         }
+    }
+    
+    func currentLightColor() -> UIColor {
+        var hue:CGFloat?
+        var brightness:CGFloat?
+        var saturation:CGFloat?
+        
+        if let hueChar = self.hueCharacteristic {
+            let hueValue:CGFloat = (hueChar.value as? NSNumber) ?? (0.0 as CGFloat)
+            let hueRatio:CGFloat = hueChar.metadata.maximumValue
+            hue = hueValue / hueRatio
+        }
+        
+        if let brightnessChar = self.brightnessCharacteristic {
+            let brightnessValue:CGFloat = (brightnessChar.value as? NSNumber) ?? (0.0 as CGFloat)
+            let brightnessRatio:CGFloat = brightnessChar.metadata.maximumValue
+            brightness = brightnessValue / brightnessRatio
+        }
+        
+        if let saturationChar = self.saturationCharacteristic {
+            let saturationValue:CGFloat = (saturationChar.value as? NSNumber) ?? (0.0 as CGFloat)
+            let saturationRatio:CGFloat = saturationChar.metadata.maximumValue
+            saturation = saturationValue / saturationRatio
+        }
+        
+        return UIColor(hue: (hue ?? 0.0), saturation: (saturation ?? 0.0), brightness: (brightness ?? 0.0), alpha: 1.0)
     }
     
     func configureView() {
@@ -148,6 +175,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     override func viewDidDisappear(animated: Bool) {
+        NSLog("Start Disappearing Char")
         super.viewDidDisappear(animated)
         for characteristic in characteristics {
             if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
@@ -163,6 +191,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
         self.characteristicTableView?.setEditing(false, animated: true)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSLog("End Disappearing Char")
     }
     
     func didUpdateValueForCharacteristic(aNote:NSNotification) {
