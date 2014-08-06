@@ -159,5 +159,24 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let action = actions[indexPath.row]
+            self.currentActionSet?.removeAction(action) {
+                [weak self]
+                error in
+                if error != nil {
+                    NSLog("Failed removing action from action set, error:\(error)")
+                } else {
+                    self?.updateActions()
+                }
+            }
+        }
+    }
 
 }
