@@ -19,9 +19,18 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     var saturationCharacteristic:HMCharacteristic?
     var onCharacteristic:HMCharacteristic?
     
+    var databaseIndex: Int?
+    var accessoryIdentifier: NSUUID?
+    var serviceNameCache: String?
+    
     var detailItem: HMService? {
     didSet {
-        self.title = detailItem!.name
+        self.title = detailItem?.name
+        
+        databaseIndex = Core.sharedInstance.versionIndex
+        accessoryIdentifier = detailItem?.accessory.identifier
+        serviceNameCache = detailItem?.name
+        
         // Update the view.
         self.configureView()
     }
@@ -102,6 +111,8 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             }
         }
         
+        characteristics.removeAll(keepCapacity: true)
+        
         // Update the user interface for the detail item.
         for characteristic in detailItem!.characteristics as [HMCharacteristic] {
             if colorButton?.enabled == true {
@@ -122,12 +133,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 }
             }
             
-            characteristics.removeAll(keepCapacity: true)
             if !contains(characteristics, characteristic) {
                 characteristics.append(characteristic)
-                characteristicTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
+        characteristicTableView?.reloadData()
         
     }
     
@@ -137,36 +147,55 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         self.configureView()
     }
     
+    func invalidateLocalCache() {
+        if databaseIndex != Core.sharedInstance.versionIndex {
+            NSLog("Invalidate Characteristic Local Cache")
+            if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
+                for service in accessory.services as [HMService] {
+                    if service.name == serviceNameCache {
+                        detailItem = service
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invalidateLocalCache", name: homeUpdateNotification, object: nil)
+        invalidateLocalCache()
+        configureView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
         for aChar in characteristics {
-            if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
-                aChar.enableNotification(true, completionHandler:
-                    {
-                        error in
-                        if (error != nil) {
-                            NSLog("Cannot enable notifications: \(error)")
-                        }
-                    }
-                )
-            }
-            if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
-                aChar.readValueWithCompletionHandler(
-                    {
-                        [weak self]
-                        (error:NSError!) in
-                        if (error != nil) {
-                            NSLog("Error read Char: \(aChar), error: \(error)")
-                        }else{
-                            if let strongSelf = self {
-                                let index = find(strongSelf.characteristics, aChar)
-                                strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+            if aChar != nil {
+                if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+                    aChar.enableNotification(true, completionHandler:
+                        {
+                            error in
+                            if (error != nil) {
+                                NSLog("Cannot enable notifications: \(error)")
                             }
-                            
                         }
-                    }
-                )
+                    )
+                }
+                if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
+                    aChar.readValueWithCompletionHandler(
+                        {
+                            [weak self]
+                            (error:NSError!) in
+                            if (error != nil) {
+                                NSLog("Error read Char: \(aChar), error: \(error)")
+                            }else{
+                                if let strongSelf = self {
+                                    let index = find(strongSelf.characteristics, aChar)
+                                    strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                                }
+                                
+                            }
+                        }
+                    )
+                }
             }
         }
     }

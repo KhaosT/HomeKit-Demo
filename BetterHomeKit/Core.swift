@@ -7,9 +7,28 @@ class Core {
         return _sharedCore
     }
     
-    var currentHome:HMHome?
+    var versionIndex = 0
+    var currentHome:HMHome? {
+        didSet{
+            versionIndex += 1
+        }
+    }
     
     init() {
         
+    }
+    
+    func getAccessoryWithIdentifier(uuid: NSUUID?) -> HMAccessory? {
+        if let uuid = uuid {
+            if let currentHome = currentHome {
+                for accessory in currentHome.accessories as [HMAccessory] {
+                    if accessory.identifier == uuid {
+                        return accessory
+                    }
+                }
+            }
+        }
+        
+        return nil
     }
 }

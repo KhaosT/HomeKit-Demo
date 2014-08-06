@@ -10,6 +10,7 @@ import UIKit
 import HomeKit
 
 let characteristicUpdateNotification = "didUpdateValueForCharacteristic"
+let homeUpdateNotification = "didUpdateHomeManagerForHome"
 
 class AccessoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
@@ -37,6 +38,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
     func updateHomeAccessories() {
@@ -135,6 +137,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             NSLog("Current Users:\(mainHome.users)")
             removeEverything()
             self.updateHomeAccessories()
+            NSNotificationCenter.defaultCenter().postNotificationName(homeUpdateNotification, object: nil)
         }
     }
     

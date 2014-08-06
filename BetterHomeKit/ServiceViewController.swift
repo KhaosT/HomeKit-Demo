@@ -14,9 +14,14 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet var servicesTableView : UITableView?
     var services = [HMService]()
     
+    var currentIdentifier: NSUUID?
+    var databaseIndex: Int?
+    
     var detailItem: HMAccessory? {
         didSet {
-            self.title = detailItem!.name
+            self.title = detailItem?.name
+            databaseIndex = Core.sharedInstance.versionIndex
+            currentIdentifier = detailItem?.identifier.copy() as? NSUUID
             // Update the view.
             self.configureView()
         }
@@ -49,13 +54,31 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func configureView() {
         // Update the user interface for the detail item.
+        services.removeAll(keepCapacity: true)
         if let detailItem = detailItem {
             for service in detailItem.services as [HMService] {
                 if !contains(services, service) {
                     services.append(service)
-                    servicesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
                 }
             }
+            servicesTableView?.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invalidateLocalCache", name: homeUpdateNotification, object: nil)
+        invalidateLocalCache()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func invalidateLocalCache() {
+        if databaseIndex != Core.sharedInstance.versionIndex {
+            detailItem = Core.sharedInstance.getAccessoryWithIdentifier(currentIdentifier)
         }
     }
     
