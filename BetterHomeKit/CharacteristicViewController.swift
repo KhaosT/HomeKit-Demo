@@ -70,7 +70,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
         
         if segue.identifier? == "startActionAssignProcess" {
-            (segue.destinationViewController as ActionSetsViewController).pendingCharacteristic = sender as? HMCharacteristic
+            (segue.destinationViewController as ActionSetsViewController).pendingCharacteristic = Characteristic(hmChar: (sender as HMCharacteristic))
         }
     }
     

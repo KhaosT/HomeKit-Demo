@@ -22,8 +22,6 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     var mainHome:HMHome!
     
-    weak var pendingAccessory:HMAccessory?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -73,9 +71,8 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             let naviController = segue.destinationViewController as UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
                 let roomVC = naviController.viewControllers?[0] as RoomsViewController
-                if let accessory = pendingAccessory {
-                    roomVC.pendingAccessory = accessory
-                    pendingAccessory = nil
+                if let accessory = sender as? HMAccessory {
+                    roomVC.pendingAccessory = Accessory(hmAccessory: accessory)
                 }
             }
         }
@@ -258,8 +255,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
                 if let strongSelf = self {
-                    strongSelf.pendingAccessory = strongSelf.objects[indexPath.row]
-                    strongSelf.performSegueWithIdentifier("presentRoomsVC", sender: self)
+                    strongSelf.performSegueWithIdentifier("presentRoomsVC", sender: strongSelf.objects[indexPath.row])
                     tableView.setEditing(false, animated: true)
                 }
             }

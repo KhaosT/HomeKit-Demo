@@ -13,7 +13,7 @@ let assignAccessoryNotificationString = "DidAssignAccessoryToRoom"
 
 class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    weak var pendingAccessory:HMAccessory?
+    var pendingAccessory:Accessory?
     @IBOutlet var roomTableView: UITableView!
     
     override func viewDidDisappear(animated: Bool) {
@@ -75,7 +75,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         if let accessory = pendingAccessory {
             let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as HMRoom
-            Core.sharedInstance.currentHome?.assignAccessory(accessory, toRoom: room, completionHandler:
+            Core.sharedInstance.currentHome?.assignAccessory(accessory.toHMAccessory(), toRoom: room, completionHandler:
                 {
                     [weak self]
                     error in

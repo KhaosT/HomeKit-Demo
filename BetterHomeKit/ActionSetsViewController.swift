@@ -12,7 +12,7 @@ import HomeKit
 class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     weak var pendingTrigger:HMTrigger?
-    weak var pendingCharacteristic:HMCharacteristic?
+    var pendingCharacteristic: Characteristic?
     
     var actionSets = [HMActionSet]()
     
@@ -98,7 +98,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                     self?.navigationController.popViewControllerAnimated(true)
                 }
             }
-        } else if let pendingChar = pendingCharacteristic {
+        } else if let pendingChar = pendingCharacteristic?.toHMCharacteristic() {
             let object = pendingChar
             var charDesc = object.characteristicType
             charDesc = HomeKitUUIDs[object.characteristicType] as? String
