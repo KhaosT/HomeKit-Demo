@@ -20,9 +20,14 @@
 		CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */; };
 		CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */; };
 		CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC970A8E1991E64400872018 /* UsersViewController.swift */; };
+		CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */; };
+		CCA8C5B71992354B00D297CE /* TriggersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B61992354B00D297CE /* TriggersViewController.swift */; };
+		CCA8C5B9199237E400D297CE /* ActionSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */; };
+		CCA8C5BC19923B9100D297CE /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5BB19923B9100D297CE /* Core.swift */; };
+		CCA8C5C019924A9600D297CE /* TriggerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */; };
 		CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9230F193FD1FB001BE28C /* AppDelegate.swift */; };
-		CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92311193FD1FB001BE28C /* MasterViewController.swift */; };
-		CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92313193FD1FB001BE28C /* DetailViewController.swift */; };
+		CCA92312193FD1FB001BE28C /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92311193FD1FB001BE28C /* AccessoryViewController.swift */; };
+		CCA92314193FD1FB001BE28C /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92313193FD1FB001BE28C /* ServiceViewController.swift */; };
 		CCA92317193FD1FB001BE28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA92315193FD1FB001BE28C /* Main.storyboard */; };
 		CCA92319193FD1FB001BE28C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA92318193FD1FB001BE28C /* Images.xcassets */; };
 		CCA92325193FD1FB001BE28C /* BetterHomeKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92324193FD1FB001BE28C /* BetterHomeKitTests.swift */; };
@@ -86,11 +91,16 @@
 		CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		CC970A8E1991E64400872018 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetsViewController.swift; sourceTree = "<group>"; };
+		CCA8C5B61992354B00D297CE /* TriggersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersViewController.swift; sourceTree = "<group>"; };
+		CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetViewController.swift; sourceTree = "<group>"; };
+		CCA8C5BB19923B9100D297CE /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TriggerDetailViewController.swift; path = ../TriggerDetailViewController.swift; sourceTree = "<group>"; };
 		CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA9230E193FD1FB001BE28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA9230F193FD1FB001BE28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CCA92311193FD1FB001BE28C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		CCA92313193FD1FB001BE28C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CCA92311193FD1FB001BE28C /* AccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewController.swift; sourceTree = "<group>"; };
+		CCA92313193FD1FB001BE28C /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		CCA92316193FD1FB001BE28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCA92318193FD1FB001BE28C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CCA9231E193FD1FB001BE28C /* BetterHomeKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterHomeKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,15 +181,20 @@
 				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
 				CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
-				CCA92311193FD1FB001BE28C /* MasterViewController.swift */,
-				CCA92313193FD1FB001BE28C /* DetailViewController.swift */,
+				CCA8C5BB19923B9100D297CE /* Core.swift */,
+				CCA92311193FD1FB001BE28C /* AccessoryViewController.swift */,
+				CCA92313193FD1FB001BE28C /* ServiceViewController.swift */,
 				CCA9233219402088001BE28C /* CharacteristicViewController.swift */,
 				CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
-				CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */,
 				CC1BE949198CB008008E9193 /* TriggerViewController.swift */,
 				CC970A8E1991E64400872018 /* UsersViewController.swift */,
+				CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */,
+				CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */,
+				CCA8C5B61992354B00D297CE /* TriggersViewController.swift */,
+				CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */,
+				CCA8C5BF19924A9600D297CE /* TriggerDetailViewController.swift */,
 				CCA92315193FD1FB001BE28C /* Main.storyboard */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
@@ -316,16 +331,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */,
+				CCA8C5BC19923B9100D297CE /* Core.swift in Sources */,
+				CCA92314193FD1FB001BE28C /* ServiceViewController.swift in Sources */,
 				CC1BE94A198CB008008E9193 /* TriggerViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
 				CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */,
 				CC78B080197AC2A600A4A443 /* HRColorInfoView.m in Sources */,
+				CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */,
 				CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */,
+				CCA8C5B9199237E400D297CE /* ActionSetViewController.swift in Sources */,
 				CC78B082197AC2A600A4A443 /* HRColorPickerView.m in Sources */,
 				CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */,
-				CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */,
+				CCA92312193FD1FB001BE28C /* AccessoryViewController.swift in Sources */,
 				CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */,
+				CCA8C5B71992354B00D297CE /* TriggersViewController.swift in Sources */,
 				CC78B081197AC2A600A4A443 /* HRColorMapView.m in Sources */,
 				CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */,
 				CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */,
@@ -334,6 +353,7 @@
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
 				CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */,
 				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
+				CCA8C5C019924A9600D297CE /* TriggerDetailViewController.swift in Sources */,
 				CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,12 +9,10 @@
 import UIKit
 import HomeKit
 
-class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryDelegate {
+class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryDelegate {
 
     @IBOutlet var servicesTableView : UITableView?
     var services = [HMService]()
-
-    weak var currentHome:HMHome?
     
     var detailItem: HMAccessory? {
         didSet {
@@ -27,6 +25,7 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
     @IBAction func renameService(sender : AnyObject) {
         let alert:UIAlertController = UIAlertController(title: "Rename Accessory", message: "Enter the name you want for this accessory", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
@@ -42,7 +41,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
                     }
                 )
             }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         dispatch_async(dispatch_get_main_queue(),
             {
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -68,7 +66,6 @@ class DetailViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 let object = services[indexPath.row] as HMService
                 servicesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as CharacteristicViewController).detailItem = object
-                (segue.destinationViewController as CharacteristicViewController).currentHome = currentHome
             }
         }
     }

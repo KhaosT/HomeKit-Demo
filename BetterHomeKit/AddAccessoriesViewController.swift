@@ -17,8 +17,6 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     var accessories:NSMutableArray = NSMutableArray()
     
-    weak var homeManager:HMHomeManager!
-    
     var accessoriesManager:HMAccessoryBrowser = HMAccessoryBrowser()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -73,7 +71,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        homeManager.primaryHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
+        Core.sharedInstance.currentHome?.addAccessory(accessories.objectAtIndex(indexPath.row) as HMAccessory, completionHandler:
             {
                 (error:NSError!) in
                 if error != nil {

@@ -10,29 +10,11 @@ import UIKit
 import HomeKit
 
 class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    weak var currentHome:HMHome?
-    
-    var actAndTriggerArray = [AnyObject]()
     
     @IBOutlet weak var atTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        updateLocalArray()
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    func updateLocalArray () {
-        actAndTriggerArray.removeAll(keepCapacity: false)
-        if let currentHome = currentHome {
-            actAndTriggerArray += currentHome.actionSets as [AnyObject]
-            actAndTriggerArray += currentHome.triggers as [AnyObject]
-        }
-        atTableView.reloadData()
-        
     }
     
     @IBAction func dismissView(sender: AnyObject) {
@@ -46,69 +28,31 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return actAndTriggerArray.count
+        return 2
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath) as UITableViewCell
         
-        if let action = actAndTriggerArray[indexPath.row] as? HMActionSet {
-            cell.textLabel.text = action.name
-            cell.detailTextLabel.text = "ActionSet"
+        if indexPath.row == 0 {
+            cell.textLabel.text = "Action Sets"
+        } else if indexPath.row == 1 {
+            cell.textLabel.text = "Triggers"
         }
-        
-        if let trigger = actAndTriggerArray[indexPath.row] as? HMTrigger {
-            cell.textLabel.text = trigger.name
-            var actions = trigger.actionSets.map{$0.name}
-            var actionsText = "ActionSets: "
-            for name in actions {
-                actionsText += "\(name) "
-            }
-            cell.detailTextLabel.text = actionsText
-        }
-        
+
         return cell
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            if let action = actAndTriggerArray[indexPath.row] as? HMActionSet {
-                currentHome?.removeActionSet(action) {
-                    [weak self]
-                    error in
-                    if error != nil {
-                        NSLog("Failed to remove ActionSet: \(error)")
-                    }else{
-                        self?.updateLocalArray()
-                    }
-                }
-            }
-            if let trigger = actAndTriggerArray[indexPath.row] as? HMTrigger {
-                currentHome?.removeTrigger(trigger) {
-                    [weak self]
-                    error in
-                    if error != nil {
-                        NSLog("Failed to remove Trigger: \(error)")
-                    }else{
-                        self?.updateLocalArray()
-                    }
-                }
-            }
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        switch indexPath.row {
+        case 0:
+            self.performSegueWithIdentifier("presentActionSets", sender: nil)
+        case 1:
+            self.performSegueWithIdentifier("presentTriggers", sender: nil)
+        default:
+            NSLog("Something Wrong at here :(")
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

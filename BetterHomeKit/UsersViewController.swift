@@ -13,8 +13,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var usersTableView: UITableView!
     
-    weak var currentHome:HMHome?
-    
     var usersDict = [String:String]()
     
     var usersArray: [String] {
@@ -41,7 +39,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func fetchUsers() {
         usersDict.removeAll(keepCapacity: false)
-        if let currentHome = currentHome {
+        if let currentHome = Core.sharedInstance.currentHome {
             for user in currentHome.users as [String]{
                 usersDict[user] = "Unknown"
                 currentHome.getPrivilegeForUser(user) {
@@ -77,7 +75,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 [weak self]
                 (action:UIAlertAction!) in
                 let textField = alert.textFields[0] as UITextField
-                self?.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
+                Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
                     if error != nil {
                         NSLog("Add user failed: \(error)")
                     } else {
@@ -90,7 +88,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 [weak self]
                 (action:UIAlertAction!) in
                 let textField = alert.textFields[0] as UITextField
-                self?.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Administrator, completionHandler: { error in
+                Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Administrator, completionHandler: { error in
                     if error != nil {
                         NSLog("Add user failed: \(error)")
                     } else {
@@ -129,7 +127,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let userID = usersArray[indexPath.row]
-            currentHome?.removeUser(userID) {
+            Core.sharedInstance.currentHome?.removeUser(userID) {
                 [weak self]
                 error in
                 if error != nil {

@@ -10,23 +10,24 @@ import UIKit
 import HomeKit
 
 class TriggerViewController: UIViewController, UITextFieldDelegate {
+    weak var pendingTrigger:HMTimerTrigger?
     
-    weak var currentHome:HMHome?
-    weak var targetCharacteristic:HMCharacteristic?
-
-    @IBOutlet weak var targetValueField: UITextField!
-    @IBOutlet weak var targetState: UISwitch!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var repeatSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if targetCharacteristic?.metadata.format == (HMCharacteristicMetadataFormatBool as String) {
-            targetValueField.hidden = true
-            targetState.hidden = false
+        
+        if let pendingTrigger = pendingTrigger {
+            nameField.text = pendingTrigger.name
+            datePicker.date = pendingTrigger.fireDate
+            if pendingTrigger.recurrence != nil && pendingTrigger.recurrence.minute == 5 {
+                repeatSwitch.on = true
+            } else {
+                repeatSwitch.on = false
+            }
         }
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,10 +36,6 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        if textField == targetValueField {
-            nameField.becomeFirstResponder()
-        }
-        
         if textField == nameField {
             nameField.resignFirstResponder()
         }
@@ -46,78 +43,65 @@ class TriggerViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveTrigger(sender: AnyObject) {
-        if let targetCharacteristic = targetCharacteristic {
-            var targetValue: AnyObject?
+        if let pendingTrigger = pendingTrigger {
+            let triggerName = self.nameField.text
+            let calendar = NSCalendar.currentCalendar()
+            let selectedDate = self.datePicker.date
+            let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
+            let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
+            var recurrenceComp:NSDateComponents?
             
-            switch (targetCharacteristic.metadata.format as NSString) {
-            case HMCharacteristicMetadataFormatBool:
-                targetValue = targetState.on
-            case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
-                let f = NSNumberFormatter()
-                f.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                targetValue = f.numberFromString(targetValueField.text)
-            case HMCharacteristicMetadataFormatString:
-                targetValue = targetValueField.text
-            default:
-                NSLog("Unsupported")
+            if repeatSwitch.on {
+                recurrenceComp = NSDateComponents()
+                recurrenceComp?.minute = 5
             }
             
-            let action = HMCharacteristicWriteAction(characteristic: targetCharacteristic, targetValue: targetValue)
-            if let currentHome = currentHome {
-                currentHome.addActionSetWithName(nameField.text) {
-                    (actionSet: HMActionSet!, error: NSError!) in
+            pendingTrigger.updateRecurrence(recurrenceComp) {
+                error in
+                if error != nil {
+                    NSLog("Failed updating recurrence, error:\(error)")
+                }
+            }
+            pendingTrigger.updateName(triggerName) {
+                error in
+                if error != nil {
+                    NSLog("Failed updating fire date, error:\(error)")
+                }
+            }
+            pendingTrigger.updateFireDate(fireDate) {
+                error in
+                if error != nil {
+                    NSLog("Failed updating fire date, error:\(error)")
+                } else {
+                    self.navigationController.popViewControllerAnimated(true)
+                }
+            }
+        } else {
+            if let currentHome = Core.sharedInstance.currentHome {
+                let triggerName = self.nameField.text
+                let calendar = NSCalendar.currentCalendar()
+                let selectedDate = self.datePicker.date
+                let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
+                let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
+                
+                var recurrenceComp:NSDateComponents?
+                
+                if repeatSwitch.on {
+                    recurrenceComp = NSDateComponents()
+                    recurrenceComp?.minute = 5
+                }
+                
+                let trigger = HMTimerTrigger(name: triggerName, fireDate: fireDate, timeZone: nil, recurrence: recurrenceComp, recurrenceCalendar: nil)
+                currentHome.addTrigger(trigger) {
+                    [weak self]
+                    error in
                     if error != nil {
-                        NSLog("Failed to add action set, Error: \(error)")
+                        NSLog("Failed to add Time Trigger, Error: \(error)")
                     } else {
-                        actionSet.addAction(action) {
-                            error in
-                            if error != nil {
-                                NSLog("Failed to add Action to Action Set Error: \(error)")
-                            }else {
-                                let calendar = NSCalendar.currentCalendar()
-                                let selectedDate = self.datePicker.date
-                                let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
-                                let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
-                                let trigger = HMTimerTrigger(name: self.nameField.text.stringByAppendingString("Trigger"), fireDate: fireDate, timeZone: nil, recurrence: nil, recurrenceCalendar: nil)
-                                NSLog("Trigger FireDate:\(trigger.fireDate)")
-                                self.currentHome?.addTrigger(trigger) {
-                                    error in
-                                    if error != nil {
-                                        NSLog("Failed to add Time Trigger, Error: \(error)")
-                                    } else {
-                                        trigger.addActionSet(actionSet) {
-                                            error in
-                                            if error != nil {
-                                                NSLog("Failed to add action set to Time Trigger, Error: \(error)")
-                                            }else{
-                                                trigger.enable(true) {
-                                                    error in
-                                                    if error != nil {
-                                                        NSLog("Failed to enable the trigger, Error: \(error)")
-                                                    } else {
-                                                        self.navigationController.popViewControllerAnimated(true)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        self?.navigationController.popViewControllerAnimated(true)
                     }
                 }
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

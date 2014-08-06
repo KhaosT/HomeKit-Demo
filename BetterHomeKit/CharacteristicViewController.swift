@@ -19,8 +19,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     var saturationCharacteristic:HMCharacteristic?
     var onCharacteristic:HMCharacteristic?
     
-    weak var currentHome:HMHome?
-    
     var detailItem: HMService? {
     didSet {
         self.title = detailItem!.name
@@ -34,6 +32,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     @IBAction func renameService(sender : AnyObject) {
         let alert:UIAlertController = UIAlertController(title: "Rename Service", message: "Enter the name you want for this service. Siri should be able to take command with this name.", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
@@ -49,7 +48,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 )
             }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         dispatch_async(dispatch_get_main_queue(),
             {
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -61,11 +59,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             (segue.destinationViewController as ColorPickerViewController).delegate = self
             (segue.destinationViewController as ColorPickerViewController).initialColor = currentLightColor()
         }
-        if segue.identifier? == "presentTriggerView" {
-            if let characteristic = sender as? HMCharacteristic {
-                (segue.destinationViewController as TriggerViewController).currentHome = currentHome
-                (segue.destinationViewController as TriggerViewController).targetCharacteristic = characteristic
-            }
+        
+        if segue.identifier? == "startActionAssignProcess" {
+            (segue.destinationViewController as ActionSetsViewController).pendingCharacteristic = sender as? HMCharacteristic
         }
     }
     
@@ -175,7 +171,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     override func viewDidDisappear(animated: Bool) {
-        NSLog("Start Disappearing Char")
         super.viewDidDisappear(animated)
         for characteristic in characteristics {
             if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
@@ -191,7 +186,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
         self.characteristicTableView?.setEditing(false, animated: true)
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        NSLog("End Disappearing Char")
     }
     
     func didUpdateValueForCharacteristic(aNote:NSNotification) {
@@ -288,14 +282,13 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         
         var options = [UITableViewRowAction]()
         
-        let triggerAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Trigger", handler:
+        let triggerAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Action", handler:
             {
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
                 if let strongSelf = self {
                     let characteristic = strongSelf.characteristics[indexPath.row] as HMCharacteristic
-                    NSLog("Setup Trigger for \(characteristic)")
-                    strongSelf.performSegueWithIdentifier("presentTriggerView", sender: characteristic)
+                    strongSelf.performSegueWithIdentifier("startActionAssignProcess", sender: characteristic)
                     tableView.setEditing(false, animated: true)
                 }
             }
@@ -374,6 +367,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
                 let alert:UIAlertController = UIAlertController(title: "Adjust \(charDesc)", message: "Enter the value from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
@@ -395,7 +389,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             }
                         )
                     }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 dispatch_async(dispatch_get_main_queue(),
                     {
                         self.presentViewController(alert, animated: true, completion: nil)
@@ -403,6 +396,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             case HMCharacteristicMetadataFormatString:
                 let alert:UIAlertController = UIAlertController(title: "Update \(charDesc)", message: "Enter the \(charDesc) from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
@@ -422,7 +416,6 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             }
                         )
                     }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 dispatch_async(dispatch_get_main_queue(),
                     {
                         self.presentViewController(alert, animated: true, completion: nil)

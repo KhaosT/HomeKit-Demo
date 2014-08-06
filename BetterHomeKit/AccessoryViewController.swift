@@ -11,7 +11,7 @@ import HomeKit
 
 let characteristicUpdateNotification = "didUpdateValueForCharacteristic"
 
-class MasterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
+class AccessoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
     var objects = [HMAccessory]()
     
@@ -63,40 +63,18 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
             if let indexPath = indexPath {
                 let object = objects[indexPath.row] as HMAccessory
                 accessoriesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
-                (segue.destinationViewController as DetailViewController).detailItem = object
-                (segue.destinationViewController as DetailViewController).currentHome = mainHome
+                (segue.destinationViewController as ServiceViewController).detailItem = object
             }
-        }
-        
-        if segue.identifier? == "showAddNewAccessories" {
-            (segue.destinationViewController as AddAccessoriesViewController).homeManager = homeManager
         }
         
         if segue.identifier? == "presentRoomsVC" {
             let naviController = segue.destinationViewController as UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
                 let roomVC = naviController.viewControllers?[0] as RoomsViewController
-                roomVC.currentHome = mainHome
                 if let accessory = pendingAccessory {
                     roomVC.pendingAccessory = accessory
                     pendingAccessory = nil
                 }
-            }
-        }
-        
-        if segue.identifier? == "presentTriggersVC" {
-            let naviController = segue.destinationViewController as UINavigationController
-            if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let taaVC = naviController.viewControllers?[0] as TriggersAndActionsViewController
-                taaVC.currentHome = mainHome
-            }
-        }
-        
-        if segue.identifier? == "presentUsersVC" {
-            let naviController = segue.destinationViewController as UINavigationController
-            if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let taaVC = naviController.viewControllers?[0] as UsersViewController
-                taaVC.currentHome = mainHome
             }
         }
     }
@@ -119,6 +97,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                 NSLog("No Home is available, ask user to add one.")
                 let alert:UIAlertController = UIAlertController(title: "Create New Home", message: "You need a new home to continue", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
@@ -143,7 +122,6 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                                 }
                         })
                 }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 dispatch_async(dispatch_get_main_queue(),
                     {
                         self.presentViewController(alert, animated: true, completion: nil)
@@ -151,6 +129,7 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }else{
             NSLog("Find primary Home :)")
+            Core.sharedInstance.currentHome = manager.primaryHome
             mainHome = manager.primaryHome
             mainHome.delegate = self
             NSLog("Current Users:\(mainHome.users)")
