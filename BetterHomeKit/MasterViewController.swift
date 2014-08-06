@@ -120,12 +120,12 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
         for home in manager.homes as [HMHome] {
             NSLog("Home:\(home)")
         }
-        if !manager.primaryHome {
+        if manager.primaryHome == nil {
             if manager.homes?.count > 0 {
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
                     { (error:NSError!) in
                         NSLog("DidSetPrimaryHome")
-                    })
+                })
             }else{
                 let alert:UIAlertController = UIAlertController(title: "Create New Home", message: "You need a new home to continue", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
@@ -136,18 +136,28 @@ class MasterViewController: UIViewController, UITableViewDataSource, UITableView
                         manager.addHomeWithName(textField.text, completionHandler:
                             {
                                 (home:HMHome!, error:NSError!) in
-                                NSLog("New Home \(home)")
-                                manager.updatePrimaryHome(home, completionHandler:
-                                    { (error:NSError!) in
-                                        NSLog("DidSetPrimaryHome")
-                                    })
-                            })
-                    }))
+                                if error != nil {
+                                    NSLog("Failed adding home, Error:\(error)")
+                                } else {
+                                    NSLog("New Home \(home)")
+                                    manager.updatePrimaryHome(home, completionHandler:
+                                        {
+                                            (error:NSError!) in
+                                            if error != nil {
+                                                NSLog("Failed updating primary home, Error: \(error)")
+                                            } else {
+                                                NSLog("DidSetPrimaryHome")
+                                            }
+                                        }
+                                    )
+                                }
+                        })
+                }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 dispatch_async(dispatch_get_main_queue(),
                     {
                         self.presentViewController(alert, animated: true, completion: nil)
-                    })
+                })
             }
         }else{
             mainHome = manager.primaryHome
