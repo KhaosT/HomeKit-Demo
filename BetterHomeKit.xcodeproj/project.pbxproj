@@ -19,6 +19,7 @@
 		CC78B083197AC2A600A4A443 /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07A197AC2A600A4A443 /* HRHSVColorUtil.m */; };
 		CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */; };
 		CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */; };
+		CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC970A8E1991E64400872018 /* UsersViewController.swift */; };
 		CCA92310193FD1FB001BE28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9230F193FD1FB001BE28C /* AppDelegate.swift */; };
 		CCA92312193FD1FB001BE28C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92311193FD1FB001BE28C /* MasterViewController.swift */; };
 		CCA92314193FD1FB001BE28C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA92313193FD1FB001BE28C /* DetailViewController.swift */; };
@@ -83,6 +84,7 @@
 		CC78B07B197AC2A600A4A443 /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
 		CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
 		CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		CC970A8E1991E64400872018 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA9230E193FD1FB001BE28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
 				CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */,
 				CC1BE949198CB008008E9193 /* TriggerViewController.swift */,
+				CC970A8E1991E64400872018 /* UsersViewController.swift */,
 				CCA92315193FD1FB001BE28C /* Main.storyboard */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
@@ -331,6 +334,7 @@
 				CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */,
 				CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */,
 				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
+				CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

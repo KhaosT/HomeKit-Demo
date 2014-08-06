@@ -15,7 +15,12 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     weak var currentHome:HMHome?
     weak var pendingAccessory:HMAccessory?
-    @IBOutlet var roomTableView: UITableView?
+    @IBOutlet var roomTableView: UITableView!
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.roomTableView.setEditing(false, animated: false)
+    }
     
     @IBAction func dismissRoomController(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -36,7 +41,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                             if let error = error {
                                 NSLog("Add room error:\(error)")
                             }else{
-                                strongSelf.roomTableView?.reloadData()
+                                strongSelf.roomTableView.reloadData()
                             }
                         }
                     )
@@ -113,5 +118,25 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if let room = self.currentHome?.rooms[indexPath.row] as? HMRoom {
+                currentHome?.removeRoom(room) {
+                    [weak self]
+                    error in
+                    if error != nil {
+                        NSLog("Failed removing room, error:\(error)")
+                    } else {
+                        self?.roomTableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }
