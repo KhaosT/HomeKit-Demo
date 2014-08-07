@@ -91,6 +91,7 @@
 		CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
 		CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		CC970A8E1991E64400872018 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		CCA254A119934F7700E1D087 /* HomeKit_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeKit_Private.h; sourceTree = "<group>"; };
 		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetsViewController.swift; sourceTree = "<group>"; };
 		CCA8C5B61992354B00D297CE /* TriggersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +182,7 @@
 			children = (
 				CC78B06C197AC2A600A4A443 /* ColorPicker */,
 				CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */,
+				CCA254A119934F7700E1D087 /* HomeKit_Private.h */,
 				CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */,
 				CCA9230F193FD1FB001BE28C /* AppDelegate.swift */,
 				CCA8C5BB19923B9100D297CE /* Core.swift */,

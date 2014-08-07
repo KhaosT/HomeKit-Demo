@@ -115,6 +115,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         
         // Update the user interface for the detail item.
         for characteristic in detailItem!.characteristics as [HMCharacteristic] {
+            NSLog("CharDes: \(characteristic.characteristicTypeDescription())")
             if colorButton?.enabled == true {
                 if characteristic.characteristicType == (HMCharacteristicTypeBrightness as String) {
                     brightnessCharacteristic = characteristic

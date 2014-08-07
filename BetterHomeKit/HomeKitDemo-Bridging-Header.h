@@ -3,3 +3,4 @@
 //
 
 #import "HRColorPickerView.h"
+#import "HomeKit_Private.h"
