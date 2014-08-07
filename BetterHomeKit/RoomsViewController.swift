@@ -65,9 +65,9 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as UITableViewCell
         
-        let rooms = Core.sharedInstance.currentHome?.rooms
-        
-        cell.textLabel.text = rooms?[indexPath.row].name
+        let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
+
+        cell.textLabel.text = room.name
         
         return cell
     }
