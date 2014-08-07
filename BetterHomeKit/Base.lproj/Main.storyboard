@@ -498,7 +498,7 @@
         <!--Trigger-->
         <scene sceneID="ykw-Qp-MNg">
             <objects>
-                <viewController id="Aid-3p-Mzi" customClass="TriggerViewController" customModule="HomeKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Aid-3p-Mzi" customClass="TriggerCreateViewController" customModule="HomeKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h8P-0F-Uiw"/>
                         <viewControllerLayoutGuide type="bottom" id="Xsz-8B-ghX"/>

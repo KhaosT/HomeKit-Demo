@@ -9,7 +9,7 @@
 import UIKit
 import HomeKit
 
-class TriggerViewController: UIViewController, UITextFieldDelegate {
+class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
     weak var pendingTrigger:HMTimerTrigger?
     
     @IBOutlet weak var datePicker: UIDatePicker!

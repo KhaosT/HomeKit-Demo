@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */; };
-		CC1BE94A198CB008008E9193 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE949198CB008008E9193 /* TriggerViewController.swift */; };
+		CC1BE94A198CB008008E9193 /* TriggerCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */; };
 		CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */; };
 		CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */; };
 		CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */; };
@@ -71,7 +71,7 @@
 
 /* Begin PBXFileReference section */
 		CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
-		CC1BE949198CB008008E9193 /* TriggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
+		CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerCreateViewController.swift; sourceTree = "<group>"; };
 		CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersAndActionsViewController.swift; sourceTree = "<group>"; };
 		CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
 		CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 				CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
-				CC1BE949198CB008008E9193 /* TriggerViewController.swift */,
+				CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */,
 				CC970A8E1991E64400872018 /* UsersViewController.swift */,
 				CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */,
 				CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */,
@@ -339,7 +339,7 @@
 				CCA8C5BC19923B9100D297CE /* Core.swift in Sources */,
 				CCA92314193FD1FB001BE28C /* ServiceViewController.swift in Sources */,
 				CCBD291E19928D27009231C9 /* Cache.swift in Sources */,
-				CC1BE94A198CB008008E9193 /* TriggerViewController.swift in Sources */,
+				CC1BE94A198CB008008E9193 /* TriggerCreateViewController.swift in Sources */,
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
 				CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */,
 				CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */,

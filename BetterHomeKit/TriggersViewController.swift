@@ -50,7 +50,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if segue.identifier? == "updateTrigger" {
-            let triggerVC = segue.destinationViewController as TriggerViewController
+            let triggerVC = segue.destinationViewController as TriggerCreateViewController
             triggerVC.pendingTrigger = sender as? HMTimerTrigger
         }
     }
