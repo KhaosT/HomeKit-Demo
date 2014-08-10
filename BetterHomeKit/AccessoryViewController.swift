@@ -90,6 +90,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 NSLog("There are homes in HMHomeManager, choose the first one.")
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
                     { (error:NSError!) in
+                        Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
                         NSLog("DidSetPrimaryHome")
                 })
             }else{
