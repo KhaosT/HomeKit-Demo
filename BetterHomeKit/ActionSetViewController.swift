@@ -60,7 +60,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let action = actions[indexPath.row] as HMCharacteristicWriteAction
         
-        if let charDesc = HomeKitUUIDs[action.characteristic.characteristicType] as? String {
+        if let charDesc = HomeKitUUIDs[action.characteristic.characteristicType] {
             cell.textLabel.text = charDesc
         }else{
             cell.textLabel.text = action.characteristic.characteristicType
@@ -76,7 +76,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let object = _action.characteristic
         var charDesc = object.characteristicType
-        charDesc = HomeKitUUIDs[object.characteristicType] as? String
+        charDesc = HomeKitUUIDs[object.characteristicType]
         switch (object.metadata.format as NSString) {
         case HMCharacteristicMetadataFormatBool:
             let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Please choose the target state for this action", preferredStyle: .Alert)

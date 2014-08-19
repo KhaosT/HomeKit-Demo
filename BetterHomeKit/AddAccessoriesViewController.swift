@@ -24,7 +24,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         // Custom initialization
     }
     
-    required init(coder aDecoder: NSCoder!){
+    required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
     }
 

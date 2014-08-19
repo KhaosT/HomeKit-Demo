@@ -40,7 +40,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func updateHomeAccessories() {
-        if homeManager != nil && homeManager.primaryHome != nil {
+        if homeManager.primaryHome != nil {
             for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
                 if !contains(objects, accessory) {
                     objects.insert(accessory, atIndex: 0)

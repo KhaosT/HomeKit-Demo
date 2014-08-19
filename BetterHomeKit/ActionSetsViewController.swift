@@ -101,7 +101,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if let pendingChar = pendingCharacteristic?.toHMCharacteristic() {
             let object = pendingChar
             var charDesc = object.characteristicType
-            charDesc = HomeKitUUIDs[object.characteristicType] as? String
+            charDesc = HomeKitUUIDs[object.characteristicType]
             switch (object.metadata.format as NSString) {
             case HMCharacteristicMetadataFormatBool:
                 let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Please choose the target state for this action", preferredStyle: .Alert)

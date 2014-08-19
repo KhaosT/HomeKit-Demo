@@ -169,34 +169,32 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         configureView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
         for aChar in characteristics {
-            if aChar != nil {
-                if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
-                    aChar.enableNotification(true, completionHandler:
-                        {
-                            error in
-                            if (error != nil) {
-                                NSLog("Cannot enable notifications: \(error)")
-                            }
+            if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+                aChar.enableNotification(true, completionHandler:
+                    {
+                        error in
+                        if (error != nil) {
+                            NSLog("Cannot enable notifications: \(error)")
                         }
-                    )
-                }
-                if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
-                    aChar.readValueWithCompletionHandler(
-                        {
-                            [weak self]
-                            (error:NSError!) in
-                            if (error != nil) {
-                                NSLog("Error read Char: \(aChar), error: \(error)")
-                            }else{
-                                if let strongSelf = self {
-                                    let index = find(strongSelf.characteristics, aChar)
-                                    strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
-                                }
-                                
+                    }
+                )
+            }
+            if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
+                aChar.readValueWithCompletionHandler(
+                    {
+                        [weak self]
+                        (error:NSError!) in
+                        if (error != nil) {
+                            NSLog("Error read Char: \(aChar), error: \(error)")
+                        }else{
+                            if let strongSelf = self {
+                                let index = find(strongSelf.characteristics, aChar)
+                                strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
                             }
+                            
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }
@@ -296,7 +294,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = characteristics[indexPath.row] as HMCharacteristic
-        if let charDesc = HomeKitUUIDs[object.characteristicType] as? String {
+        if let charDesc = HomeKitUUIDs[object.characteristicType] {
             cell.detailTextLabel.text = charDesc
         }else{
             cell.detailTextLabel.text = object.characteristicType
@@ -376,7 +374,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             )
         default:
             var charDesc = object.characteristicType
-            charDesc = HomeKitUUIDs[object.characteristicType] as? String
+            if let desc = HomeKitUUIDs[object.characteristicType] {
+                charDesc = desc
+            }
             switch (object.metadata.format as NSString) {
             case HMCharacteristicMetadataFormatBool:
                 if (object.value != nil) {
