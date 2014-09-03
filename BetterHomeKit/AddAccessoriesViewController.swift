@@ -55,20 +55,20 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return accessories.count;
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel.text = accessories[indexPath.row].name
+        cell.textLabel?.text = accessories[indexPath.row].name
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         Core.sharedInstance.currentHome?.addAccessory(accessories[indexPath.row], completionHandler:
@@ -83,7 +83,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         )
     }
     
-    func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!)
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath)
     {
         let accessory = accessories[indexPath.row]
         accessory.identifyWithCompletionHandler({

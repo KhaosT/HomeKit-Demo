@@ -34,7 +34,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
-                let textField = alert.textFields[0] as UITextField
+                let textField = alert.textFields?[0] as UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
@@ -104,28 +104,28 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Dispose of any resources that can be recreated.
     }
 
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return services.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = services[indexPath.row] as HMService
         if (object.name != nil) {
-            cell.textLabel.text = object.name
+            cell.textLabel?.text = object.name
             if let serviceDesc = HomeKitUUIDs[object.serviceType] {
-                cell.detailTextLabel.text = serviceDesc
+                cell.detailTextLabel?.text = serviceDesc
             }else{
-                cell.detailTextLabel.text = object.serviceType
+                cell.detailTextLabel?.text = object.serviceType
             }
         }else{
             if let serviceDesc = HomeKitUUIDs[object.serviceType] {
-                cell.detailTextLabel.text = serviceDesc
+                cell.detailTextLabel?.text = serviceDesc
             }else{
-                cell.detailTextLabel.text = object.serviceType
+                cell.detailTextLabel?.text = object.serviceType
             }
-            cell.detailTextLabel.text = ""
+            cell.detailTextLabel?.text = ""
         }
         return cell
     }

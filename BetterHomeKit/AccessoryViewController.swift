@@ -58,7 +58,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     // #pragma mark - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier? == "showDetail" {
+        if segue.identifier == "showDetail" {
             let indexPath = accessoriesTableView?.indexPathForSelectedRow()
             if let indexPath = indexPath {
                 let object = objects[indexPath.row] as HMAccessory
@@ -67,7 +67,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
-        if segue.identifier? == "presentRoomsVC" {
+        if segue.identifier == "presentRoomsVC" {
             let naviController = segue.destinationViewController as UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
                 let roomVC = naviController.viewControllers?[0] as RoomsViewController
@@ -101,7 +101,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields[0] as UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         manager.addHomeWithName(textField.text, completionHandler:
                             {
                                 (home:HMHome!, error:NSError!) in
@@ -191,11 +191,11 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
                 if accessory.reachable {
                     if let cell = cell {
-                        cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+                        cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
                     }
                 }else{
                     if let cell = cell {
-                        cell.textLabel.textColor = UIColor.redColor()
+                        cell.textLabel?.textColor = UIColor.redColor()
                     }
                 }
             }
@@ -224,13 +224,13 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         
         let object = objects[indexPath.row] as HMAccessory
         if object.reachable {
-            cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+            cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
         }else{
-            cell.textLabel.textColor = UIColor.redColor()
+            cell.textLabel?.textColor = UIColor.redColor()
         }
-        cell.textLabel.text = object.name
+        cell.textLabel?.text = object.name
         
-        cell.detailTextLabel.text = object.room?.name
+        cell.detailTextLabel?.text = object.room?.name
         
         return cell
     }
@@ -247,7 +247,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var options = [UITableViewRowAction]()
         
@@ -328,7 +328,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         return options
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
     }
 }

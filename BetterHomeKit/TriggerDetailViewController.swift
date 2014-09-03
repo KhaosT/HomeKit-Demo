@@ -43,11 +43,11 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier? == "showActionSetsSelection" {
+        if segue.identifier == "showActionSetsSelection" {
             let actionVC = segue.destinationViewController as ActionSetsViewController
             actionVC.pendingTrigger = sender as? HMTrigger
         }
-        if segue.identifier? == "showActionSetDetails" {
+        if segue.identifier == "showActionSetDetails" {
             let actionVC = segue.destinationViewController as ActionSetViewController
             actionVC.currentActionSet = sender as? HMActionSet
         }
@@ -58,22 +58,22 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return actionSets.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as UITableViewCell
         
         let actionSet = actionSets[indexPath.row] as HMActionSet
         
-        cell.textLabel.text = "\(actionSet.name)"
-        cell.detailTextLabel.text = "Actions:\(actionSet.actions.count)"
+        cell.textLabel?.text = "\(actionSet.name)"
+        cell.detailTextLabel?.text = "Actions:\(actionSet.actions.count)"
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let actionSet = actionSets[indexPath.row]
         
         self.performSegueWithIdentifier("showActionSetDetails", sender: actionSet)
@@ -85,7 +85,7 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
         return true
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let actionSet = actionSets[indexPath.row]
             currentTrigger?.removeActionSet(actionSet) {

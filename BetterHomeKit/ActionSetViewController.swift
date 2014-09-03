@@ -51,27 +51,27 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return actions.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActionCell", forIndexPath: indexPath) as UITableViewCell
         
         let action = actions[indexPath.row] as HMCharacteristicWriteAction
         
         if let charDesc = HomeKitUUIDs[action.characteristic.characteristicType] {
-            cell.textLabel.text = charDesc
+            cell.textLabel?.text = charDesc
         }else{
-            cell.textLabel.text = action.characteristic.characteristicType
+            cell.textLabel?.text = action.characteristic.characteristicType
         }
         
-        cell.detailTextLabel.text = "Accessory: \(action.characteristic.service.accessory.name) | Target Value: \(action.targetValue)"
+        cell.detailTextLabel?.text = "Accessory: \(action.characteristic.service.accessory.name) | Target Value: \(action.targetValue)"
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let _action = actions[indexPath.row] as HMCharacteristicWriteAction
         
         let object = _action.characteristic
@@ -116,7 +116,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                 {
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
+                    let textField = alert.textFields?[0] as UITextField
                     let f = NSNumberFormatter()
                     f.numberStyle = NSNumberFormatterStyle.DecimalStyle
                     _action.updateTargetValue(f.numberFromString(textField.text)) {
@@ -139,7 +139,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                 {
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
+                    let textField = alert.textFields?[0] as UITextField
                     _action.updateTargetValue(textField.text) {
                         error in
                         if error != nil {
@@ -164,7 +164,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         return true
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let action = actions[indexPath.row]
             self.currentActionSet?.removeAction(action) {

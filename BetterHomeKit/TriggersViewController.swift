@@ -44,33 +44,33 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier? == "showDetailedTrigger" {
+        if segue.identifier == "showDetailedTrigger" {
             let triggerVC = segue.destinationViewController as TriggerDetailViewController
             triggerVC.currentTrigger = sender as? HMTrigger
         }
         
-        if segue.identifier? == "updateTrigger" {
+        if segue.identifier == "updateTrigger" {
             let triggerVC = segue.destinationViewController as TriggerCreateViewController
             triggerVC.pendingTrigger = sender as? HMTimerTrigger
         }
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return triggers.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as UITableViewCell
         
         let trigger = triggers[indexPath.row] as HMTimerTrigger
-        cell.textLabel.text = trigger.name
+        cell.textLabel?.text = trigger.name
         
         if trigger.enabled {
-            cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
-            cell.detailTextLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+            cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+            cell.detailTextLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
         } else {
-            cell.textLabel.textColor = UIColor.lightGrayColor()
-            cell.detailTextLabel.textColor = UIColor.lightGrayColor()
+            cell.textLabel?.textColor = UIColor.lightGrayColor()
+            cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
         }
         
         var actions = trigger.actionSets.map{$0.name}
@@ -81,12 +81,12 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         detailText += "| Fire Date: \(dateFormatter.stringFromDate(trigger.fireDate)) "
         detailText += "| Last Fire: \(dateFormatter.stringFromDate(trigger.lastFireDate))"
         
-        cell.detailTextLabel.text = detailText
+        cell.detailTextLabel?.text = detailText
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let trigger = triggers[indexPath.row]
         
         self.performSegueWithIdentifier("showDetailedTrigger", sender: trigger)
@@ -98,11 +98,11 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         return true
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
-    func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var options = [UITableViewRowAction]()
         

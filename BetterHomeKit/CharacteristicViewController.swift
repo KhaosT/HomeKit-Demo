@@ -45,7 +45,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
-                let textField = alert.textFields[0] as UITextField
+                let textField = alert.textFields?[0] as UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
@@ -64,12 +64,12 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier? == "showColorPicker" {
+        if segue.identifier == "showColorPicker" {
             (segue.destinationViewController as ColorPickerViewController).delegate = self
             (segue.destinationViewController as ColorPickerViewController).initialColor = currentLightColor()
         }
         
-        if segue.identifier? == "startActionAssignProcess" {
+        if segue.identifier == "startActionAssignProcess" {
             (segue.destinationViewController as ActionSetsViewController).pendingCharacteristic = Characteristic(hmChar: (sender as HMCharacteristic))
         }
     }
@@ -227,9 +227,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             dispatch_async(dispatch_get_main_queue(),
                                 {
                                     if let value = characteristic.value as? NSObject {
-                                        cell.textLabel.text = "\(value)"
+                                        cell.textLabel?.text = "\(value)"
                                     }else{
-                                        cell.textLabel.text = ""
+                                        cell.textLabel?.text = ""
                                     }
                                 }
                             )
@@ -286,28 +286,28 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characteristics.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = characteristics[indexPath.row] as HMCharacteristic
         if let charDesc = HomeKitUUIDs[object.characteristicType] {
-            cell.detailTextLabel.text = charDesc
+            cell.detailTextLabel?.text = charDesc
         }else{
-            cell.detailTextLabel.text = object.characteristicType
+            cell.detailTextLabel?.text = object.characteristicType
         }
         if (object.value != nil) {
-            cell.textLabel.text = "\(object.value)"
+            cell.textLabel?.text = "\(object.value)"
         }else{
-            cell.textLabel.text = ""
+            cell.textLabel?.text = ""
         }
         return cell
     }
     
-    func tableView(tableView: UITableView!, editActionsForRowAtIndexPath indexPath: NSIndexPath!) -> [AnyObject]! {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         var options = [UITableViewRowAction]()
         
@@ -329,7 +329,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         return options
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
@@ -341,7 +341,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         return false
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let object = characteristics[indexPath.row] as HMCharacteristic
@@ -388,7 +388,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             }else{
                                 dispatch_async(dispatch_get_main_queue(),
                                     {
-                                        tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                                            cell.textLabel?.text = "\(object.value)"
+                                        }
                                     }
                                 )
                             }
@@ -402,7 +404,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields[0] as UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         let f = NSNumberFormatter()
                         f.numberStyle = NSNumberFormatterStyle.DecimalStyle
                         object.writeValue(f.numberFromString(textField.text), completionHandler:
@@ -413,7 +415,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                 }else{
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
-                                            tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                                                cell.textLabel?.text = "\(object.value)"
+                                            }
                                         }
                                     )
                                 }
@@ -431,7 +435,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields[0] as UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         object.writeValue("\(textField.text)", completionHandler:
                             {
                                 (error:NSError!) in
@@ -440,7 +444,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                 }else{
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
-                                            tableView.cellForRowAtIndexPath(indexPath).textLabel.text = "\(object.value)"
+                                            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                                                cell.textLabel?.text = "\(object.value)"
+                                            }
                                         }
                                     )
                                 }

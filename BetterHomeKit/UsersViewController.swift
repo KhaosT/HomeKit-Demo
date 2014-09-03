@@ -74,7 +74,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields[0] as UITextField
+                let textField = alert.textFields?[0] as UITextField
                 Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
                     if error != nil {
                         NSLog("Add user failed: \(error)")
@@ -87,7 +87,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields[0] as UITextField
+                let textField = alert.textFields?[0] as UITextField
                 Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Administrator, completionHandler: { error in
                     if error != nil {
                         NSLog("Add user failed: \(error)")
@@ -107,15 +107,15 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersDict.count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as UITableViewCell
         
-        cell.textLabel.text = usersArray[indexPath.row]
-        cell.detailTextLabel.text = usersDict[usersArray[indexPath.row]]
+        cell.textLabel?.text = usersArray[indexPath.row]
+        cell.detailTextLabel?.text = usersDict[usersArray[indexPath.row]]
         
         return cell
     }
@@ -124,7 +124,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return true
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let userID = usersArray[indexPath.row]
             Core.sharedInstance.currentHome?.removeUser(userID) {

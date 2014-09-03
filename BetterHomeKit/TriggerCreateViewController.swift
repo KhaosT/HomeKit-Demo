@@ -100,7 +100,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
                 if error != nil {
                     NSLog("Failed updating fire date, error:\(error)")
                 } else {
-                    self.navigationController.popViewControllerAnimated(true)
+                    self.navigationController?.popViewControllerAnimated(true)
                 }
             }
         } else {
@@ -130,7 +130,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
                     if error != nil {
                         NSLog("Failed to add Time Trigger, Error: \(error)")
                     } else {
-                        self?.navigationController.popViewControllerAnimated(true)
+                        self?.navigationController?.popViewControllerAnimated(true)
                     }
                 }
             }

@@ -33,7 +33,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields[0] as UITextField
+                let textField = alert.textFields?[0] as UITextField
                 if let strongSelf = self {
                     Core.sharedInstance.currentHome?.addRoomWithName(textField.text, completionHandler:
                         {
@@ -54,7 +54,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewWillAppear(animated)
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let rooms = Core.sharedInstance.currentHome?.rooms {
             return rooms.count
         }else{
@@ -62,17 +62,17 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as UITableViewCell
         
         let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
 
-        cell.textLabel.text = room.name
+        cell.textLabel?.text = room.name
         
         return cell
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let accessory = pendingAccessory {
             let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as HMRoom
             Core.sharedInstance.currentHome?.assignAccessory(accessory.toHMAccessory(), toRoom: room, completionHandler:
@@ -96,7 +96,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 {
                     [weak self]
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields[0] as UITextField
+                    let textField = alert.textFields?[0] as UITextField
                     let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
                     room.updateName(textField.text, completionHandler:
                         {
@@ -105,7 +105,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                                 println("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                cell.textLabel.text = Core.sharedInstance.currentHome?.rooms?[indexPath.row].name
+                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.rooms?[indexPath.row].name
                             }
                         }
                     )
@@ -123,7 +123,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         return true
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
                 Core.sharedInstance.currentHome?.removeRoom(room) {
