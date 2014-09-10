@@ -13,13 +13,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var usersTableView: UITableView!
     
-    var usersDict = [String:String]()
-    
-    var usersArray: [String] {
-        get{
-            return usersDict.keys.array
-        }
-    }
+    lazy var usersArray = [HMUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,30 +32,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func fetchUsers() {
-        usersDict.removeAll(keepCapacity: false)
+        usersArray.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            for user in currentHome.users as [String]{
-                usersDict[user] = "Unknown"
-                currentHome.getPrivilegeForUser(user) {
-                    [weak self]
-                    (privilege:HMHomeUserPrivilege, error:NSError!) in
-                    if error != nil {
-                        NSLog("Failed updating user privilege, Error:\(error)")
-                    } else {
-                        NSLog("Get user privilege: \(privilege)")
-                        if let strongSelf = self {
-                            if privilege == HMHomeUserPrivilege.Administrator {
-                                strongSelf.usersDict[user] = "Administrator"
-                            }
-                            if privilege == HMHomeUserPrivilege.Regular {
-                                strongSelf.usersDict[user] = "Regular"
-                            }
-                            if let index = find(strongSelf.usersArray, user) {
-                                strongSelf.usersTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
-                            }
-                        }
-                    }
-                }
+            for user in currentHome.users as [HMUser]{
+                usersArray.append(user)
             }
         }
         usersTableView.reloadData()
@@ -70,33 +44,21 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func addUser(sender: AnyObject) {
         let alert = UIAlertController(title: "New User", message: "Enter the iCloud address of user you want to add. (The users list will get updated once user accept the invitation.)", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addTextFieldWithConfigurationHandler(nil)
-        alert.addAction(UIAlertAction(title: "Add as Regular", style: UIAlertActionStyle.Default, handler:
-            {
-                [weak self]
-                (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
-                Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Regular, completionHandler: { error in
-                    if error != nil {
-                        NSLog("Add user failed: \(error)")
-                    } else {
-                        self?.fetchUsers()
-                    }
-                })
-        }))
-        alert.addAction(UIAlertAction(title: "Add as Admin", style: UIAlertActionStyle.Default, handler:
-            {
-                [weak self]
-                (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
-                Core.sharedInstance.currentHome?.addUser(textField.text, privilege: HMHomeUserPrivilege.Administrator, completionHandler: { error in
-                    if error != nil {
-                        NSLog("Add user failed: \(error)")
-                    } else {
-                        self?.fetchUsers()
-                    }
-                })
-        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
+            {
+                [weak self]
+                (action:UIAlertAction!) in
+                let textField = alert.textFields?[0] as UITextField
+                Core.sharedInstance.currentHome?.addUserWithCompletionHandler {
+                    user, error in
+                    if error != nil {
+                        NSLog("Add user failed: \(error)")
+                    } else {
+                        self?.fetchUsers()
+                    }
+                }
+        }))
         dispatch_async(dispatch_get_main_queue(),
             {
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -108,14 +70,14 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersDict.count
+        return usersArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as UITableViewCell
         
-        cell.textLabel?.text = usersArray[indexPath.row]
-        cell.detailTextLabel?.text = usersDict[usersArray[indexPath.row]]
+        cell.textLabel?.text = usersArray[indexPath.row].name
+        cell.detailTextLabel?.text = "User"
         
         return cell
     }
