@@ -42,7 +42,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func addUser(sender: AnyObject) {
-        let alert = UIAlertController(title: "New User", message: "Enter the iCloud address of user you want to add. (The users list will get updated once user accept the invitation.)", preferredStyle: UIAlertControllerStyle.Alert)
+        /*let alert = UIAlertController(title: "New User", message: "Enter the iCloud address of user you want to add. (The users list will get updated once user accept the invitation.)", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addTextFieldWithConfigurationHandler(nil)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
@@ -58,11 +58,19 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         self?.fetchUsers()
                     }
                 }
-        }))
-        dispatch_async(dispatch_get_main_queue(),
+        }))*/
+        Core.sharedInstance.currentHome?.addUserWithCompletionHandler {
+            user, error in
+            if error != nil {
+                NSLog("Add user failed: \(error)")
+            } else {
+                self.fetchUsers()
+            }
+        }
+        /*dispatch_async(dispatch_get_main_queue(),
             {
                 self.presentViewController(alert, animated: true, completion: nil)
-        })
+        })*/
     }
 
     @IBAction func dismissVC(sender: AnyObject) {
