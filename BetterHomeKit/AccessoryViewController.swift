@@ -18,7 +18,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     var homeManager:HMHomeManager = HMHomeManager()
     
-    @IBOutlet var accessoriesTableView: UITableView?
+    @IBOutlet var accessoriesTableView: UITableView!
     
     var mainHome:HMHome!
     
@@ -47,7 +47,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                     accessory.delegate = self
                 }
             }
-            accessoriesTableView?.reloadData()
+            accessoriesTableView.reloadData()
         }
     }
         
@@ -59,10 +59,10 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            let indexPath = accessoriesTableView?.indexPathForSelectedRow()
+            let indexPath = accessoriesTableView.indexPathForSelectedRow()
             if let indexPath = indexPath {
                 let object = objects[indexPath.row] as HMAccessory
-                accessoriesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
+                accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as ServiceViewController).detailItem = object
             }
         }
@@ -150,7 +150,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             if !contains(objects, accessory) {
                 objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
-                accessoriesTableView?.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
+                accessoriesTableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
             }
         }
     }
@@ -160,7 +160,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         if contains(objects, accessory) {
             let index = find(objects, accessory)
             objects.removeAtIndex(index!)
-            accessoriesTableView?.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
+            accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
         }
     }
     
@@ -188,7 +188,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                 }
                 let index = find(objects, accessory)
-                let cell = accessoriesTableView?.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
+                let cell = accessoriesTableView.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
                 if accessory.reachable {
                     if let cell = cell {
                         cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
@@ -216,7 +216,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return self.objects.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -307,7 +307,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                                     {
                                         if (isBridge != nil) {
                                             self?.removeEverything()
-                                            self?.accessoriesTableView?.reloadData()
+                                            self?.accessoriesTableView.reloadData()
                                         }else{
                                             self?.objects.removeAtIndex(indexPath.row)
                                             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

@@ -11,7 +11,7 @@ import HomeKit
 
 class CharacteristicViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
-    @IBOutlet var characteristicTableView : UITableView?
+    @IBOutlet var characteristicTableView : UITableView!
     var characteristics = [HMCharacteristic]()
     
     var hueCharacteristic:HMCharacteristic?
@@ -138,7 +138,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 characteristics.append(characteristic)
             }
         }
-        characteristicTableView?.reloadData()
+        characteristicTableView.reloadData()
         
     }
     
@@ -189,7 +189,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         }else{
                             if let strongSelf = self {
                                 let index = find(strongSelf.characteristics, aChar)
-                                strongSelf.characteristicTableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                                strongSelf.characteristicTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
                             }
                             
                         }
@@ -213,7 +213,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 )
             }
         }
-        self.characteristicTableView?.setEditing(false, animated: true)
+        self.characteristicTableView.setEditing(false, animated: true)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -223,7 +223,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 NSLog("DidUpdate Value for Chara:\(characteristic), value:\(characteristic.value)")
                 if contains(characteristics, characteristic) {
                     if let index = find(characteristics, characteristic) {
-                        if let cell = self.characteristicTableView?.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) {
+                        if let cell = self.characteristicTableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) {
                             dispatch_async(dispatch_get_main_queue(),
                                 {
                                     if let value = characteristic.value as? NSObject {
