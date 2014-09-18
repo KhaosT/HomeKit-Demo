@@ -126,6 +126,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                                             if error != nil {
                                                 NSLog("Failed updating primary home, Error: \(error)")
                                             } else {
+                                                Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
                                                 NSLog("DidSetPrimaryHome")
                                             }
                                         }
