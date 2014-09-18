@@ -19,6 +19,7 @@
 		CC78B083197AC2A600A4A443 /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07A197AC2A600A4A443 /* HRHSVColorUtil.m */; };
 		CC78B084197AC2A600A4A443 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */; };
 		CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */; };
+		CC7A2D0B19CA92E000E89F0E /* HomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */; };
 		CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC970A8E1991E64400872018 /* UsersViewController.swift */; };
 		CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */; };
 		CCA8C5B71992354B00D297CE /* TriggersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B61992354B00D297CE /* TriggersViewController.swift */; };
@@ -90,6 +91,7 @@
 		CC78B07B197AC2A600A4A443 /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
 		CC78B07C197AC2A600A4A443 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
 		CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomesViewController.swift; sourceTree = "<group>"; };
 		CC970A8E1991E64400872018 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CCA254A119934F7700E1D087 /* HomeKit_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeKit_Private.h; sourceTree = "<group>"; };
 		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
+				CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */,
 				CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */,
 				CC970A8E1991E64400872018 /* UsersViewController.swift */,
 				CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */,
@@ -343,6 +346,7 @@
 				CCA92331193FD2E9001BE28C /* AddAccessoriesViewController.swift in Sources */,
 				CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */,
 				CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */,
+				CC7A2D0B19CA92E000E89F0E /* HomesViewController.swift in Sources */,
 				CC78B080197AC2A600A4A443 /* HRColorInfoView.m in Sources */,
 				CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */,
 				CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */,

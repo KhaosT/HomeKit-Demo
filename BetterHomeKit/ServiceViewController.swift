@@ -11,7 +11,7 @@ import HomeKit
 
 class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,HMAccessoryDelegate {
 
-    @IBOutlet var servicesTableView : UITableView!
+    @IBOutlet var servicesTableView : UITableView?
     var services = [HMService]()
     
     var currentIdentifier: NSUUID?
@@ -61,7 +61,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
                     services.append(service)
                 }
             }
-            servicesTableView.reloadData()
+            servicesTableView?.reloadData()
         }
     }
     
@@ -84,10 +84,10 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCharacteristic" {
-            let indexPath = servicesTableView.indexPathForSelectedRow()
+            let indexPath = servicesTableView?.indexPathForSelectedRow()
             if let indexPath = indexPath {
                 let object = services[indexPath.row] as HMService
-                servicesTableView.deselectRowAtIndexPath(indexPath, animated: true)
+                servicesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as CharacteristicViewController).detailItem = object
             }
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -22,6 +22,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-341" y="64"/>
+        </scene>
+        <!--Homes-->
+        <scene sceneID="v6A-Bb-Zu7">
+            <objects>
+                <viewController id="Aw7-V0-yOQ" customClass="HomesViewController" customModule="HomeKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8R3-9s-iN3"/>
+                        <viewControllerLayoutGuide type="bottom" id="ei0-fq-qEb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h9X-gx-syF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3ao-lA-FdF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="rRM-nQ-CCi" style="IBUITableViewCellStyleDefault" id="UdR-XU-M9A">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UdR-XU-M9A" id="411-u1-Kwi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rRM-nQ-CCi">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Aw7-V0-yOQ" id="yLs-Ky-Ghd"/>
+                                    <outlet property="delegate" destination="Aw7-V0-yOQ" id="IMt-lE-x2O"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ei0-fq-qEb" firstAttribute="top" secondItem="3ao-lA-FdF" secondAttribute="bottom" id="Duf-Yj-9ea"/>
+                            <constraint firstItem="3ao-lA-FdF" firstAttribute="top" secondItem="h9X-gx-syF" secondAttribute="top" id="HEQ-R6-rdZ"/>
+                            <constraint firstItem="3ao-lA-FdF" firstAttribute="leading" secondItem="h9X-gx-syF" secondAttribute="leading" id="Kxz-lU-snw"/>
+                            <constraint firstAttribute="trailing" secondItem="3ao-lA-FdF" secondAttribute="trailing" id="LGl-Cy-a8B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Homes" id="iv5-T6-uYy">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="a0y-Rj-K5T">
+                            <connections>
+                                <action selector="dismissHomeController:" destination="Aw7-V0-yOQ" id="wAn-6n-LoQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="EHS-hp-3q5">
+                            <connections>
+                                <action selector="addHome:" destination="Aw7-V0-yOQ" id="uFk-58-uCq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="homesTableView" destination="3ao-lA-FdF" id="dpv-IK-sza"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pFV-Q0-9W7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1989" y="-1218"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="39e-Nz-cgx">
+            <objects>
+                <navigationController id="n1b-RS-lmX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LOG-Kl-XKM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Aw7-V0-yOQ" kind="relationship" relationship="rootViewController" id="KDH-M9-3np"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MyN-y0-Kug" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245" y="-1218"/>
         </scene>
         <!--Add Accessories View Controller-->
         <scene sceneID="4aa-kG-CvK">
@@ -168,6 +250,13 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Accessories" id="v67-8O-Liw">
+                        <barButtonItem key="leftBarButtonItem" title="Homes" id="FO8-le-dfD">
+                            <connections>
+                                <segue destination="n1b-RS-lmX" kind="popoverPresentation" identifier="presentHomes" popoverAnchorBarButtonItem="FO8-le-dfD" id="mX4-PS-PTR">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4iF-gF-2xj">
                             <connections>
                                 <segue destination="yxG-uM-lt8" kind="popoverPresentation" identifier="showAddNewAccessories" popoverAnchorBarButtonItem="4iF-gF-2xj" id="ULp-yl-sOE">

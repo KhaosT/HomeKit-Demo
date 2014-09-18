@@ -11,6 +11,7 @@ import HomeKit
 
 let characteristicUpdateNotification = "didUpdateValueForCharacteristic"
 let homeUpdateNotification = "didUpdateHomeManagerForHome"
+let changeHomeNotification = "didUpdateCurrentHome"
 
 class AccessoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate ,HMHomeManagerDelegate,HMHomeDelegate,HMAccessoryDelegate {
     
@@ -19,8 +20,6 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     var homeManager:HMHomeManager = HMHomeManager()
     
     @IBOutlet var accessoriesTableView: UITableView!
-    
-    var mainHome:HMHome!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +30,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         self.updateHomeAccessories()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHomeAccessories", name: addAccessoryNotificationString, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHomeAccessories", name: assignAccessoryNotificationString, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHomeAccessories", name: changeHomeNotification, object: nil)
         homeManager.delegate = self
     }
     
@@ -40,14 +40,17 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func updateHomeAccessories() {
-        if homeManager.primaryHome != nil {
-            for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
-                if !contains(objects, accessory) {
-                    objects.insert(accessory, atIndex: 0)
-                    accessory.delegate = self
+        if Core.sharedInstance.currentHome? != nil {
+            self.objects.removeAll(keepCapacity: false)
+            if let accessories = Core.sharedInstance.currentHome!.accessories as? [HMAccessory] {
+                for accessory in accessories {
+                    if !contains(objects, accessory) {
+                        objects.insert(accessory, atIndex: 0)
+                        accessory.delegate = self
+                    }
                 }
+                accessoriesTableView.reloadData()
             }
-            accessoriesTableView.reloadData()
         }
     }
         
@@ -64,6 +67,14 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 let object = objects[indexPath.row] as HMAccessory
                 accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
                 (segue.destinationViewController as ServiceViewController).detailItem = object
+            }
+        }
+        
+        if segue.identifier == "presentHomes" {
+            let naviController = segue.destinationViewController as UINavigationController
+            if let naviController = (segue.destinationViewController as? UINavigationController) {
+                let homeVC = naviController.viewControllers?[0] as HomesViewController
+                homeVC.homeManager = self.homeManager
             }
         }
         
@@ -130,9 +141,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }else{
             NSLog("Find primary Home :)")
             Core.sharedInstance.currentHome = manager.primaryHome
-            mainHome = manager.primaryHome
-            mainHome.delegate = self
-            NSLog("Current Users:\(mainHome.users)")
+            Core.sharedInstance.currentHome?.delegate = self
             removeEverything()
             self.updateHomeAccessories()
             NSNotificationCenter.defaultCenter().postNotificationName(homeUpdateNotification, object: nil)
@@ -146,7 +155,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!)
     {
-        for accessory in homeManager.primaryHome.accessories as [HMAccessory] {
+        for accessory in Core.sharedInstance.currentHome!.accessories as [HMAccessory] {
             if !contains(objects, accessory) {
                 objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
@@ -241,7 +250,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func removeEverything() {
         self.objects.removeAll(keepCapacity: false)
-        self.objects += (self.homeManager.primaryHome.accessories as [HMAccessory])
+        self.objects += (Core.sharedInstance.currentHome!.accessories as [HMAccessory])
         for accessory in self.objects {
             accessory.delegate = self
         }
@@ -296,7 +305,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                     [weak self]
                     (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
                     let isBridge = self?.objects[indexPath.row].identifiersForBridgedAccessories
-                    self?.homeManager.primaryHome.removeAccessory(self?.objects[indexPath.row], completionHandler:
+                    Core.sharedInstance.currentHome?.removeAccessory(self?.objects[indexPath.row], completionHandler:
                         {
                             [weak self]
                             (error:NSError!) in
