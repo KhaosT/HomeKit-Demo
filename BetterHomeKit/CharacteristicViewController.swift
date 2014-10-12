@@ -80,21 +80,21 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         var saturation:CGFloat?
         
         if let hueChar = self.hueCharacteristic {
-            let hueValue:CGFloat = (hueChar.value as? NSNumber) ?? (0.0 as CGFloat)
-            let hueRatio:CGFloat = hueChar.metadata.maximumValue
-            hue = hueValue / hueRatio
+            let hueValue:NSNumber = (hueChar.value as? NSNumber) ?? (0.0 as NSNumber)
+            let hueRatio:NSNumber = hueChar.metadata.maximumValue
+            hue = CGFloat(hueValue.floatValue / hueRatio.floatValue)
         }
         
         if let brightnessChar = self.brightnessCharacteristic {
-            let brightnessValue:CGFloat = (brightnessChar.value as? NSNumber) ?? (0.0 as CGFloat)
-            let brightnessRatio:CGFloat = brightnessChar.metadata.maximumValue
-            brightness = brightnessValue / brightnessRatio
+            let brightnessValue:NSNumber = (brightnessChar.value as? NSNumber) ?? (0.0 as NSNumber)
+            let brightnessRatio:NSNumber = brightnessChar.metadata.maximumValue
+            brightness = CGFloat(brightnessValue.floatValue / brightnessRatio.floatValue)
         }
         
         if let saturationChar = self.saturationCharacteristic {
-            let saturationValue:CGFloat = (saturationChar.value as? NSNumber) ?? (0.0 as CGFloat)
-            let saturationRatio:CGFloat = saturationChar.metadata.maximumValue
-            saturation = saturationValue / saturationRatio
+            let saturationValue:NSNumber = (saturationChar.value as? NSNumber) ?? (0.0 as NSNumber)
+            let saturationRatio:NSNumber = saturationChar.metadata.maximumValue
+            saturation = CGFloat(saturationValue.floatValue / saturationRatio.floatValue)
         }
         
         return UIColor(hue: (hue ?? 0.0), saturation: (saturation ?? 0.0), brightness: (brightness ?? 0.0), alpha: 1.0)
