@@ -56,7 +56,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func handleError(error: NSError) {
         if error.code == 4097 {
-            var alert = UIAlertController(title: "XPC Connection rejected!", message: "It appears that homed denies the xpc connection requestion from this app. This normally happens because the app doesn't have a HomeKit dev entitlement. Please may sure you have enabled the HomeKit capability in Xcode.", preferredStyle: UIAlertControllerStyle.Alert)
+            var alert = UIAlertController(title: "XPC Connection rejected!", message: "It appears that homed denies the xpc connection request from this app. This normally happens because the app doesn't have a HomeKit dev entitlement. Please may sure you have enabled the HomeKit capability in Xcode.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return
