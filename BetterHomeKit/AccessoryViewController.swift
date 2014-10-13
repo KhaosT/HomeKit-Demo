@@ -150,6 +150,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                                 (home:HMHome!, error:NSError!) in
                                 if error != nil {
                                     NSLog("Failed adding home, Error:\(error)")
+                                    self.handleError(error)
                                 } else {
                                     NSLog("New Home \(home)")
                                     manager.updatePrimaryHome(home, completionHandler:
