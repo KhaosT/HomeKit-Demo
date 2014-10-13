@@ -53,7 +53,35 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
-        
+    
+    func handleError(error: NSError) {
+        if error.code == 4097 {
+            var alert = UIAlertController(title: "XPC Connection rejected!", message: "It appears that homed denies the xpc connection requestion from this app. This normally happens because the app doesn't have a HomeKit dev entitlement. Please may sure you have enabled the HomeKit capability in Xcode.", preferredStyle: UIAlertControllerStyle.Alert)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        if let errorCode = HMErrorCode(rawValue: error.code) {
+            var alert = UIAlertController(title: "Oops!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            switch errorCode {
+            case .HomeAccessNotAuthorized:
+                alert.message = "Access to HomeKit has been denied. Please enable HomeKit access for this app."
+            case .HomeWithSimilarNameExists:
+                alert.message = "A home with similar name alread exist, please try to use a different name."
+            case .KeychainSyncNotEnabled:
+                alert.message = "HomeKit requires Keychain Sync enabled when there is an iCloud account on device."
+            case .MissingEntitlement:
+                alert.message = "HomeKit requires the app to have HomeKit dev entitlement."
+            case .NotSignedIntoiCloud:
+                alert.message = "You need to sign in iCloud to process."
+            case .CloudDataSyncInProgress:
+                alert.message = "For iOS < 8.1, there is a issue syncing with CloudKit that may causes HomeKit database locked up. Currently there is no known reliable workaround on this issue, Sign out and sign in iCloud sometime may resolve this issue."
+            default:
+                alert.message = "An unknown error occurs. Error code: \(error.code). Please refer HMError.h for more details."
+            }
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -100,7 +128,11 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             if manager.homes?.count > 0 {
                 NSLog("There are homes in HMHomeManager, choose the first one.")
                 manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
-                    { (error:NSError!) in
+                    {
+                        (error:NSError!) in
+                        if error != nil {
+                            self.handleError(error)
+                        }
                         Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
                         NSLog("DidSetPrimaryHome")
                 })
@@ -125,6 +157,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                                             (error:NSError!) in
                                             if error != nil {
                                                 NSLog("Failed updating primary home, Error: \(error)")
+                                                self.handleError(error)
                                             } else {
                                                 Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
                                                 NSLog("DidSetPrimaryHome")
