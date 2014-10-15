@@ -61,7 +61,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        if let errorCode = HMErrorCode(rawValue: error.code) {
+        if let errorCode = HMErrorCode.fromRaw(error.code) {
             var alert = UIAlertController(title: "Oops!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             switch errorCode {
