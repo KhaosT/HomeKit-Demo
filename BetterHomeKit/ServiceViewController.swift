@@ -113,7 +113,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         let object = services[indexPath.row] as HMService
         if (object.name != nil) {
-            cell.textLabel?.text = object.name
+            cell.textLabel.text = object.name
             if let serviceDesc = HomeKitUUIDs[object.serviceType] {
                 cell.detailTextLabel?.text = serviceDesc
             }else{

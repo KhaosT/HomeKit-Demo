@@ -61,9 +61,9 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         let action = actions[indexPath.row] as HMCharacteristicWriteAction
         
         if let charDesc = HomeKitUUIDs[action.characteristic.characteristicType] {
-            cell.textLabel?.text = charDesc
+            cell.textLabel.text = charDesc
         }else{
-            cell.textLabel?.text = action.characteristic.characteristicType
+            cell.textLabel.text = action.characteristic.characteristicType
         }
         
         cell.detailTextLabel?.text = "Accessory: \(action.characteristic.service.accessory.name) | Target Value: \(action.targetValue)"

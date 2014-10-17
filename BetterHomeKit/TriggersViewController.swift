@@ -63,13 +63,13 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as UITableViewCell
         
         let trigger = triggers[indexPath.row] as HMTimerTrigger
-        cell.textLabel?.text = trigger.name
+        cell.textLabel.text = trigger.name
         
         if trigger.enabled {
-            cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+            cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
             cell.detailTextLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
         } else {
-            cell.textLabel?.textColor = UIColor.lightGrayColor()
+            cell.textLabel.textColor = UIColor.lightGrayColor()
             cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
         }
         

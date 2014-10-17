@@ -237,11 +237,11 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 let cell = accessoriesTableView.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
                 if accessory.reachable {
                     if let cell = cell {
-                        cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+                        cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
                     }
                 }else{
                     if let cell = cell {
-                        cell.textLabel?.textColor = UIColor.redColor()
+                        cell.textLabel.textColor = UIColor.redColor()
                     }
                 }
             }
@@ -270,11 +270,11 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         
         let object = objects[indexPath.row] as HMAccessory
         if object.reachable {
-            cell.textLabel?.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
+            cell.textLabel.textColor = UIColor(red: 0.043, green: 0.827, blue: 0.094, alpha: 1.0)
         }else{
-            cell.textLabel?.textColor = UIColor.redColor()
+            cell.textLabel.textColor = UIColor.redColor()
         }
-        cell.textLabel?.text = object.name
+        cell.textLabel.text = object.name
         
         cell.detailTextLabel?.text = object.room?.name
         

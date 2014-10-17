@@ -65,7 +65,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let home = self.homeManager?.homes?[indexPath.row] as HMHome
         
-        cell.textLabel?.text = home.name
+        cell.textLabel.text = home.name
         
         return cell
     }
@@ -131,7 +131,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     println("Error:\(error)")
                                 }else{
                                     let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                    cell?.textLabel?.text = self?.homeManager?.homes?[indexPath.row].name
+                                    cell?.textLabel.text = self?.homeManager?.homes?[indexPath.row].name
                                 }
                             }
                         )

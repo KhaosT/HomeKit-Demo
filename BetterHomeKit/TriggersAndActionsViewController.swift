@@ -31,9 +31,9 @@ class TriggersAndActionsViewController: UIViewController, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath) as UITableViewCell
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "Action Sets"
+            cell.textLabel.text = "Action Sets"
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Triggers"
+            cell.textLabel.text = "Triggers"
         }
 
         return cell

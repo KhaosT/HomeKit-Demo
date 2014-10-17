@@ -227,9 +227,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             dispatch_async(dispatch_get_main_queue(),
                                 {
                                     if let value = characteristic.value as? NSObject {
-                                        cell.textLabel?.text = "\(value)"
+                                        cell.textLabel.text = "\(value)"
                                     }else{
-                                        cell.textLabel?.text = ""
+                                        cell.textLabel.text = ""
                                     }
                                 }
                             )
@@ -300,9 +300,9 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             cell.detailTextLabel?.text = object.characteristicType
         }
         if (object.value != nil) {
-            cell.textLabel?.text = "\(object.value)"
+            cell.textLabel.text = "\(object.value)"
         }else{
-            cell.textLabel?.text = ""
+            cell.textLabel.text = ""
         }
         return cell
     }
@@ -389,7 +389,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                 dispatch_async(dispatch_get_main_queue(),
                                     {
                                         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                            cell.textLabel?.text = "\(object.value)"
+                                            cell.textLabel.text = "\(object.value)"
                                         }
                                     }
                                 )
@@ -416,7 +416,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
                                             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                                cell.textLabel?.text = "\(object.value)"
+                                                cell.textLabel.text = "\(object.value)"
                                             }
                                         }
                                     )
@@ -445,7 +445,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
                                             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                                cell.textLabel?.text = "\(object.value)"
+                                                cell.textLabel.text = "\(object.value)"
                                             }
                                         }
                                     )

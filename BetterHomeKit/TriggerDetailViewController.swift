@@ -67,7 +67,7 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let actionSet = actionSets[indexPath.row] as HMActionSet
         
-        cell.textLabel?.text = "\(actionSet.name)"
+        cell.textLabel.text = "\(actionSet.name)"
         cell.detailTextLabel?.text = "Actions:\(actionSet.actions.count)"
         
         return cell

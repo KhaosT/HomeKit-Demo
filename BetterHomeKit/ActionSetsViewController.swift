@@ -79,7 +79,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as UITableViewCell
         
         let actionSet = actionSets[indexPath.row]
-        cell.textLabel?.text = actionSet.name
+        cell.textLabel.text = actionSet.name
         cell.detailTextLabel?.text = "Actions:\(actionSet.actions.count)"
         
         return cell
