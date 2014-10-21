@@ -14,7 +14,7 @@ class Accessory {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCacheInvalidation", name: homeUpdateNotification, object: nil)
     }
     
-    func handleCacheInvalidation() {
+    @objc func handleCacheInvalidation() {
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Accessory Internal Cache")
             if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
@@ -51,7 +51,7 @@ class Characteristic {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCacheInvalidation", name: homeUpdateNotification, object: nil)
     }
     
-    func handleCacheInvalidation() {
+    @objc func handleCacheInvalidation() {
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Characteristic Internal Cache")
             if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
@@ -93,7 +93,7 @@ class Room {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCacheInvalidation", name: homeUpdateNotification, object: nil)
     }
     
-    func handleCacheInvalidation() {
+    @objc func handleCacheInvalidation() {
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Room Internal Cache")
             if let currentHome = Core.sharedInstance.currentHome {

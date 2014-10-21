@@ -292,6 +292,11 @@
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 7C2EXSD3YV;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					CCA9231D193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
