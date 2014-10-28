@@ -287,11 +287,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = Oltica;
+				ORGANIZATIONNAME = Nlr;
 				TargetAttributes = {
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 7C2EXSD3YV;
+						DevelopmentTeam = 36V5UB57WW;
 					};
 					CCA9231D193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
