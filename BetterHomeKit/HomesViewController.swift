@@ -142,6 +142,28 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         editAction.backgroundColor = UIColor.orangeColor()
         options.append(editAction)
         
+        let primaryAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Set Primary", handler:
+            {
+                [weak self]
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                let home = self?.homeManager?.homes?[indexPath.row] as HMHome
+                self?.homeManager?.updatePrimaryHome(home, completionHandler: {
+                    error in
+                    if let error = error {
+                        println("Error:\(error)")
+                    } else {
+                        Core.sharedInstance.currentHome = home
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName(changeHomeNotification, object: nil)
+                        
+                        self?.dismissHomeController(self!)
+                    }
+                })
+            }
+        )
+        primaryAction.backgroundColor = UIColor.magentaColor()
+        options.append(primaryAction)
+        
         return options
     }
     
