@@ -142,7 +142,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         editAction.backgroundColor = UIColor.orangeColor()
         options.append(editAction)
         
-        let primaryAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Set Primary", handler:
+        let primaryAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "🏡", handler:
             {
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
@@ -161,7 +161,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 })
             }
         )
-        primaryAction.backgroundColor = UIColor.magentaColor()
+        primaryAction.backgroundColor = UIColor.cyanColor()
         options.append(primaryAction)
         
         return options
