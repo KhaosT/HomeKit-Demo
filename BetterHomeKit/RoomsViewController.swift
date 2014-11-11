@@ -54,6 +54,19 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewWillAppear(animated)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "presentZonesVC" {
+            let naviController = segue.destinationViewController as UINavigationController
+            if let naviController = (segue.destinationViewController as? UINavigationController) {
+                let zoneVC = naviController.viewControllers?[0] as ZonesViewController
+                if let room = sender as? HMRoom {
+                    zoneVC.pendingRoom = Room( hmRoom : room)
+                }
+            }
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let rooms = Core.sharedInstance.currentHome?.rooms {
             return rooms.count
@@ -123,6 +136,63 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         return true
     }
     
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var options = [UITableViewRowAction]()
+    
+        let assignAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Assign", handler:
+            {
+                [weak self]
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                if let strongSelf = self {
+                    if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
+                        strongSelf.performSegueWithIdentifier("presentZonesVC", sender: room)
+                        tableView.setEditing(false, animated: true)
+                    }
+                }
+            }
+        )
+        assignAction.backgroundColor = UIColor.orangeColor()
+        
+        options.append(assignAction)
+    
+        if indexPath.row < Core.sharedInstance.currentHome?.rooms.count {
+    
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:
+                {
+                
+                    [weak self]
+                    (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                    if let strongSelf = self {
+                        if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
+                            Core.sharedInstance.currentHome?.removeRoom(room) {
+                                [weak self]
+                                error in
+                                if error != nil {
+                                    NSLog("Failed removing room, error:\(error)")
+                                } else {
+                                    self?.roomTableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+
+                    tableView.setEditing(false, animated: true)
+
+                }
+            )
+            
+            options.append(deleteAction)
+        }
+
+        return options
+    }
+
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    /*
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
@@ -138,4 +208,5 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         }
     }
+    */
 }
