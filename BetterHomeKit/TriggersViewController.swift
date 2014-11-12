@@ -75,11 +75,18 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         
         var actions = trigger.actionSets.map{$0.name}
         var detailText = ""
+        
         for name in actions {
             detailText += "\(name) "
         }
-        detailText += "| Fire Date: \(dateFormatter.stringFromDate(trigger.fireDate)) "
-        detailText += "| Last Fire: \(dateFormatter.stringFromDate(trigger.lastFireDate))"
+        
+        if trigger.fireDate != nil {
+            detailText += "| Fire Date: \(dateFormatter.stringFromDate(trigger.fireDate)) "
+        }
+        
+        if trigger.lastFireDate != nil {
+            detailText += "| Last Fire: \(dateFormatter.stringFromDate(trigger.lastFireDate))"
+        }
         
         cell.detailTextLabel?.text = detailText
         
