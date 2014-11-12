@@ -82,6 +82,22 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
         cell.textLabel.text = room.name
         
+        var detailText = ""
+        for(var i=0; i<Core.sharedInstance.currentHome?.zones.count; i++)
+        {
+            let zone = Core.sharedInstance.currentHome?.zones[i] as HMZone
+            if let rooms = zone.rooms
+            {
+                for iroom in rooms
+                {
+                    if iroom.name == room.name {
+                        detailText += zone.name + " "
+                    }
+                }
+            }
+        }
+        cell.detailTextLabel?.text = detailText
+        
         return cell
     }
     
