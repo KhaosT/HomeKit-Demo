@@ -26,6 +26,10 @@ class Accessory {
     func toHMAccessory() -> HMAccessory {
         return internalAccessory
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 
 class Characteristic {
@@ -75,6 +79,10 @@ class Characteristic {
     func toHMCharacteristic() -> HMCharacteristic {
         return internalChar
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
 }
 
@@ -110,5 +118,9 @@ class Room {
     
     func toHMRoom() -> HMRoom {
         return internalRoom
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

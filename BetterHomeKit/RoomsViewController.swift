@@ -16,6 +16,11 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     var pendingAccessory:Accessory?
     @IBOutlet var roomTableView: UITableView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRooms", name: assignRoomNotificationString, object: nil)
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         self.roomTableView.setEditing(false, animated: false)
@@ -50,8 +55,16 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func updateRooms() {
+        self.roomTableView.reloadData()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
