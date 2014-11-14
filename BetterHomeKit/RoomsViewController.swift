@@ -89,7 +89,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
 
-        cell.textLabel.text = room.name
+        cell.textLabel?.text = room.name
         
         var detailText = ""
         for(var i=0; i<Core.sharedInstance.currentHome?.zones.count; i++)
@@ -143,7 +143,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                                 println("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                cell?.textLabel.text = Core.sharedInstance.currentHome?.rooms?[indexPath.row].name
+                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.rooms?[indexPath.row].name
                             }
                         }
                     )

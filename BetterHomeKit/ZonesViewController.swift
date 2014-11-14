@@ -75,7 +75,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         }
         
-        cell.textLabel.text = zone.name
+        cell.textLabel?.text = zone.name
         cell.detailTextLabel?.text = detailText
         
         return cell
@@ -130,7 +130,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                                 println("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                cell?.textLabel.text = Core.sharedInstance.currentHome?.zones?[indexPath.row].name
+                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.zones?[indexPath.row].name
                             }
                         }
                     )

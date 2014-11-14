@@ -33,7 +33,6 @@ class Accessory {
 }
 
 class Characteristic {
-    
     var internalChar: HMCharacteristic
     
     let characteristicType: String
@@ -83,11 +82,9 @@ class Characteristic {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
 }
 
 class Room {
-    
     var internalRoom: HMRoom
     
     let roomName: String
