@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0E8B5211A04C0F000DEF6E3 /* ZonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */; };
 		CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */; };
 		CC1BE94A198CB008008E9193 /* TriggerCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */; };
 		CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZonesViewController.swift; sourceTree = "<group>"; };
 		CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
 		CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerCreateViewController.swift; sourceTree = "<group>"; };
 		CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersAndActionsViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				CC5367A419F0C8D500B636C6 /* Launch Screen.xib */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
+				B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */,
 			);
 			path = BetterHomeKit;
 			sourceTree = "<group>";
@@ -287,11 +290,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = Oltica;
+				ORGANIZATIONNAME = Nlr;
 				TargetAttributes = {
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 7C2EXSD3YV;
+						DevelopmentTeam = 36V5UB57WW;
 					};
 					CCA9231D193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
@@ -369,6 +372,7 @@
 				CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */,
 				CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */,
 				CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */,
+				B0E8B5211A04C0F000DEF6E3 /* ZonesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
