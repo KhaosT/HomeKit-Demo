@@ -68,11 +68,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let rooms = Core.sharedInstance.currentHome?.rooms {
-            return rooms.count
-        }else{
-            return 0
-        }
+        return Core.sharedInstance.currentHome?.rooms.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

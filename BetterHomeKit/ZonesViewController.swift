@@ -56,11 +56,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let zones = Core.sharedInstance.currentHome?.zones {
-            return zones.count
-        }else{
-            return 0
-        }
+        return Core.sharedInstance.currentHome?.zones.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
