@@ -68,7 +68,16 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as HMZone
         
+        var detailText = "|"
+        
+        let roomNames = zone.rooms.map { $0.name }
+        
+        for name in roomNames {
+            detailText += "\(name)|"
+        }
+        
         cell.textLabel.text = zone.name
+        cell.detailTextLabel?.text = detailText
         
         return cell
     }

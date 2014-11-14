@@ -199,6 +199,7 @@
 				CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */,
 				CCA92330193FD2E9001BE28C /* AddAccessoriesViewController.swift */,
 				CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */,
+				B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */,
 				CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */,
 				CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */,
 				CC970A8E1991E64400872018 /* UsersViewController.swift */,
@@ -211,7 +212,6 @@
 				CC5367A419F0C8D500B636C6 /* Launch Screen.xib */,
 				CCA92318193FD1FB001BE28C /* Images.xcassets */,
 				CCA9230D193FD1FB001BE28C /* Supporting Files */,
-				B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */,
 			);
 			path = BetterHomeKit;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				TargetAttributes = {
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 36V5UB57WW;
+						DevelopmentTeam = 7C2EXSD3YV;
 					};
 					CCA9231D193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
