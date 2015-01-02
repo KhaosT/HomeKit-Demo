@@ -37,7 +37,7 @@ class Characteristic {
     
     let characteristicType: String
     let accessoryIdentifier: NSUUID
-    let serviceName: String
+    let serviceName: String?
     let serviceType: String
     
     var databaseIndex: Int
@@ -59,8 +59,8 @@ class Characteristic {
             NSLog("Invalidate Characteristic Internal Cache")
             if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
                 for service in accessory.services as [HMService] {
-                    if service.name == serviceName {
-                        if service.serviceType == serviceType {
+                    if service.serviceType == serviceType {
+                        if service.name == serviceName {
                             for characteristic in service.characteristics as [HMCharacteristic] {
                                 if characteristic.characteristicType == characteristicType {
                                     NSLog("Recovered Characteristic")
