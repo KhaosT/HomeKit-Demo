@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import HomeKit
 
-class ServicesInterfaceController: WKInterfaceController,HMAccessoryDelegate {
+class ServicesInterfaceController: WKInterfaceController, HMAccessoryDelegate {
     
     var currentAccessory: HMAccessory!
     @IBOutlet weak var servicesTable: WKInterfaceTable!

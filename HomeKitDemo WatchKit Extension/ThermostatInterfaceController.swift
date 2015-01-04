@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import HomeKit
 
-class ThermostatInterfaceController: WKInterfaceController {
+class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate {
 
     @IBOutlet weak var currentTempLabel: WKInterfaceLabel!
     @IBOutlet weak var targetTempLabel: WKInterfaceLabel!
@@ -37,9 +37,17 @@ class ThermostatInterfaceController: WKInterfaceController {
                 case HMCharacteristicTypeCurrentTemperature:
                     self.currentTempChar = charactertistic
                     if let value = self.currentTempChar.value as? Float {
-                        self.currentTempLabel.setText("Current Temp: \(value)°")
+                        self.currentTempLabel.setText("Current Temp: \(Int(value))°")
                     } else {
                         self.currentTempLabel.setText("Current Temp: ?°")
+                    }
+                    if self.currentService.accessory.reachable {
+                        charactertistic.enableNotification(true, completionHandler: {
+                            error in
+                            if let error = error {
+                                NSLog("Notification Error:\(error)")
+                            }
+                        })
                     }
                 case HMCharacteristicTypeTargetTemperature:
                     self.targetTempChar = charactertistic
@@ -49,6 +57,14 @@ class ThermostatInterfaceController: WKInterfaceController {
                     } else {
                         self.targetTempLabel.setText("?°")
                         self.targetTempSlider.setEnabled(false)
+                    }
+                    if self.currentService.accessory.reachable {
+                        charactertistic.enableNotification(true, completionHandler: {
+                            error in
+                            if let error = error {
+                                NSLog("Notification Error:\(error)")
+                            }
+                        })
                     }
                 case HMCharacteristicTypeTargetHeatingCooling:
                     self.targetMode = charactertistic
@@ -63,11 +79,31 @@ class ThermostatInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.currentService.accessory.delegate = self
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+    
+    func disableCharacteristicsNotifications() {
+        if let characteristic = self.currentTempChar {
+            characteristic.enableNotification(false, completionHandler: {
+                error in
+                if let error = error {
+                    NSLog("Disable Notification fail, error:\(error)")
+                }
+            })
+        }
+        if let characteristic = self.targetTempChar {
+            characteristic.enableNotification(false, completionHandler: {
+                error in
+                if let error = error {
+                    NSLog("Disable Notification fail, error:\(error)")
+                }
+            })
+        }
     }
 
     @IBAction func setTargetHeating() {
@@ -96,5 +132,21 @@ class ThermostatInterfaceController: WKInterfaceController {
                 NSLog("Failed updating target temp, error:\(error)")
             }
         })
+    }
+    
+    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+        switch characteristic {
+        case self.currentTempChar:
+            if let value = self.currentTempChar.value as? Float {
+                self.currentTempLabel.setText("Current Temp: \(Int(value))°")
+            }
+        case self.targetTempChar:
+            if let value = self.targetTempChar.value as? Float {
+                self.targetTempLabel.setText("\(Int(value))°")
+                self.targetTempSlider.setValue(value)
+            }
+        default:
+            NSLog("Update for Char:\(characteristic)")
+        }
     }
 }

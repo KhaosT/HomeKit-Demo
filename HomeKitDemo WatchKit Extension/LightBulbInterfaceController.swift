@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import HomeKit
 
-class LightBulbInterfaceController: WKInterfaceController {
+class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
 
     @IBOutlet weak var powerSwitch: WKInterfaceSwitch!
     @IBOutlet weak var brightnessSlider: WKInterfaceSlider!
@@ -44,6 +44,13 @@ class LightBulbInterfaceController: WKInterfaceController {
                     powerSwitch.setHidden(false)
                     if !self.currentService.accessory.reachable {
                         powerSwitch.setEnabled(false)
+                    } else {
+                        charactertistic.enableNotification(true, completionHandler: {
+                            error in
+                            if let error = error {
+                                NSLog("Notification Error:\(error)")
+                            }
+                        })
                     }
                 case HMCharacteristicTypeBrightness:
                     self.brightnessChar = charactertistic
@@ -53,6 +60,13 @@ class LightBulbInterfaceController: WKInterfaceController {
                     brightnessSlider.setHidden(false)
                     if !self.currentService.accessory.reachable {
                         brightnessSlider.setEnabled(false)
+                    } else {
+                        charactertistic.enableNotification(true, completionHandler: {
+                            error in
+                            if let error = error {
+                                NSLog("Notification Error:\(error)")
+                            }
+                        })
                     }
                 case HMCharacteristicTypeSaturation:
                     self.saturationChar = charactertistic
@@ -72,11 +86,32 @@ class LightBulbInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.currentService.accessory.delegate = self
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        self.disableCharacteristicsNotifications()
+    }
+    
+    func disableCharacteristicsNotifications() {
+        if let characteristic = self.powerChar {
+            characteristic.enableNotification(false, completionHandler: {
+                error in
+                if let error = error {
+                    NSLog("Disable Notification fail, error:\(error)")
+                }
+            })
+        }
+        if let characteristic = self.brightnessChar {
+            characteristic.enableNotification(false, completionHandler: {
+                error in
+                if let error = error {
+                    NSLog("Disable Notification fail, error:\(error)")
+                }
+            })
+        }
     }
     
     @IBAction func didChangePowerState(value: Bool) {
@@ -148,6 +183,21 @@ class LightBulbInterfaceController: WKInterfaceController {
     
     @IBAction func setLightColorBlue() {
         self.updateColor(UIColor.blueColor())
+    }
+    
+    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+        switch characteristic {
+        case self.powerChar:
+            if let value = self.powerChar.value as? Bool {
+                powerSwitch.setOn(value)
+            }
+        case self.brightnessChar:
+            if let value = self.brightnessChar.value as? Float {
+                brightnessSlider.setValue(value)
+            }
+        default:
+            NSLog("Update for Char:\(characteristic)")
+        }
     }
     
 }
