@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import HomeKit
 
-class ServicesInterfaceController: WKInterfaceController {
+class ServicesInterfaceController: WKInterfaceController,HMAccessoryDelegate {
     
     var currentAccessory: HMAccessory!
     @IBOutlet weak var servicesTable: WKInterfaceTable!
@@ -28,6 +28,16 @@ class ServicesInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.currentAccessory.delegate = self
+        self.updateServices()
+    }
+
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func updateServices() {
         self.servicesTable.setNumberOfRows(self.currentAccessory.services.count, withRowType: "SingleLabelRow")
         for index in 0..<self.currentAccessory.services.count {
             var row:SingleLabelRow = self.servicesTable.rowControllerAtIndex(index) as SingleLabelRow
@@ -39,10 +49,9 @@ class ServicesInterfaceController: WKInterfaceController {
             }
         }
     }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
+    
+    func accessoryDidUpdateServices(accessory: HMAccessory!) {
+        self.updateServices()
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {

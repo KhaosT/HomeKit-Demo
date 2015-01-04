@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 import HomeKit
 
-class AccessoriesInterfaceController: WKInterfaceController {
+class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
 
     var currentHome: HMHome!
     @IBOutlet weak var accessoriesTable: WKInterfaceTable!
@@ -22,6 +22,7 @@ class AccessoriesInterfaceController: WKInterfaceController {
         // Configure interface objects here.
         if let context = context as? HMHome {
             self.currentHome = context
+            self.currentHome.delegate = self
             self.setTitle(self.currentHome.name)
             Core.sharedInstance.currentHome = self.currentHome
         }
@@ -30,6 +31,15 @@ class AccessoriesInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.updateAccessories()
+    }
+
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func updateAccessories() {
         self.accessoriesTable.setNumberOfRows(self.currentHome.accessories.count, withRowType: "SingleLabelRow")
         for index in 0..<self.currentHome.accessories.count {
             var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow
@@ -37,10 +47,13 @@ class AccessoriesInterfaceController: WKInterfaceController {
             row.textLabel.setText("\(accessory.name)")
         }
     }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
+    
+    func home(home: HMHome!, didAddAccessory accessory: HMAccessory!) {
+        self.updateAccessories()
+    }
+    
+    func home(home: HMHome!, didRemoveAccessory accessory: HMAccessory!) {
+        self.updateAccessories()
     }
 
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {

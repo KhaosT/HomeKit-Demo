@@ -38,11 +38,46 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.updateHomes()
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+    
+    @IBAction func addHome() {
+        self.presentTextInputControllerWithSuggestions(["Home","Test Home","New Home"], allowedInputMode: WKTextInputMode.Plain, completion: {
+            texts in
+            if let texts = texts {
+                if texts.count > 0 {
+                    var homeName = texts[0] as String
+                    self.homeManager.addHomeWithName(homeName, completionHandler: {
+                        home,error in
+                        if let error = error {
+                            NSLog("Failed adding home, error:\(error)")
+                        } else {
+                            self.updateHomes()
+                        }
+                    })
+                }
+            }
+        })
+    }
+    
+    func updateHomes() {
+        self.dismissController()
+        if self.homeManager.homes.count == 0 {
+            var errorInfo = ["title":"No Home Available","details":"Please make sure there is at least one home in HomeKit database."];
+            self.presentControllerWithName("ErrorInfoController", context: errorInfo)
+        } else {
+            self.homesTable.setNumberOfRows(self.homeManager.homes.count, withRowType: "SingleLabelRow")
+            for index in 0..<self.homeManager.homes.count {
+                var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
+                var home = self.homeManager.homes[index] as HMHome
+                row.textLabel.setText("\(home.name)")
+            }
+        }
     }
     
     func homeManagerDidUpdateHomes(manager: HMHomeManager!) {
@@ -53,18 +88,15 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
             permissionTimer = nil
         }
         
-        if manager.homes.count == 0 {
-            var errorInfo = ["title":"No Home Available","details":"Please make sure there is at least one home in HomeKit database."];
-            self.presentControllerWithName("ErrorInfoController", context: errorInfo)
-        } else {
-            self.homesTable.setNumberOfRows(manager.homes.count, withRowType: "SingleLabelRow")
-            for index in 0..<manager.homes.count {
-                var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
-                var home = manager.homes[index] as HMHome
-                row.textLabel.setText("\(home.name)")
-            }
-        }
-        
+        self.updateHomes()
+    }
+    
+    func homeManager(manager: HMHomeManager!, didAddHome home: HMHome!) {
+        self.updateHomes()
+    }
+    
+    func homeManager(manager: HMHomeManager!, didRemoveHome home: HMHome!) {
+        self.updateHomes()
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {

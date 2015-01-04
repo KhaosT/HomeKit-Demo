@@ -25,6 +25,15 @@
                             </items>
                         </table>
                     </items>
+                    <menu key="menu" id="reQ-Mh-8od">
+                        <items>
+                            <menuItem title="Add Home" icon="add" id="w8F-4W-dfg">
+                                <connections>
+                                    <action selector="addHome" destination="AgC-eL-Hgc" id="Yza-Ry-4fJ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="homesTable" destination="Pgp-QL-ejh" id="yoY-xF-zYk"/>
                     </connections>

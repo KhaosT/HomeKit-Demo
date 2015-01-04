@@ -215,13 +215,13 @@
 				CC0A72C51A58F38C003318DC /* HomeKitDemo WatchKit Extension.entitlements */,
 				CC0A72B41A58F36E003318DC /* HomeKitDefines.swift */,
 				CC0A72B51A58F36E003318DC /* Core.swift */,
+				CC0A72981A58F32E003318DC /* InterfaceController.swift */,
 				CC0A72B61A58F36E003318DC /* AccessoriesInterfaceController.swift */,
 				CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */,
 				CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */,
 				CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */,
 				CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */,
 				CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */,
-				CC0A72981A58F32E003318DC /* InterfaceController.swift */,
 				CC0A729A1A58F32E003318DC /* Images.xcassets */,
 				CC0A72961A58F32E003318DC /* Supporting Files */,
 			);
@@ -874,6 +874,7 @@
 				CC0A72B01A58F32E003318DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC0A72B21A58F32E003318DC /* Build configuration list for PBXNativeTarget "HomeKitDemo WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -882,6 +883,7 @@
 				CC0A72AE1A58F32E003318DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CCA92305193FD1FB001BE28C /* Build configuration list for PBXProject "BetterHomeKit" */ = {
 			isa = XCConfigurationList;
