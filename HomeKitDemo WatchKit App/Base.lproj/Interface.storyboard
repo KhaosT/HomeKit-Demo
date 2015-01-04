@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6724" systemVersion="14C81f" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3735"/>
+    </dependencies>
+    <scenes>
+        <!--Homes-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Homes" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="HomeKitDemo_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <table alignment="center" id="Pgp-QL-ejh">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="AOv-DI-9ku" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="OUP-QK-5uj">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Label" id="nEq-33-D3s"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="nEq-33-D3s" id="zhS-fs-uGT"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="homesTable" destination="Pgp-QL-ejh" id="yoY-xF-zYk"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="279"/>
+        </scene>
+        <!--ErrorInfoController-->
+        <scene sceneID="o1r-8U-zl4">
+            <objects>
+                <controller identifier="ErrorInfoController" id="a3n-aJ-yuJ" customClass="ErrorInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Title" textAlignment="center" numberOfLines="2" id="kfh-bP-gjp"/>
+                        <label alignment="center" verticalAlignment="center" text="Details" textAlignment="center" numberOfLines="4" id="0eM-6e-8OV">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="detailLabel" destination="0eM-6e-8OV" id="nAf-xm-9q9"/>
+                        <outlet property="titleLabel" destination="kfh-bP-gjp" id="8JO-sd-gS7"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="279"/>
+        </scene>
+        <!--AccessoriesController-->
+        <scene sceneID="7wm-xp-Gtu">
+            <objects>
+                <controller identifier="AccessoriesController" id="AGy-Qj-dcP" customClass="AccessoriesInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <table alignment="center" id="q8l-CN-FHL">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="Ydo-gb-KO9" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="H8q-t5-402">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Label" id="Bud-3f-q26"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="Bud-3f-q26" id="XTe-kG-zGy"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="accessoriesTable" destination="q8l-CN-FHL" id="J8h-Yh-ols"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="511"/>
+        </scene>
+        <!--ServicesController-->
+        <scene sceneID="cuo-7I-vBp">
+            <objects>
+                <controller identifier="ServicesController" id="kxY-uD-pKf" customClass="ServicesInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <table alignment="center" id="fYI-HW-7n6">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="VI4-uJ-8Bt" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="q8R-5m-EGe">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Label" id="94C-6Y-afL"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="94C-6Y-afL" id="i6K-3x-uoZ"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="Vax-RB-ABf">
+                        <items>
+                            <menuItem title="Unpair" icon="trash" id="XTW-4c-JqX">
+                                <connections>
+                                    <action selector="unpairAccessory" destination="kxY-uD-pKf" id="5dw-EY-96Y"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="servicesTable" destination="fYI-HW-7n6" id="IPh-TV-b5F"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="751"/>
+        </scene>
+        <!--Light-->
+        <scene sceneID="Reg-mi-W8u">
+            <objects>
+                <controller identifier="LightBulbController" title="Light" id="L2Z-SC-LxG" customClass="LightBulbInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <switch width="1" alignment="left" hidden="YES" value="YES" title="Power" id="ceE-D9-cXa">
+                            <connections>
+                                <action selector="didChangePowerState:" destination="L2Z-SC-LxG" id="Ejp-Me-J0T"/>
+                            </connections>
+                        </switch>
+                        <slider width="1" alignment="left" hidden="YES" continuous="YES" value="50" maximum="100" steps="10" minimumImage="BrightnessDown" maximumImage="BrightnessUp" id="XEN-3n-OuS">
+                            <connections>
+                                <action selector="didChangeBrightness:" destination="L2Z-SC-LxG" id="WOl-jU-dWF"/>
+                            </connections>
+                        </slider>
+                        <group width="1" alignment="center" verticalAlignment="center" hidden="YES" id="qRv-Jk-4qg">
+                            <items>
+                                <button width="0.33000000000000002" alignment="left" id="mr1-Z2-6bx">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="setLightColorWhite" destination="L2Z-SC-LxG" id="jvD-00-pLt"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" alignment="left" id="7QE-Kt-Rf0">
+                                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="setLightColorYellow" destination="L2Z-SC-LxG" id="iOh-ui-dD5"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" alignment="left" id="J0p-El-rf0">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="setLightColorBlue" destination="L2Z-SC-LxG" id="oGV-hj-3k8"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="brightnessSlider" destination="XEN-3n-OuS" id="f4j-Gk-mjd"/>
+                        <outlet property="colorsQuickGroup" destination="qRv-Jk-4qg" id="mvM-Pv-uBI"/>
+                        <outlet property="powerSwitch" destination="ceE-D9-cXa" id="wVb-v0-INq"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="751"/>
+        </scene>
+        <!--UnsupportedServiceController-->
+        <scene sceneID="cNu-6c-Xzb">
+            <objects>
+                <controller identifier="UnsupportedServiceController" id="vF7-Ga-mFv">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Unsupported Service" textAlignment="center" numberOfLines="2" id="bvX-9r-jHZ"/>
+                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb and Thermostat are supported." textAlignment="center" numberOfLines="3" id="zfj-QY-5Xf">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="989"/>
+        </scene>
+        <!--Thermostat-->
+        <scene sceneID="dTp-W7-rvt">
+            <objects>
+                <controller identifier="ThermostatController" title="Thermostat" id="PNo-Jt-GGj" customClass="ThermostatInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="poH-3P-N4m">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="Current Temp: 22°" id="sYi-2m-Dmz"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="hWu-Be-qWe">
+                            <items>
+                                <label width="25" alignment="center" verticalAlignment="center" text="20°" id="NNn-l9-9yp"/>
+                                <slider width="0.80000000000000004" alignment="center" continuous="YES" value="20" minimum="10" maximum="38" steps="28" id="1m0-C6-178">
+                                    <connections>
+                                        <action selector="didUpdateTargetTemp:" destination="PNo-Jt-GGj" id="3Xx-zS-d9M"/>
+                                    </connections>
+                                </slider>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="f6p-Hl-tE9">
+                            <items>
+                                <button width="0.5" alignment="left" title="Heat" id="4Ei-dO-gp7">
+                                    <connections>
+                                        <action selector="setTargetHeating" destination="PNo-Jt-GGj" id="GIa-GB-tjV"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" alignment="left" title="Cool" id="iFS-yT-dnL">
+                                    <connections>
+                                        <action selector="setTargetCooling" destination="PNo-Jt-GGj" id="tTv-wA-duG"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="currentTempLabel" destination="sYi-2m-Dmz" id="zcy-Xz-v9k"/>
+                        <outlet property="targetTempLabel" destination="NNn-l9-9yp" id="Xd2-mC-5wI"/>
+                        <outlet property="targetTempSlider" destination="1m0-C6-178" id="c1o-jP-6Jb"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="989"/>
+        </scene>
+    </scenes>
+</document>

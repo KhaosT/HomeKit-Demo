@@ -1,0 +1,74 @@
+//
+//  ServicesInterfaceController.swift
+//  HomeKitWatch
+//
+//  Created by Khaos Tian on 1/3/15.
+//  Copyright (c) 2015 Oltica. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+import HomeKit
+
+class ServicesInterfaceController: WKInterfaceController {
+    
+    var currentAccessory: HMAccessory!
+    @IBOutlet weak var servicesTable: WKInterfaceTable!
+
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let context = context as? HMAccessory {
+            self.currentAccessory = context
+            self.setTitle(self.currentAccessory.name)
+        }
+        // Configure interface objects here.
+    }
+
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+        self.servicesTable.setNumberOfRows(self.currentAccessory.services.count, withRowType: "SingleLabelRow")
+        for index in 0..<self.currentAccessory.services.count {
+            var row:SingleLabelRow = self.servicesTable.rowControllerAtIndex(index) as SingleLabelRow
+            var service = self.currentAccessory.services[index] as HMService
+            if let serviceDesc = HomeKitUUIDs[service.serviceType] {
+                row.textLabel.setText("\(serviceDesc)")
+            }else{
+                row.textLabel.setText("\(service.serviceType)")
+            }
+        }
+    }
+
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+        NSLog("Did Select Row:\(rowIndex)")
+        var service = self.currentAccessory.services[rowIndex] as HMService
+        switch service.serviceType {
+        case HMServiceTypeLightbulb:
+            NSLog("Light Bulb")
+            self.pushControllerWithName("LightBulbController", context: service)
+        case HMServiceTypeThermostat:
+            NSLog("Thermostat")
+            self.pushControllerWithName("ThermostatController", context: service)
+        default:
+            NSLog("Other")
+            self.presentControllerWithName("UnsupportedServiceController", context: nil)
+        }
+    }
+
+    @IBAction func unpairAccessory() {
+        Core.sharedInstance.currentHome.removeAccessory(self.currentAccessory, completionHandler: {
+            error in
+            if let error = error {
+                NSLog("Unpair Failed,error:\(error)")
+            } else {
+                self.popController()
+            }
+        })
+    }
+}
