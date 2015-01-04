@@ -14,19 +14,33 @@ class ErrorInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var titleLabel: WKInterfaceLabel!
     @IBOutlet weak var detailLabel: WKInterfaceLabel!
+    @IBOutlet weak var actionButton: WKInterfaceButton!
+    
+    var action: ((WKInterfaceController) -> ())?
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        if let context = context as? [String: String] {
-            if let title = context["title"] {
+        if let context = context as? ErrorObject {
+            if let title = context.title {
                 self.titleLabel.setText(title)
             }
-            if let details = context["details"] {
+            if let details = context.details {
                 self.detailLabel.setText(details)
+            }
+            if let actionButtonText = context.actionButton {
+                self.action = context.action
+                self.actionButton.setTitle(actionButtonText)
+                self.actionButton.setHidden(false)
             }
         }
         // Configure interface objects here.
+    }
+    
+    @IBAction func didPressActionButton() {
+        if let action = self.action {
+            action(self)
+        }
     }
 
     override func willActivate() {

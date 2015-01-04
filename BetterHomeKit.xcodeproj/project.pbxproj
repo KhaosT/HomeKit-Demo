@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0E8B5211A04C0F000DEF6E3 /* ZonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */; };
+		CC02B99B1A59110600E7D950 /* ErrorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC02B99A1A59110600E7D950 /* ErrorObject.swift */; };
 		CC0A72991A58F32E003318DC /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72981A58F32E003318DC /* InterfaceController.swift */; };
 		CC0A729B1A58F32E003318DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC0A729A1A58F32E003318DC /* Images.xcassets */; };
 		CC0A729F1A58F32E003318DC /* HomeKitDemo WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = CC0A729E1A58F32E003318DC /* HomeKitDemo WatchKit App.app */; };
@@ -117,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZonesViewController.swift; sourceTree = "<group>"; };
+		CC02B99A1A59110600E7D950 /* ErrorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorObject.swift; sourceTree = "<group>"; };
 		CC0A72941A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "HomeKitDemo WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0A72971A58F32E003318DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC0A72981A58F32E003318DC /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				CC0A72C51A58F38C003318DC /* HomeKitDemo WatchKit Extension.entitlements */,
 				CC0A72B41A58F36E003318DC /* HomeKitDefines.swift */,
 				CC0A72B51A58F36E003318DC /* Core.swift */,
+				CC02B99A1A59110600E7D950 /* ErrorObject.swift */,
 				CC0A72981A58F32E003318DC /* InterfaceController.swift */,
 				CC0A72B61A58F36E003318DC /* AccessoriesInterfaceController.swift */,
 				CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */,
@@ -539,6 +542,7 @@
 				CC0A72C11A58F36E003318DC /* ThermostatInterfaceController.swift in Sources */,
 				CC0A72991A58F32E003318DC /* InterfaceController.swift in Sources */,
 				CC0A72BF1A58F36E003318DC /* ServicesInterfaceController.swift in Sources */,
+				CC02B99B1A59110600E7D950 /* ErrorObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

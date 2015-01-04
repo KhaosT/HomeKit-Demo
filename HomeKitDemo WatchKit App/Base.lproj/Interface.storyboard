@@ -27,9 +27,9 @@
                     </items>
                     <menu key="menu" id="reQ-Mh-8od">
                         <items>
-                            <menuItem title="Add Home" icon="add" id="w8F-4W-dfg">
+                            <menuItem title="Add Home" icon="add" id="C4w-uj-NGp">
                                 <connections>
-                                    <action selector="addHome" destination="AgC-eL-Hgc" id="Yza-Ry-4fJ"/>
+                                    <action selector="addHome" destination="AgC-eL-Hgc" id="tqt-lp-4CX"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -51,8 +51,14 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
+                        <button width="1" alignment="center" verticalAlignment="center" hidden="YES" title="Button" id="9pH-v9-5nZ">
+                            <connections>
+                                <action selector="didPressActionButton" destination="a3n-aJ-yuJ" id="zyJ-FW-yOT"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
+                        <outlet property="actionButton" destination="9pH-v9-5nZ" id="LLK-MC-JeT"/>
                         <outlet property="detailLabel" destination="0eM-6e-8OV" id="nAf-xm-9q9"/>
                         <outlet property="titleLabel" destination="kfh-bP-gjp" id="8JO-sd-gS7"/>
                     </connections>
@@ -197,7 +203,7 @@
                         </group>
                         <group width="1" alignment="center" id="hWu-Be-qWe">
                             <items>
-                                <label width="25" alignment="center" verticalAlignment="center" text="20°" id="NNn-l9-9yp"/>
+                                <label width="25" alignment="center" verticalAlignment="center" text="20°" textAlignment="center" id="NNn-l9-9yp"/>
                                 <slider width="0.80000000000000004" alignment="center" continuous="YES" value="20" minimum="10" maximum="38" steps="28" id="1m0-C6-178">
                                     <connections>
                                         <action selector="didUpdateTargetTemp:" destination="PNo-Jt-GGj" id="3Xx-zS-d9M"/>

@@ -31,8 +31,8 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     @objc func showPermissionAlert() {
         permissionTimer.invalidate()
         permissionTimer = nil
-        var errorInfo = ["title":"Accept HomeKit Permission","details":"Please accept HomeKit permission on iOS side."];
-        self.presentControllerWithName("ErrorInfoController", context: errorInfo)
+        var errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
+        self.presentControllerWithName("ErrorInfoController", context: errorObject)
     }
 
     override func willActivate() {
@@ -47,7 +47,11 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     }
     
     @IBAction func addHome() {
-        self.presentTextInputControllerWithSuggestions(["Home","Test Home","New Home"], allowedInputMode: WKTextInputMode.Plain, completion: {
+        self.remoteAddHome(self)
+    }
+    
+    func remoteAddHome(controller: WKInterfaceController) {
+        controller.presentTextInputControllerWithSuggestions(["Home","Test Home","New Home"], allowedInputMode: WKTextInputMode.Plain, completion: {
             texts in
             if let texts = texts {
                 if texts.count > 0 {
@@ -57,7 +61,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
                         if let error = error {
                             NSLog("Failed adding home, error:\(error)")
                         } else {
-                            self.updateHomes()
+                            controller.dismissController()
                         }
                     })
                 }
@@ -68,8 +72,10 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     func updateHomes() {
         self.dismissController()
         if self.homeManager.homes.count == 0 {
-            var errorInfo = ["title":"No Home Available","details":"Please make sure there is at least one home in HomeKit database."];
-            self.presentControllerWithName("ErrorInfoController", context: errorInfo)
+            var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
+            errorObject.actionButton = "Add Home"
+            errorObject.action = self.remoteAddHome
+            self.presentControllerWithName("ErrorInfoController", context: errorObject)
         } else {
             self.homesTable.setNumberOfRows(self.homeManager.homes.count, withRowType: "SingleLabelRow")
             for index in 0..<self.homeManager.homes.count {
