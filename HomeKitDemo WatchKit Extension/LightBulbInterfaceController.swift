@@ -38,17 +38,29 @@ class LightBulbInterfaceController: WKInterfaceController {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypePowerState:
                     self.powerChar = charactertistic
-                    powerSwitch.setOn(self.powerChar.value as Bool)
+                    if let value = self.powerChar.value as? Bool {
+                        powerSwitch.setOn(value)
+                    }
                     powerSwitch.setHidden(false)
+                    if !self.currentService.accessory.reachable {
+                        powerSwitch.setEnabled(false)
+                    }
                 case HMCharacteristicTypeBrightness:
                     self.brightnessChar = charactertistic
-                    brightnessSlider.setValue(self.brightnessChar.value as Float)
+                    if let value = self.brightnessChar.value as? Float {
+                        brightnessSlider.setValue(value)
+                    }
                     brightnessSlider.setHidden(false)
+                    if !self.currentService.accessory.reachable {
+                        brightnessSlider.setEnabled(false)
+                    }
                 case HMCharacteristicTypeSaturation:
                     self.saturationChar = charactertistic
                 case HMCharacteristicTypeHue:
                     self.hueChar = charactertistic
-                    colorsQuickGroup.setHidden(false)
+                    if self.currentService.accessory.reachable {
+                        colorsQuickGroup.setHidden(false)
+                    }
                 default:
                     NSLog("Unhandled Char:\(charactertistic)")
                 }

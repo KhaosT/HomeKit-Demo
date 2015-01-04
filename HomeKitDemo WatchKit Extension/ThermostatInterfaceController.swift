@@ -36,11 +36,20 @@ class ThermostatInterfaceController: WKInterfaceController {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypeCurrentTemperature:
                     self.currentTempChar = charactertistic
-                    self.currentTempLabel.setText("Current Temp: \(self.currentTempChar.value)°")
+                    if let value = self.currentTempChar.value as? Float {
+                        self.currentTempLabel.setText("Current Temp: \(value)°")
+                    } else {
+                        self.currentTempLabel.setText("Current Temp: ?°")
+                    }
                 case HMCharacteristicTypeTargetTemperature:
                     self.targetTempChar = charactertistic
-                    self.targetTempLabel.setText("\(Int(self.targetTempChar.value as Float))°")
-                    self.targetTempSlider.setValue(self.targetTempChar.value as Float)
+                    if let value = self.targetTempChar.value as? Float {
+                        self.targetTempLabel.setText("\(Int(value))°")
+                        self.targetTempSlider.setValue(value)
+                    } else {
+                        self.targetTempLabel.setText("?°")
+                        self.targetTempSlider.setEnabled(false)
+                    }
                 case HMCharacteristicTypeTargetHeatingCooling:
                     self.targetMode = charactertistic
                 default:
