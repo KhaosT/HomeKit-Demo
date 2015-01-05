@@ -20,6 +20,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
+        //For unknown reason, this one doesn't work.
         self.addMenuItemWithItemIcon(WKMenuItemIcon.Add, title: "Add Home", action: Selector("addHome"))
         
         NSLog("Awake");
