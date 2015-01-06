@@ -23,7 +23,11 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     @IBAction func dismissZoneController(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if let _ = pendingRoom {
+            self.navigationController?.popViewControllerAnimated(true)
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func addZone(sender: AnyObject) {

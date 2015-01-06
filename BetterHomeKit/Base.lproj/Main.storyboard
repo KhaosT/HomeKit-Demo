@@ -334,13 +334,7 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Zones" id="QzK-SJ-PxI">
-                            <connections>
-                                <segue destination="VEP-nn-GCs" kind="popoverPresentation" identifier="presentZonesVC" popoverAnchorBarButtonItem="QzK-SJ-PxI" id="NTG-ql-5B9">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem title="Zones" id="QzK-SJ-PxI"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Rooms" id="m3k-cX-XyS">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="5Zj-9p-9PX">
@@ -357,6 +351,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="roomTableView" destination="dBG-vI-UK6" id="snH-Kx-oan"/>
+                        <segue destination="XmA-hk-CgP" kind="show" identifier="presentZonesVC" id="nmE-tW-Sv0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BtP-Y5-TVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -392,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oxk-Ol-B7W">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="zoneCell" textLabel="XcU-Xe-LyP" detailTextLabel="E3m-aL-b6t" style="IBUITableViewCellStyleSubtitle" id="hqk-Yj-R4B">
@@ -1243,7 +1238,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NTG-ql-5B9"/>
+        <segue reference="nmE-tW-Sv0"/>
         <segue reference="tIO-cY-9UB"/>
         <segue reference="4Zs-ws-nGU"/>
     </inferredMetricsTieBreakers>

@@ -70,9 +70,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "presentZonesVC" {
-            let naviController = segue.destinationViewController as UINavigationController
-            if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let zoneVC = naviController.viewControllers?[0] as ZonesViewController
+            if let zoneVC = segue.destinationViewController as? ZonesViewController {
                 if let room = sender as? HMRoom {
                     zoneVC.pendingRoom = Room( hmRoom : room)
                 }
