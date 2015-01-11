@@ -63,6 +63,11 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             user, error in
             if error != nil {
                 NSLog("Add user failed: \(error)")
+                if error.code == 41 {
+                    var alert = UIAlertController(title: "Failed", message: "Failed to add user to home. Normally this happens because not all accessories are reachable. Please try again after all accessories are reachable.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             } else {
                 self.fetchUsers()
             }
