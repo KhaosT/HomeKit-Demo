@@ -15,13 +15,13 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     var homeManager: HMHomeManager!
     @IBOutlet weak var homesTable: WKInterfaceTable!
     
-    var permissionTimer: NSTimer!
+    var permissionTimer: NSTimer?
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
         //For unknown reason, this one doesn't work.
-        self.addMenuItemWithItemIcon(WKMenuItemIcon.Add, title: "Add Home", action: Selector("addHome"))
+        self.addMenuItemWithItemIcon(WKMenuItemIcon.Add, title: "Add Home", action: "addHome")
         
         NSLog("Awake");
         homeManager = HMHomeManager()
@@ -32,7 +32,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     }
     
     func showPermissionAlert() {
-        permissionTimer.invalidate()
+        permissionTimer?.invalidate()
         permissionTimer = nil
         var errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
         self.presentControllerWithName("ErrorInfoController", context: errorObject)
@@ -92,10 +92,8 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     func homeManagerDidUpdateHomes(manager: HMHomeManager!) {
         NSLog("HomeManagerDidUpdateHomes")
         
-        if permissionTimer != nil {
-            permissionTimer.invalidate()
-            permissionTimer = nil
-        }
+        permissionTimer?.invalidate()
+        permissionTimer = nil
         
         self.updateHomes()
     }
