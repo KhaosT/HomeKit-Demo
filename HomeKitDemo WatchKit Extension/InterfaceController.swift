@@ -17,13 +17,13 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     
     var permissionTimer: NSTimer?
     
+    var isPresenting: Bool = false
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        //For unknown reason, this one doesn't work.
         self.addMenuItemWithItemIcon(WKMenuItemIcon.Add, title: "Add Home", action: "addHome")
         
-        NSLog("Awake");
         homeManager = HMHomeManager()
         homeManager.delegate = self
         
@@ -34,8 +34,11 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     func showPermissionAlert() {
         permissionTimer?.invalidate()
         permissionTimer = nil
-        var errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
-        self.presentControllerWithName("ErrorInfoController", context: errorObject)
+        if !isPresenting {
+            isPresenting = true
+            var errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
+            self.presentControllerWithName("ErrorInfoController", context: errorObject)
+        }
     }
 
     override func willActivate() {
@@ -73,11 +76,15 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     }
     
     func updateHomes() {
-        self.dismissController()
+        if isPresenting {
+            isPresenting = false
+            self.dismissController()
+        }
         if self.homeManager.homes.count == 0 {
             var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
             errorObject.actionButton = "Add Home"
             errorObject.action = self.remoteAddHome
+            isPresenting = true
             self.presentControllerWithName("ErrorInfoController", context: errorObject)
         } else {
             self.homesTable.setNumberOfRows(self.homeManager.homes.count, withRowType: "SingleLabelRow")
