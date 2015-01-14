@@ -14,6 +14,7 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
 
     var currentHome: HMHome!
     @IBOutlet weak var accessoriesTable: WKInterfaceTable!
+    @IBOutlet weak var noAccessoryGroup: WKInterfaceGroup!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -40,6 +41,12 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
     }
     
     func updateAccessories() {
+        if self.currentHome.accessories.count == 0 {
+            self.noAccessoryGroup.setHidden(false)
+        } else {
+            self.noAccessoryGroup.setHidden(true)
+        }
+        
         self.accessoriesTable.setNumberOfRows(self.currentHome.accessories.count, withRowType: "SingleLabelRow")
         for index in 0..<self.currentHome.accessories.count {
             var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow

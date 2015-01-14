@@ -76,9 +76,19 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <group width="1" alignment="center" verticalAlignment="center" hidden="YES" layout="vertical" id="4eu-ac-3AF">
+                            <items>
+                                <label alignment="center" text="No Accessory" textAlignment="center" id="1Ty-59-BO9"/>
+                                <label alignment="center" text="You can add accessory from iOS app." textAlignment="center" numberOfLines="0" id="LwJ-yA-Da8">
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="accessoriesTable" destination="q8l-CN-FHL" id="J8h-Yh-ols"/>
+                        <outlet property="noAccessoryGroup" destination="4eu-ac-3AF" id="pV8-Ha-LHB"/>
                     </connections>
                 </controller>
             </objects>
