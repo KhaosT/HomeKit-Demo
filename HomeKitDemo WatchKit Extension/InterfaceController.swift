@@ -19,6 +19,8 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     
     var isPresenting: Bool = false
     
+    var homes: [HMHome]!
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
@@ -68,6 +70,14 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
                             NSLog("Failed adding home, error:\(error)")
                         } else {
                             controller.dismissController()
+                            self.homes.append(home)
+                            
+                            if let index = find(self.homes, home) {
+                                self.homesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
+                                var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
+                                var home = self.homeManager.homes[index] as HMHome
+                                row.textLabel.setText("\(home.name)")
+                            }
                         }
                     })
                 }
@@ -80,17 +90,17 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
             isPresenting = false
             self.dismissController()
         }
-        if self.homeManager.homes.count == 0 {
+        if self.homes.count == 0 {
             var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
             errorObject.actionButton = "Add Home"
             errorObject.action = self.remoteAddHome
             isPresenting = true
             self.presentControllerWithName("ErrorInfoController", context: errorObject)
         } else {
-            self.homesTable.setNumberOfRows(self.homeManager.homes.count, withRowType: "SingleLabelRow")
-            for index in 0..<self.homeManager.homes.count {
+            self.homesTable.setNumberOfRows(self.homes.count, withRowType: "SingleLabelRow")
+            for index in 0..<self.homes.count {
                 var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
-                var home = self.homeManager.homes[index] as HMHome
+                var home = self.homes[index]
                 row.textLabel.setText("\(home.name)")
             }
         }
@@ -102,15 +112,26 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
         permissionTimer?.invalidate()
         permissionTimer = nil
         
+        self.homes = manager.homes as [HMHome]
         self.updateHomes()
     }
     
     func homeManager(manager: HMHomeManager!, didAddHome home: HMHome!) {
-        self.updateHomes()
+        self.homes.append(home)
+        
+        if let index = find(self.homes, home) {
+            self.homesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
+            var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
+            var home = self.homeManager.homes[index] as HMHome
+            row.textLabel.setText("\(home.name)")
+        }
     }
     
     func homeManager(manager: HMHomeManager!, didRemoveHome home: HMHome!) {
-        self.updateHomes()
+        if let index = find(self.homes, home) {
+            self.homesTable.removeRowsAtIndexes(NSIndexSet(index: index))
+            self.homes.removeAtIndex(index)
+        }
     }
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
