@@ -90,20 +90,27 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
             isPresenting = false
             self.dismissController()
         }
-        if self.homes.count == 0 {
-            var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
-            errorObject.actionButton = "Add Home"
-            errorObject.action = self.remoteAddHome
-            isPresenting = true
-            self.presentControllerWithName("ErrorInfoController", context: errorObject)
-        } else {
-            self.homesTable.setNumberOfRows(self.homes.count, withRowType: "SingleLabelRow")
-            for index in 0..<self.homes.count {
-                var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
-                var home = self.homes[index]
-                row.textLabel.setText("\(home.name)")
+        if let homes = self.homes {
+            if self.homes.count == 0 {
+                self.presentNoHomeVC()
+            } else {
+                self.homesTable.setNumberOfRows(self.homes.count, withRowType: "SingleLabelRow")
+                for index in 0..<self.homes.count {
+                    var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as SingleLabelRow
+                    var home = self.homes[index]
+                    row.textLabel.setText("\(home.name)")
+                }
             }
         }
+        
+    }
+    
+    func presentNoHomeVC() {
+        var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
+        errorObject.actionButton = "Add Home"
+        errorObject.action = self.remoteAddHome
+        isPresenting = true
+        self.presentControllerWithName("ErrorInfoController", context: errorObject)
     }
     
     func homeManagerDidUpdateHomes(manager: HMHomeManager!) {
@@ -131,6 +138,10 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
         if let index = find(self.homes, home) {
             self.homesTable.removeRowsAtIndexes(NSIndexSet(index: index))
             self.homes.removeAtIndex(index)
+        }
+        
+        if self.homes.count == 0 {
+            self.presentNoHomeVC()
         }
     }
     

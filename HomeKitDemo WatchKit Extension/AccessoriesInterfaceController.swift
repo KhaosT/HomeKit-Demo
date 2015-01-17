@@ -68,12 +68,17 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
             row.textLabel.setText("\(accessory.name)")
         }
         
+        self.noAccessoryGroup.setHidden(true)
+        
     }
     
     func home(home: HMHome!, didRemoveAccessory accessory: HMAccessory!) {
         if let index = find(self.accessories, accessory) {
             self.accessories.removeAtIndex(index)
             self.accessoriesTable.removeRowsAtIndexes(NSIndexSet(index: index))
+        }
+        if self.accessories.count == 0 {
+            self.noAccessoryGroup.setHidden(false)
         }
     }
 
