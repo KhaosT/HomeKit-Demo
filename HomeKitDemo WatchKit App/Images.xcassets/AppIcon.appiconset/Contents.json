@@ -30,6 +30,7 @@
       "size" : "40x40",
       "idiom" : "watch",
       "scale" : "2x",
+      "filename" : "Icon_38.png",
       "role" : "appLauncher",
       "subtype" : "38mm"
     },
@@ -37,6 +38,7 @@
       "size" : "44x44",
       "idiom" : "watch",
       "scale" : "2x",
+      "filename" : "Icon.png",
       "role" : "appLauncher",
       "subtype" : "42mm"
     },
