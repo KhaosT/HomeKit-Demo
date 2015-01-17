@@ -31,7 +31,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
             self.currentService = context
             
             if let name = self.currentService.accessory.name {
-                self.setTitle("\(name) - Light")
+                self.setTitle("Light")
             }
             
             for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
@@ -44,13 +44,6 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
                     powerSwitch.setHidden(false)
                     if !self.currentService.accessory.reachable {
                         powerSwitch.setEnabled(false)
-                    } else {
-                        charactertistic.enableNotification(true, completionHandler: {
-                            error in
-                            if let error = error {
-                                NSLog("Notification Error:\(error)")
-                            }
-                        })
                     }
                 case HMCharacteristicTypeBrightness:
                     self.brightnessChar = charactertistic
@@ -60,13 +53,6 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
                     brightnessSlider.setHidden(false)
                     if !self.currentService.accessory.reachable {
                         brightnessSlider.setEnabled(false)
-                    } else {
-                        charactertistic.enableNotification(true, completionHandler: {
-                            error in
-                            if let error = error {
-                                NSLog("Notification Error:\(error)")
-                            }
-                        })
                     }
                 case HMCharacteristicTypeSaturation:
                     self.saturationChar = charactertistic
@@ -87,17 +73,18 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         self.currentService.accessory.delegate = self
+        self.updatesCharacteristicsNotifications(true)
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
-        self.disableCharacteristicsNotifications()
+        self.updatesCharacteristicsNotifications(false)
     }
     
-    func disableCharacteristicsNotifications() {
+    func updatesCharacteristicsNotifications(state: Bool) {
         if let characteristic = self.powerChar {
-            characteristic.enableNotification(false, completionHandler: {
+            characteristic.enableNotification(state, completionHandler: {
                 error in
                 if let error = error {
                     NSLog("Disable Notification fail, error:\(error)")
@@ -105,7 +92,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
             })
         }
         if let characteristic = self.brightnessChar {
-            characteristic.enableNotification(false, completionHandler: {
+            characteristic.enableNotification(state, completionHandler: {
                 error in
                 if let error = error {
                     NSLog("Disable Notification fail, error:\(error)")

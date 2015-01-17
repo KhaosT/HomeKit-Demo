@@ -64,6 +64,9 @@ class ServicesInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         case HMServiceTypeThermostat:
             NSLog("Thermostat")
             self.pushControllerWithName("ThermostatController", context: service)
+        case HMServiceTypeLockMechanism:
+            NSLog("Lock Mechanism")
+            self.pushControllerWithName("LockMechanismVC", context: service)
         default:
             NSLog("Other")
             self.presentControllerWithName("UnsupportedServiceController", context: nil)

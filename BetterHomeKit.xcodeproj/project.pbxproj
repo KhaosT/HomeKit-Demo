@@ -28,6 +28,7 @@
 		CC1BE94A198CB008008E9193 /* TriggerCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */; };
 		CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */; };
 		CC5367A519F0C8D500B636C6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5367A419F0C8D500B636C6 /* Launch Screen.xib */; };
+		CC67298F1A69D3D9005E713C /* LockMechanismInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */; };
 		CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */; };
 		CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */; };
 		CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B072197AC2A600A4A443 /* HRColorCursor.m */; };
@@ -140,6 +141,7 @@
 		CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerCreateViewController.swift; sourceTree = "<group>"; };
 		CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersAndActionsViewController.swift; sourceTree = "<group>"; };
 		CC5367A419F0C8D500B636C6 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMechanismInterfaceController.swift; sourceTree = "<group>"; };
 		CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
 		CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
 		CC78B06F197AC2A600A4A443 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessSlider.h; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */,
 				CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */,
 				CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */,
+				CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */,
 				CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */,
 				CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */,
 				CC0A729A1A58F32E003318DC /* Images.xcassets */,
@@ -536,6 +539,7 @@
 				CC0A72BE1A58F36E003318DC /* AccessoriesInterfaceController.swift in Sources */,
 				CC0A72C21A58F36E003318DC /* SingleLabelRow.swift in Sources */,
 				CC0A72BD1A58F36E003318DC /* Core.swift in Sources */,
+				CC67298F1A69D3D9005E713C /* LockMechanismInterfaceController.swift in Sources */,
 				CC0A72BC1A58F36E003318DC /* HomeKitDefines.swift in Sources */,
 				CC0A72C31A58F36E003318DC /* ErrorInterfaceController.swift in Sources */,
 				CC0A72C01A58F36E003318DC /* LightBulbInterfaceController.swift in Sources */,

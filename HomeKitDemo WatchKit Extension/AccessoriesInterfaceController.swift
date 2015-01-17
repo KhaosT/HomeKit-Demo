@@ -16,6 +16,8 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
     @IBOutlet weak var accessoriesTable: WKInterfaceTable!
     @IBOutlet weak var noAccessoryGroup: WKInterfaceGroup!
     
+    var accessories: [HMAccessory]!
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
@@ -32,6 +34,7 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        self.accessories = self.currentHome.accessories as [HMAccessory]
         self.updateAccessories()
     }
 
@@ -41,26 +44,37 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
     }
     
     func updateAccessories() {
-        if self.currentHome.accessories.count == 0 {
+        if self.accessories.count == 0 {
             self.noAccessoryGroup.setHidden(false)
         } else {
             self.noAccessoryGroup.setHidden(true)
         }
         
-        self.accessoriesTable.setNumberOfRows(self.currentHome.accessories.count, withRowType: "SingleLabelRow")
-        for index in 0..<self.currentHome.accessories.count {
+        self.accessoriesTable.setNumberOfRows(self.accessories.count, withRowType: "SingleLabelRow")
+        for index in 0..<self.accessories.count {
             var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow
-            var accessory = self.currentHome.accessories[index] as HMAccessory
+            var accessory = self.accessories[index] as HMAccessory
             row.textLabel.setText("\(accessory.name)")
         }
     }
     
     func home(home: HMHome!, didAddAccessory accessory: HMAccessory!) {
-        self.updateAccessories()
+        self.accessories.append(accessory)
+        
+        if let index = find(self.accessories, accessory) {
+            self.accessoriesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
+            var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow
+            var accessory = self.currentHome.accessories[index] as HMAccessory
+            row.textLabel.setText("\(accessory.name)")
+        }
+        
     }
     
     func home(home: HMHome!, didRemoveAccessory accessory: HMAccessory!) {
-        self.updateAccessories()
+        if let index = find(self.accessories, accessory) {
+            self.accessories.removeAtIndex(index)
+            self.accessoriesTable.removeRowsAtIndexes(NSIndexSet(index: index))
+        }
     }
 
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6724" systemVersion="14C94b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3735"/>
@@ -15,7 +15,7 @@
                                 <tableRow identifier="SingleLabelRow" id="AOv-DI-9ku" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="OUP-QK-5uj">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Label" id="nEq-33-D3s"/>
+                                            <label alignment="center" verticalAlignment="center" text="{Home}" id="nEq-33-D3s"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -67,7 +67,7 @@
                                 <tableRow identifier="SingleLabelRow" id="Ydo-gb-KO9" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="H8q-t5-402">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Label" id="Bud-3f-q26"/>
+                                            <label alignment="center" verticalAlignment="center" text="{Accessory}" id="Bud-3f-q26"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -104,7 +104,7 @@
                                 <tableRow identifier="SingleLabelRow" id="VI4-uJ-8Bt" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="q8R-5m-EGe">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Label" id="94C-6Y-afL"/>
+                                            <label alignment="center" verticalAlignment="center" text="{Service}" id="94C-6Y-afL"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -177,13 +177,38 @@
             </objects>
             <point key="canvasLocation" x="484" y="751"/>
         </scene>
+        <!--Lock-->
+        <scene sceneID="sFx-ZP-Ul0">
+            <objects>
+                <controller identifier="LockMechanismVC" title="Lock" id="Vyc-hj-287" customClass="LockMechanismInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="45" alignment="left" id="XJQ-el-kSl">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="Current:" id="E5F-Bl-DMA"/>
+                                <label alignment="center" verticalAlignment="center" text="Unsecured" minimumScaleFactor="0.60000000000000009" id="HB1-fr-JZX"/>
+                            </items>
+                        </group>
+                        <switch width="1" alignment="left" value="YES" title="Lock" id="NWN-mr-sdh">
+                            <connections>
+                                <action selector="changeLockState:" destination="Vyc-hj-287" id="Qzu-5F-IRn"/>
+                            </connections>
+                        </switch>
+                    </items>
+                    <connections>
+                        <outlet property="currentStateLabel" destination="HB1-fr-JZX" id="Mrn-51-glr"/>
+                        <outlet property="lockSwitch" destination="NWN-mr-sdh" id="M3q-qX-NhY"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="681" y="751"/>
+        </scene>
         <!--UnsupportedServiceController-->
         <scene sceneID="cNu-6c-Xzb">
             <objects>
                 <controller identifier="UnsupportedServiceController" id="vF7-Ga-mFv">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="Unsupported Service" textAlignment="center" numberOfLines="2" id="bvX-9r-jHZ"/>
-                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb and Thermostat are supported." textAlignment="center" numberOfLines="3" id="zfj-QY-5Xf">
+                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb, Lock and Thermostat are supported." textAlignment="center" numberOfLines="0" id="zfj-QY-5Xf">
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>

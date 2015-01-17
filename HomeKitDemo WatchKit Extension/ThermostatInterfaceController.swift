@@ -29,7 +29,7 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
             self.currentService = context
             
             if let name = self.currentService.accessory.name {
-                self.setTitle("\(name) - Thermo")
+                self.setTitle("Thermostat")
             }
             
             for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
@@ -41,14 +41,6 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
                     } else {
                         self.currentTempLabel.setText("Current Temp: ?°")
                     }
-                    if self.currentService.accessory.reachable {
-                        charactertistic.enableNotification(true, completionHandler: {
-                            error in
-                            if let error = error {
-                                NSLog("Notification Error:\(error)")
-                            }
-                        })
-                    }
                 case HMCharacteristicTypeTargetTemperature:
                     self.targetTempChar = charactertistic
                     if let value = self.targetTempChar.value as? Float {
@@ -57,14 +49,6 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
                     } else {
                         self.targetTempLabel.setText("?°")
                         self.targetTempSlider.setEnabled(false)
-                    }
-                    if self.currentService.accessory.reachable {
-                        charactertistic.enableNotification(true, completionHandler: {
-                            error in
-                            if let error = error {
-                                NSLog("Notification Error:\(error)")
-                            }
-                        })
                     }
                 case HMCharacteristicTypeTargetHeatingCooling:
                     self.targetMode = charactertistic
@@ -80,16 +64,18 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         self.currentService.accessory.delegate = self
+        self.updatesCharacteristicsNotifications(true)
     }
-
+    
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        self.updatesCharacteristicsNotifications(false)
     }
     
-    func disableCharacteristicsNotifications() {
+    func updatesCharacteristicsNotifications(state: Bool) {
         if let characteristic = self.currentTempChar {
-            characteristic.enableNotification(false, completionHandler: {
+            characteristic.enableNotification(state, completionHandler: {
                 error in
                 if let error = error {
                     NSLog("Disable Notification fail, error:\(error)")
@@ -97,7 +83,7 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
             })
         }
         if let characteristic = self.targetTempChar {
-            characteristic.enableNotification(false, completionHandler: {
+            characteristic.enableNotification(state, completionHandler: {
                 error in
                 if let error = error {
                     NSLog("Disable Notification fail, error:\(error)")
