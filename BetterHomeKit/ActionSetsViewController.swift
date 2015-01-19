@@ -196,19 +196,61 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            let actionSet = actionSets[indexPath.row]
-            Core.sharedInstance.currentHome?.removeActionSet(actionSet) {
-                [weak self]
-                error in
-                if error != nil {
-                    NSLog("Failed removing action set, error: \(error)")
-                } else {
-                    self?.updateActionSets()
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        var options = [UITableViewRowAction]()
+        
+        let actionSet = actionSets[indexPath.row] as HMActionSet
+        
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:
+            {
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                Core.sharedInstance.currentHome?.removeActionSet(actionSet) {
+                    error in
+                    if error != nil {
+                        NSLog("Failed removing action set, error: \(error)")
+                    } else {
+                        self.updateActionSets()
+                    }
                 }
+                tableView.setEditing(false, animated: true)
             }
-        }
+        )
+        
+        options.append(deleteAction)
+        
+        let renameAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Rename", handler:
+            {
+                (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
+                let alert:UIAlertController = UIAlertController(title: "Rename Action Set", message: "Update the name of the Action Set", preferredStyle: .Alert)
+                alert.addTextFieldWithConfigurationHandler(nil)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
+                    {
+                        (action:UIAlertAction!) in
+                        let textField = alert.textFields?[0] as UITextField
+                        actionSet.updateName(textField.text) {
+                            error in
+                            if let error = error {
+                                println("Error:\(error)")
+                            }else{
+                                let cell = tableView.cellForRowAtIndexPath(indexPath)
+                                cell?.textLabel?.text = actionSet.name
+                            }
+                        }
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                tableView.setEditing(false, animated: true)
+            }
+        )
+        renameAction.backgroundColor = UIColor.orangeColor()
+        options.append(renameAction)
+        
+        return options
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
 
 }
