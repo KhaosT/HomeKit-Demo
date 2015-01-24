@@ -226,10 +226,17 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                         if let cell = self.characteristicTableView?.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) {
                             dispatch_async(dispatch_get_main_queue(),
                                 {
-                                    if let value = characteristic.value as? NSObject {
-                                        cell.textLabel?.text = "\(value)"
-                                    }else{
-                                        cell.textLabel?.text = ""
+                                    if let cell = cell as? NumericalCell {
+                                        cell.titleLabel.text = "\(characteristic.value)"
+                                        cell.valueSlider.minimumValue = characteristic.metadata.minimumValue as Float
+                                        cell.valueSlider.maximumValue = characteristic.metadata.maximumValue as Float
+                                        cell.valueSlider.value = characteristic.value as Float
+                                    } else {
+                                        if let value = characteristic.value as? NSObject {
+                                            cell.textLabel?.text = "\(value)"
+                                        } else {
+                                            cell.textLabel?.text = ""
+                                        }
                                     }
                                 }
                             )
@@ -281,6 +288,30 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
     }
     
+    func didUpdateValue(sender: UISlider) {
+        if let cell = sender.superview?.superview as? NumericalCell {
+            var cellIndex = cell.cellIndex
+            var targetValue = Int(sender.value)
+            let characteristic = characteristics[cellIndex] as HMCharacteristic
+            characteristic.writeValue(targetValue, completionHandler:
+                {
+                    (error:NSError!) in
+                    if (error != nil) {
+                        NSLog("Change Char Error: \(error)")
+                    }else{
+                        dispatch_async(dispatch_get_main_queue(),
+                            {
+                                if let cell = self.characteristicTableView.cellForRowAtIndexPath(NSIndexPath(forRow: cellIndex, inSection: 0)) as? NumericalCell {
+                                    cell.titleLabel.text = "\(characteristic.value)"
+                                }
+                            }
+                        )
+                    }
+                }
+            )
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -290,10 +321,10 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         return characteristics.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func generateGeneralCell(tableView: UITableView, indexPath: NSIndexPath, object: HMCharacteristic) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
-        let object = characteristics[indexPath.row] as HMCharacteristic
+        
         if let charDesc = HomeKitUUIDs[object.characteristicType] {
             cell.detailTextLabel?.text = charDesc
         }else{
@@ -305,6 +336,47 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             cell.textLabel?.text = ""
         }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let object = characteristics[indexPath.row] as HMCharacteristic
+        
+        if !contains(object.properties as [String], HMCharacteristicPropertyWritable as String) {
+            return generateGeneralCell(tableView, indexPath: indexPath, object: object)
+        }
+        
+        if (object.characteristicType == HMCharacteristicTypeTargetLockMechanismState ||
+            object.characteristicType == HMCharacteristicTypeTargetDoorState) {
+            return generateGeneralCell(tableView, indexPath: indexPath, object: object)
+        }
+        
+        switch (object.metadata.format as NSString) {
+        case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
+            let cell = tableView.dequeueReusableCellWithIdentifier("NumericalCell", forIndexPath: indexPath) as NumericalCell
+            
+            cell.cellIndex = indexPath.row
+            
+            
+            cell.valueSlider.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
+            cell.valueSlider.addTarget(self, action: "didUpdateValue:", forControlEvents: UIControlEvents.ValueChanged)
+            if let charDesc = HomeKitUUIDs[object.characteristicType] {
+                cell.subtitleLabel.text = charDesc
+            }else{
+                cell.subtitleLabel.text = object.characteristicType
+            }
+            if (object.value != nil) {
+                cell.titleLabel.text = "\(object.value)"
+                cell.valueSlider.minimumValue = object.metadata.minimumValue as Float
+                cell.valueSlider.maximumValue = object.metadata.maximumValue as Float
+                cell.valueSlider.value = object.value as Float
+            }else{
+                cell.titleLabel.text = ""
+                cell.valueSlider.value = 0
+            }
+            return cell
+        default:
+            return generateGeneralCell(tableView, indexPath: indexPath, object: object)
+        }
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
@@ -463,4 +535,11 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
     }
     
+}
+
+class NumericalCell: UITableViewCell {
+    var cellIndex: Int!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var valueSlider: UISlider!
 }
