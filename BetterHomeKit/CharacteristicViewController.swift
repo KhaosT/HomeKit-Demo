@@ -162,8 +162,8 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "invalidateLocalCache", name: homeUpdateNotification, object: nil)
         invalidateLocalCache()
         configureView()
@@ -319,6 +319,10 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characteristics.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44
     }
     
     func generateGeneralCell(tableView: UITableView, indexPath: NSIndexPath, object: HMCharacteristic) -> UITableViewCell {
