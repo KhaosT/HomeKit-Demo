@@ -120,7 +120,7 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
         })
     }
     
-    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
         switch characteristic {
         case self.currentTempChar:
             if let value = self.currentTempChar.value as? Float {
