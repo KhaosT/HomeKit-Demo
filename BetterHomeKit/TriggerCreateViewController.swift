@@ -46,7 +46,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == nameField {
             nameField.resignFirstResponder()
         }

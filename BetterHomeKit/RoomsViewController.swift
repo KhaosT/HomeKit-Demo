@@ -38,7 +38,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
+                let textField = alert.textFields?[0] as! UITextField
                 if let strongSelf = self {
                     Core.sharedInstance.currentHome?.addRoomWithName(textField.text, completionHandler:
                         {
@@ -83,16 +83,16 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as! UITableViewCell
         
-        let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
+        let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as! HMRoom
 
         cell.textLabel?.text = room.name
         
         var detailText = ""
         for(var i=0; i<Core.sharedInstance.currentHome?.zones.count; i++)
         {
-            let zone = Core.sharedInstance.currentHome?.zones[i] as HMZone
+            let zone = Core.sharedInstance.currentHome?.zones[i] as! HMZone
             if let rooms = zone.rooms
             {
                 for iroom in rooms
@@ -110,7 +110,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let accessory = pendingAccessory {
-            let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as HMRoom
+            let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as! HMRoom
             Core.sharedInstance.currentHome?.assignAccessory(accessory.toHMAccessory(), toRoom: room, completionHandler:
                 {
                     [weak self]
@@ -132,8 +132,8 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 {
                     [weak self]
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as UITextField
-                    let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as HMRoom
+                    let textField = alert.textFields?[0] as! UITextField
+                    let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as! HMRoom
                     room.updateName(textField.text, completionHandler:
                         {
                             error in

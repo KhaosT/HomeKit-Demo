@@ -32,7 +32,7 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
                 self.setTitle("Thermostat")
             }
             
-            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypeCurrentTemperature:
                     self.currentTempChar = charactertistic

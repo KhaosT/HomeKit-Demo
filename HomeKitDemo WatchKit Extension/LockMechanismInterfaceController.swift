@@ -33,7 +33,7 @@ class LockMechanismInterfaceController: WKInterfaceController, HMAccessoryDelega
                 self.setTitle("Lock")
             }
             
-            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypeCurrentLockMechanismState:
                     self.currentLockChar = charactertistic
@@ -104,7 +104,7 @@ class LockMechanismInterfaceController: WKInterfaceController, HMAccessoryDelega
     }
     
     
-    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
         switch characteristic {
         case self.currentLockChar:
             if let value = self.currentLockChar.value as? Int {

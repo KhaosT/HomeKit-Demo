@@ -34,7 +34,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     func updateTriggers () {
         triggers.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            triggers += currentHome.triggers as [HMTrigger]
+            triggers += currentHome.triggers as! [HMTrigger]
         }
         triggersTableview.reloadData()
     }
@@ -45,12 +45,12 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailedTrigger" {
-            let triggerVC = segue.destinationViewController as TriggerDetailViewController
+            let triggerVC = segue.destinationViewController as! TriggerDetailViewController
             triggerVC.currentTrigger = sender as? HMTrigger
         }
         
         if segue.identifier == "updateTrigger" {
-            let triggerVC = segue.destinationViewController as TriggerCreateViewController
+            let triggerVC = segue.destinationViewController as! TriggerCreateViewController
             triggerVC.pendingTrigger = sender as? HMTimerTrigger
         }
     }
@@ -60,9 +60,9 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as! UITableViewCell
         
-        let trigger = triggers[indexPath.row] as HMTimerTrigger
+        let trigger = triggers[indexPath.row] as! HMTimerTrigger
         cell.textLabel?.text = trigger.name
         
         if trigger.enabled {
@@ -113,7 +113,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         
         var options = [UITableViewRowAction]()
         
-        let trigger = triggers[indexPath.row] as HMTimerTrigger
+        let trigger = triggers[indexPath.row] as! HMTimerTrigger
         
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:
             {

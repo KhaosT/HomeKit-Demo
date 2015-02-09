@@ -62,7 +62,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as UITableViewCell
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = accessories[indexPath.row].name
         
         return cell
@@ -94,7 +94,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
             })
     }
     
-    func accessoryBrowser(browser: HMAccessoryBrowser!, didFindNewAccessory accessory: HMAccessory!)
+    func accessoryBrowser(browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory!)
     {
         if !contains(accessories, accessory) {
             accessories.insert(accessory, atIndex: 0)
@@ -103,7 +103,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         }
     }
     
-    func accessoryBrowser(browser: HMAccessoryBrowser!, didRemoveNewAccessory accessory: HMAccessory!)
+    func accessoryBrowser(browser: HMAccessoryBrowser, didRemoveNewAccessory accessory: HMAccessory!)
     {
         if let index = find(accessories, accessory) {
             accessories.removeAtIndex(index)

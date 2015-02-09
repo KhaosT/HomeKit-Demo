@@ -34,7 +34,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
                 self.setTitle("Light")
             }
             
-            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypePowerState:
                     self.powerChar = charactertistic
@@ -172,7 +172,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         self.updateColor(UIColor.blueColor())
     }
     
-    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
         switch characteristic {
         case self.powerChar:
             if let value = self.powerChar.value as? Bool {

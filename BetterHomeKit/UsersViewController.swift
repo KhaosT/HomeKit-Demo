@@ -34,7 +34,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func fetchUsers() {
         usersArray.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            for user in currentHome.users as [HMUser]{
+            for user in currentHome.users as! [HMUser]{
                 usersArray.append(user)
             }
         }
@@ -87,7 +87,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UITableViewCell
         
         cell.textLabel?.text = usersArray[indexPath.row].name
         cell.detailTextLabel?.text = "User"

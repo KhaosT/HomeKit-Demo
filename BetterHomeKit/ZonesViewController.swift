@@ -38,7 +38,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
+                let textField = alert.textFields?[0] as! UITextField
                 if let strongSelf = self {
                     Core.sharedInstance.currentHome?.addZoneWithName(textField.text, completionHandler:
                         {
@@ -64,9 +64,9 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("zoneCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("zoneCell", forIndexPath: indexPath) as! UITableViewCell
         
-        let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as HMZone
+        let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as! HMZone
         
         var detailText = ""
         
@@ -88,7 +88,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("pendingRoom \(pendingRoom) name= \(pendingRoom)")
         if let room = pendingRoom {
-            let zone = Core.sharedInstance.currentHome?.zones[indexPath.row] as HMZone
+            let zone = Core.sharedInstance.currentHome?.zones[indexPath.row] as! HMZone
             NSLog("zone \(zone)")
             zone.addRoom(room.toHMRoom(), completionHandler:
                 {
@@ -125,8 +125,8 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 {
                     [weak self]
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as UITextField
-                    let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as HMZone
+                    let textField = alert.textFields?[0] as! UITextField
+                    let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as! HMZone
                     zone.updateName(textField.text, completionHandler:
                         {
                             error in

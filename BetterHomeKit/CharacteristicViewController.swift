@@ -45,7 +45,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
+                let textField = alert.textFields?[0] as! UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
@@ -65,12 +65,12 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showColorPicker" {
-            (segue.destinationViewController as ColorPickerViewController).delegate = self
-            (segue.destinationViewController as ColorPickerViewController).initialColor = currentLightColor()
+            (segue.destinationViewController as! ColorPickerViewController).delegate = self
+            (segue.destinationViewController as! ColorPickerViewController).initialColor = currentLightColor()
         }
         
         if segue.identifier == "startActionAssignProcess" {
-            (segue.destinationViewController as ActionSetsViewController).pendingCharacteristic = Characteristic(hmChar: (sender as HMCharacteristic))
+            (segue.destinationViewController as! ActionSetsViewController).pendingCharacteristic = Characteristic(hmChar: (sender as! HMCharacteristic))
         }
     }
     
@@ -114,7 +114,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         characteristics.removeAll(keepCapacity: true)
         
         // Update the user interface for the detail item.
-        for characteristic in detailItem!.characteristics as [HMCharacteristic] {
+        for characteristic in detailItem!.characteristics as! [HMCharacteristic] {
             NSLog("CharDes: \(characteristic.characteristicTypeDescription())")
             if colorButton?.enabled == true {
                 if characteristic.characteristicType == (HMCharacteristicTypeBrightness as String) {
@@ -152,7 +152,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Characteristic Local Cache")
             if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
-                for service in accessory.services as [HMService] {
+                for service in accessory.services as! [HMService] {
                     if service.name == serviceNameCache {
                         detailItem = service
                         break
@@ -169,7 +169,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         configureView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didUpdateValueForCharacteristic:", name: characteristicUpdateNotification, object: nil)
         for aChar in characteristics {
-            if contains(aChar.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+            if contains(aChar.properties as! [String], HMCharacteristicPropertySupportsEventNotification as String) {
                 aChar.enableNotification(true, completionHandler:
                     {
                         error in
@@ -179,7 +179,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                     }
                 )
             }
-            if contains(aChar.properties as [String], HMCharacteristicPropertyReadable as String) {
+            if contains(aChar.properties as! [String], HMCharacteristicPropertyReadable as String) {
                 aChar.readValueWithCompletionHandler(
                     {
                         [weak self]
@@ -202,7 +202,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         for characteristic in characteristics {
-            if contains(characteristic.properties as [String], HMCharacteristicPropertySupportsEventNotification as String) {
+            if contains(characteristic.properties as! [String], HMCharacteristicPropertySupportsEventNotification as String) {
                 characteristic.enableNotification(false, completionHandler:
                     {
                         error in
@@ -230,7 +230,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                         cell.titleLabel.text = "\(characteristic.value)"
                                         cell.valueSlider.minimumValue = characteristic.metadata.minimumValue as Float
                                         cell.valueSlider.maximumValue = characteristic.metadata.maximumValue as Float
-                                        cell.valueSlider.value = characteristic.value as Float
+                                        cell.valueSlider.value = characteristic.value as! Float
                                     } else {
                                         if let value = characteristic.value as? NSObject {
                                             cell.textLabel?.text = "\(value)"
@@ -326,7 +326,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     }
     
     func generateGeneralCell(tableView: UITableView, indexPath: NSIndexPath, object: HMCharacteristic) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
         
         if let charDesc = HomeKitUUIDs[object.characteristicType] {
@@ -345,7 +345,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let object = characteristics[indexPath.row] as HMCharacteristic
         
-        if !contains(object.properties as [String], HMCharacteristicPropertyWritable as String) {
+        if !contains(object.properties as! [String], HMCharacteristicPropertyWritable as String) {
             return generateGeneralCell(tableView, indexPath: indexPath, object: object)
         }
         
@@ -356,7 +356,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         
         switch (object.metadata.format as NSString) {
         case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
-            let cell = tableView.dequeueReusableCellWithIdentifier("NumericalCell", forIndexPath: indexPath) as NumericalCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("NumericalCell", forIndexPath: indexPath) as! NumericalCell
             
             cell.cellIndex = indexPath.row
             
@@ -372,7 +372,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 cell.titleLabel.text = "\(object.value)"
                 cell.valueSlider.minimumValue = object.metadata.minimumValue as Float
                 cell.valueSlider.maximumValue = object.metadata.maximumValue as Float
-                cell.valueSlider.value = object.value as Float
+                cell.valueSlider.value = object.value as! Float
             }else{
                 cell.titleLabel.text = ""
                 cell.valueSlider.value = 0
@@ -411,7 +411,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let characteristic = characteristics[indexPath.row] as HMCharacteristic
-        if contains((characteristic.properties as [String]), (HMCharacteristicPropertyWritable as String)) {
+        if contains((characteristic.properties as! [String]), (HMCharacteristicPropertyWritable as String)) {
             return true
         }
         return false
@@ -422,7 +422,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let object = characteristics[indexPath.row] as HMCharacteristic
         
-        if !contains(object.properties as [String], HMCharacteristicPropertyWritable as String) {
+        if !contains(object.properties as! [String], HMCharacteristicPropertyWritable as String) {
             return
         }
         
@@ -456,7 +456,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             switch (object.metadata.format as NSString) {
             case HMCharacteristicMetadataFormatBool:
                 if (object.value != nil) {
-                    object.writeValue(!(object.value as Bool), completionHandler:
+                    object.writeValue(!(object.value as! Bool), completionHandler:
                         {
                             (error:NSError!) in
                             if (error != nil) {
@@ -480,7 +480,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as UITextField
+                        let textField = alert.textFields?[0] as! UITextField
                         let f = NSNumberFormatter()
                         f.numberStyle = NSNumberFormatterStyle.DecimalStyle
                         object.writeValue(f.numberFromString(textField.text), completionHandler:
@@ -511,7 +511,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as UITextField
+                        let textField = alert.textFields?[0] as! UITextField
                         object.writeValue("\(textField.text)", completionHandler:
                             {
                                 (error:NSError!) in

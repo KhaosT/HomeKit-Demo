@@ -34,7 +34,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as UITextField
+                let textField = alert.textFields?[0] as! UITextField
                 self.detailItem!.updateName(textField.text, completionHandler:
                     {
                         (error:NSError!) in
@@ -56,7 +56,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Update the user interface for the detail item.
         services.removeAll(keepCapacity: true)
         if let detailItem = detailItem {
-            for service in detailItem.services as [HMService] {
+            for service in detailItem.services as! [HMService] {
                 if !contains(services, service) {
                     services.append(service)
                 }
@@ -88,7 +88,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
             if let indexPath = indexPath {
                 let object = services[indexPath.row] as HMService
                 servicesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
-                (segue.destinationViewController as CharacteristicViewController).detailItem = object
+                (segue.destinationViewController as! CharacteristicViewController).detailItem = object
             }
         }
     }
@@ -109,7 +109,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
         let object = services[indexPath.row] as HMService
         if (object.name != nil) {
@@ -130,23 +130,23 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         return cell
     }
     
-    func accessoryDidUpdateName(accessory: HMAccessory!) {
+    func accessoryDidUpdateName(accessory: HMAccessory) {
         NSLog("accessoryDidUpdateName \(accessory)")
     }
     
-    func accessory(accessory: HMAccessory!, didUpdateNameForService service: HMService!) {
+    func accessory(accessory: HMAccessory, didUpdateNameForService service: HMService!) {
         NSLog("\(accessory) didUpdateNameForService \(service.name)")
     }
     
-    func accessoryDidUpdateServices(accessory: HMAccessory!) {
+    func accessoryDidUpdateServices(accessory: HMAccessory) {
         NSLog("accessoryDidUpdateServices \(accessory.services)")
     }
     
-    func accessoryDidUpdateReachability(accessory: HMAccessory!) {
+    func accessoryDidUpdateReachability(accessory: HMAccessory) {
         NSLog("accessoryDidUpdateReachability \(accessory.reachable)")
     }
     
-    func accessory(accessory: HMAccessory!, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
         NSLog("didUpdateValueForCharacteristic \(characteristic)")
     }
 
