@@ -34,7 +34,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
                 self.setTitle("Light")
             }
             
-            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypePowerState:
                     self.powerChar = charactertistic

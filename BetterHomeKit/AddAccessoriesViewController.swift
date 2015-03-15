@@ -62,7 +62,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = accessories[indexPath.row].name
         
         return cell

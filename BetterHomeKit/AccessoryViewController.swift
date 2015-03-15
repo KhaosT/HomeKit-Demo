@@ -96,22 +96,22 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
             if let indexPath = indexPath {
                 let object = objects[indexPath.row] as HMAccessory
                 accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
-                (segue.destinationViewController as! ServiceViewController).detailItem = object
+                (segue.destinationViewController as ServiceViewController).detailItem = object
             }
         }
         
         if segue.identifier == "presentHomes" {
-            let naviController = segue.destinationViewController as! UINavigationController
+            let naviController = segue.destinationViewController as UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let homeVC = naviController.viewControllers?[0] as! HomesViewController
+                let homeVC = naviController.viewControllers?[0] as HomesViewController
                 homeVC.homeManager = self.homeManager
             }
         }
         
         if segue.identifier == "presentRoomsVC" {
-            let naviController = segue.destinationViewController as! UINavigationController
+            let naviController = segue.destinationViewController as UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let roomVC = naviController.viewControllers?[0] as! RoomsViewController
+                let roomVC = naviController.viewControllers?[0] as RoomsViewController
                 if let accessory = sender as? HMAccessory {
                     roomVC.pendingAccessory = Accessory(hmAccessory: accessory)
                 }
@@ -122,14 +122,14 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     func homeManagerDidUpdateHomes(manager: HMHomeManager)
     {
         NSLog("DidUpdateHomes:\(manager)")
-        for home in manager.homes as! [HMHome] {
+        for home in manager.homes as [HMHome] {
             NSLog("Home:\(home)")
         }
         if manager.primaryHome == nil {
             NSLog("No Primary Home, try to setup one")
             if manager.homes?.count > 0 {
                 NSLog("There are homes in HMHomeManager, choose the first one.")
-                manager.updatePrimaryHome(manager.homes[0] as! HMHome, completionHandler:
+                manager.updatePrimaryHome(manager.homes[0] as HMHome, completionHandler:
                     {
                         (error:NSError!) in
                         if error != nil {
@@ -146,7 +146,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         manager.addHomeWithName(textField.text, completionHandler:
                             {
                                 (home:HMHome!, error:NSError!) in
@@ -191,7 +191,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func home(home: HMHome, didAddAccessory accessory: HMAccessory!)
     {
-        for accessory in Core.sharedInstance.currentHome!.accessories as! [HMAccessory] {
+        for accessory in Core.sharedInstance.currentHome!.accessories as [HMAccessory] {
             if !contains(objects, accessory) {
                 objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
@@ -218,9 +218,9 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     {
         if accessory.reachable {
             if contains(objects, accessory) {
-                for service in accessory.services as! [HMService] {
-                    for characteristic in service.characteristics as! [HMCharacteristic] {
-                        if contains(characteristic.properties as! [String], HMCharacteristicPropertyReadable as String) {
+                for service in accessory.services as [HMService] {
+                    for characteristic in service.characteristics as [HMCharacteristic] {
+                        if contains(characteristic.properties as [String], HMCharacteristicPropertyReadable as String) {
                             characteristic.readValueWithCompletionHandler(
                                 {
                                     (error:NSError!) in
@@ -265,7 +265,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
         let object = objects[indexPath.row] as HMAccessory
         if object.reachable {
@@ -286,7 +286,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func removeEverything() {
         self.objects.removeAll(keepCapacity: false)
-        self.objects += (Core.sharedInstance.currentHome!.accessories as! [HMAccessory])
+        self.objects += (Core.sharedInstance.currentHome!.accessories as [HMAccessory])
         for accessory in self.objects {
             accessory.delegate = self
         }

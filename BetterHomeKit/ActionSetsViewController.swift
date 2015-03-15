@@ -30,7 +30,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     func updateActionSets () {
         actionSets.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            actionSets += currentHome.actionSets as! [HMActionSet]
+            actionSets += currentHome.actionSets as [HMActionSet]
         }
         actionSetsTableview.reloadData()
     }
@@ -43,7 +43,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
+                let textField = alert.textFields?[0] as UITextField
                 if let strongSelf = self {
                     Core.sharedInstance.currentHome?.addActionSetWithName(textField.text){
                         [weak self]
@@ -66,7 +66,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailedActionSet" {
-            let actionVC = segue.destinationViewController as! ActionSetViewController
+            let actionVC = segue.destinationViewController as ActionSetViewController
             actionVC.currentActionSet = sender as? HMActionSet
         }
     }
@@ -76,7 +76,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as UITableViewCell
         
         let actionSet = actionSets[indexPath.row]
         cell.textLabel?.text = actionSet.name
@@ -143,7 +143,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         let f = NSNumberFormatter()
                         f.numberStyle = NSNumberFormatterStyle.DecimalStyle
                         let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: f.numberFromString(textField.text))
@@ -167,7 +167,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: textField.text)
                         actionSet.addAction(writeAction) {
                             error in
@@ -228,7 +228,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                 alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
+                        let textField = alert.textFields?[0] as UITextField
                         actionSet.updateName(textField.text) {
                             error in
                             if let error = error {

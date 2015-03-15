@@ -33,17 +33,17 @@ class LockMechanismInterfaceController: WKInterfaceController, HMAccessoryDelega
                 self.setTitle("Lock")
             }
             
-            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypeCurrentLockMechanismState:
-                    self.currentLockChar = charactertistic
+                    self.currentLockChar = charactertistic as HMCharacteristic
                     if let value = self.currentLockChar.value as? Int {
                         self.currentStateLabel.setText("\(currentStates[value])")
                     } else {
                         self.currentStateLabel.setText("?")
                     }
                 case HMCharacteristicTypeTargetLockMechanismState:
-                    self.targetLockChar = charactertistic
+                    self.targetLockChar = charactertistic as HMCharacteristic
                     if !self.currentService.accessory.reachable {
                         self.lockSwitch.setEnabled(false)
                     }
