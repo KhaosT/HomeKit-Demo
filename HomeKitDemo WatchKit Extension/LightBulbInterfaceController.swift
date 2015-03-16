@@ -142,6 +142,8 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
                     error in
                     if let error = error {
                         NSLog("Failed to update Brightness \(error)")
+                    } else {
+                        self.brightnessSlider.setValue(brightValue.floatValue)
                     }
                 }
             )
