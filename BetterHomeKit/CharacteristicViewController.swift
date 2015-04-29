@@ -406,6 +406,15 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                             }
                         }
                     )
+                } else {
+                    object.writeValue(true, completionHandler:
+                        {
+                            (error:NSError!) in
+                            if (error != nil) {
+                                NSLog("Change Char Error: \(error)")
+                            }
+                        }
+                    )
                 }
             case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
                 let alert:UIAlertController = UIAlertController(title: "Adjust \(charDesc)", message: "Enter the value from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
