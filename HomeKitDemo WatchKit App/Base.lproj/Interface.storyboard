@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Homes-->
@@ -208,7 +208,7 @@
                 <controller identifier="UnsupportedServiceController" id="vF7-Ga-mFv">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="Unsupported Service" textAlignment="center" numberOfLines="2" id="bvX-9r-jHZ"/>
-                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb, Lock and Thermostat are supported." textAlignment="center" numberOfLines="0" id="zfj-QY-5Xf">
+                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb, Lock, Garage Door Opener and Thermostat are supported." textAlignment="center" numberOfLines="0" id="zfj-QY-5Xf">
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
@@ -260,6 +260,34 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="484" y="989"/>
+        </scene>
+        <!--Garage-->
+        <scene sceneID="geF-VE-sCR">
+            <objects>
+                <controller identifier="GarageVC" title="Garage" id="Mg5-Oi-Zrd" customClass="GarageInterfaceController" customModule="HomeKitDemo_WatchKit_Extension">
+                    <items>
+                        <label alignment="center" text="Current: Closed" id="67F-dL-ZWC"/>
+                        <label alignment="center" text="Lock: Unsecured" id="SUm-KS-3Pr"/>
+                        <switch width="1" alignment="left" value="YES" enabled="NO" title="Open" id="dOn-iI-Jpk">
+                            <connections>
+                                <action selector="didChangeTargetDoorState:" destination="Mg5-Oi-Zrd" id="6jw-uz-CKg"/>
+                            </connections>
+                        </switch>
+                        <switch width="1" alignment="left" value="YES" enabled="NO" title="Lock" id="RH0-EW-0GS">
+                            <connections>
+                                <action selector="didChangeTargetLockState:" destination="Mg5-Oi-Zrd" id="DTj-zk-fXS"/>
+                            </connections>
+                        </switch>
+                    </items>
+                    <connections>
+                        <outlet property="currentLockLabel" destination="SUm-KS-3Pr" id="DZx-xt-fEL"/>
+                        <outlet property="currentStateLabel" destination="67F-dL-ZWC" id="Wcz-Kx-Z1h"/>
+                        <outlet property="targetDoorStateSwitch" destination="dOn-iI-Jpk" id="vf4-qs-fcP"/>
+                        <outlet property="targetLockState" destination="RH0-EW-0GS" id="rp4-Zg-xim"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="681" y="989"/>
         </scene>
     </scenes>
 </document>

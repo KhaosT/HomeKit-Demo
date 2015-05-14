@@ -16,7 +16,7 @@ class LightBulbInterfaceController: WKInterfaceController, HMAccessoryDelegate {
     @IBOutlet weak var brightnessSlider: WKInterfaceSlider!
     @IBOutlet weak var colorsQuickGroup: WKInterfaceGroup!
     
-    var currentService:HMService!
+    var currentService: HMService!
     
     var powerChar: HMCharacteristic!
     var brightnessChar: HMCharacteristic!

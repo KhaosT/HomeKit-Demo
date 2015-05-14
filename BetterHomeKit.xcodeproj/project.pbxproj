@@ -55,6 +55,7 @@
 		CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9233219402088001BE28C /* CharacteristicViewController.swift */; };
 		CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4800B1992971000363818 /* TriggerDetailViewController.swift */; };
 		CCBD291E19928D27009231C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBD291D19928D27009231C9 /* Cache.swift */; };
+		CCC300221B047A2A0047312C /* GarageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC300211B047A2A0047312C /* GarageInterfaceController.swift */; };
 		CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
 		CCB4800B1992971000363818 /* TriggerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerDetailViewController.swift; sourceTree = "<group>"; };
 		CCBD291D19928D27009231C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		CCC300211B047A2A0047312C /* GarageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageInterfaceController.swift; sourceTree = "<group>"; };
 		CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
 		CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BetterHomeKit.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 				CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */,
 				CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */,
 				CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */,
+				CCC300211B047A2A0047312C /* GarageInterfaceController.swift */,
 				CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */,
 				CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */,
 				CC0A729A1A58F32E003318DC /* Images.xcassets */,
@@ -546,6 +549,7 @@
 				CC0A72C11A58F36E003318DC /* ThermostatInterfaceController.swift in Sources */,
 				CC0A72991A58F32E003318DC /* InterfaceController.swift in Sources */,
 				CC0A72BF1A58F36E003318DC /* ServicesInterfaceController.swift in Sources */,
+				CCC300221B047A2A0047312C /* GarageInterfaceController.swift in Sources */,
 				CC02B99B1A59110600E7D950 /* ErrorObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,6 +67,9 @@ class ServicesInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         case HMServiceTypeLockMechanism:
             NSLog("Lock Mechanism")
             self.pushControllerWithName("LockMechanismVC", context: service)
+        case HMServiceTypeGarageDoorOpener:
+            NSLog("Garage")
+            self.pushControllerWithName("GarageVC", context: service)
         default:
             NSLog("Other")
             self.presentControllerWithName("UnsupportedServiceController", context: nil)
