@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.17" systemVersion="14E26a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8066.14"/>
+    </dependencies>
+    <scenes>
+        <!--Homes-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="HomesController" title="Homes" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <table alignment="center" id="Pgp-QL-ejh">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="AOv-DI-9ku" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="OUP-QK-5uj">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="{Home}" id="nEq-33-D3s"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="nEq-33-D3s" id="zhS-fs-uGT"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="homesTable" destination="Pgp-QL-ejh" id="yoY-xF-zYk"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="279"/>
+        </scene>
+        <!--ErrorInfoController-->
+        <scene sceneID="o1r-8U-zl4">
+            <objects>
+                <controller identifier="ErrorInfoController" id="a3n-aJ-yuJ" customClass="ErrorInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Title" textAlignment="center" numberOfLines="2" id="kfh-bP-gjp"/>
+                        <label alignment="center" verticalAlignment="center" text="Details" textAlignment="center" numberOfLines="4" id="0eM-6e-8OV">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <button width="1" alignment="center" verticalAlignment="center" hidden="YES" title="Button" id="9pH-v9-5nZ">
+                            <connections>
+                                <action selector="didPressActionButton" destination="a3n-aJ-yuJ" id="zyJ-FW-yOT"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="actionButton" destination="9pH-v9-5nZ" id="LLK-MC-JeT"/>
+                        <outlet property="detailLabel" destination="0eM-6e-8OV" id="nAf-xm-9q9"/>
+                        <outlet property="titleLabel" destination="kfh-bP-gjp" id="8JO-sd-gS7"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="279"/>
+        </scene>
+        <!--AccessoriesController-->
+        <scene sceneID="7wm-xp-Gtu">
+            <objects>
+                <controller identifier="AccessoriesController" id="AGy-Qj-dcP" customClass="AccessoriesInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <table alignment="center" id="q8l-CN-FHL">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="Ydo-gb-KO9" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="H8q-t5-402">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="{Accessory}" id="Bud-3f-q26"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="Bud-3f-q26" id="XTe-kG-zGy"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <group width="1" alignment="center" verticalAlignment="center" hidden="YES" layout="vertical" id="4eu-ac-3AF">
+                            <items>
+                                <label alignment="center" text="No Accessory" textAlignment="center" id="1Ty-59-BO9"/>
+                                <label alignment="center" text="You can add accessory from iOS app." textAlignment="center" numberOfLines="0" id="LwJ-yA-Da8">
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="accessoriesTable" destination="q8l-CN-FHL" id="J8h-Yh-ols"/>
+                        <outlet property="noAccessoryGroup" destination="4eu-ac-3AF" id="pV8-Ha-LHB"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="511"/>
+        </scene>
+        <!--ServicesController-->
+        <scene sceneID="cuo-7I-vBp">
+            <objects>
+                <controller identifier="ServicesController" id="kxY-uD-pKf" customClass="ServicesInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <table alignment="center" id="fYI-HW-7n6">
+                            <items>
+                                <tableRow identifier="SingleLabelRow" id="VI4-uJ-8Bt" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="q8R-5m-EGe">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="{Service}" id="94C-6Y-afL"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="94C-6Y-afL" id="i6K-3x-uoZ"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="Vax-RB-ABf">
+                        <items>
+                            <menuItem title="Unpair" icon="trash" id="XTW-4c-JqX"/>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="servicesTable" destination="fYI-HW-7n6" id="IPh-TV-b5F"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="751"/>
+        </scene>
+        <!--Light-->
+        <scene sceneID="Reg-mi-W8u">
+            <objects>
+                <controller identifier="LightBulbController" title="Light" id="L2Z-SC-LxG" customClass="LightBulbInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <switch width="1" alignment="left" hidden="YES" value="YES" title="Power" id="ceE-D9-cXa">
+                            <connections>
+                                <action selector="didChangePowerState:" destination="L2Z-SC-LxG" id="Ejp-Me-J0T"/>
+                            </connections>
+                        </switch>
+                        <slider width="1" alignment="left" hidden="YES" continuous="YES" value="50" maximum="100" steps="10" minimumImage="BrightnessDown" maximumImage="BrightnessUp" id="XEN-3n-OuS">
+                            <connections>
+                                <action selector="didChangeBrightness:" destination="L2Z-SC-LxG" id="WOl-jU-dWF"/>
+                            </connections>
+                        </slider>
+                        <group width="1" alignment="center" verticalAlignment="center" hidden="YES" id="qRv-Jk-4qg">
+                            <items>
+                                <button width="0.33000000000000002" alignment="left" id="mr1-Z2-6bx">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="setLightColorWhite" destination="L2Z-SC-LxG" id="jvD-00-pLt"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" alignment="left" id="7QE-Kt-Rf0">
+                                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="setLightColorYellow" destination="L2Z-SC-LxG" id="iOh-ui-dD5"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" alignment="left" id="J0p-El-rf0">
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="setLightColorBlue" destination="L2Z-SC-LxG" id="oGV-hj-3k8"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="brightnessSlider" destination="XEN-3n-OuS" id="f4j-Gk-mjd"/>
+                        <outlet property="colorsQuickGroup" destination="qRv-Jk-4qg" id="mvM-Pv-uBI"/>
+                        <outlet property="powerSwitch" destination="ceE-D9-cXa" id="wVb-v0-INq"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="751"/>
+        </scene>
+        <!--Lock-->
+        <scene sceneID="sFx-ZP-Ul0">
+            <objects>
+                <controller identifier="LockMechanismVC" title="Lock" id="Vyc-hj-287" customClass="LockMechanismInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <group width="1" height="45" alignment="left" id="XJQ-el-kSl">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="Current:" id="E5F-Bl-DMA"/>
+                                <label alignment="center" verticalAlignment="center" text="Unsecured" minimumScaleFactor="0.60000000000000009" id="HB1-fr-JZX"/>
+                            </items>
+                        </group>
+                        <switch width="1" alignment="left" value="YES" title="Lock" id="NWN-mr-sdh">
+                            <connections>
+                                <action selector="changeLockState:" destination="Vyc-hj-287" id="Qzu-5F-IRn"/>
+                            </connections>
+                        </switch>
+                    </items>
+                    <connections>
+                        <outlet property="currentStateLabel" destination="HB1-fr-JZX" id="Mrn-51-glr"/>
+                        <outlet property="lockSwitch" destination="NWN-mr-sdh" id="M3q-qX-NhY"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="681" y="751"/>
+        </scene>
+        <!--UnsupportedServiceController-->
+        <scene sceneID="cNu-6c-Xzb">
+            <objects>
+                <controller identifier="UnsupportedServiceController" id="vF7-Ga-mFv">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Unsupported Service" textAlignment="center" numberOfLines="2" id="bvX-9r-jHZ"/>
+                        <label alignment="center" verticalAlignment="center" text="Currently only Light Bulb, Lock, Garage Door Opener and Thermostat are supported." textAlignment="center" numberOfLines="0" id="zfj-QY-5Xf">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="283" y="989"/>
+        </scene>
+        <!--Thermostat-->
+        <scene sceneID="dTp-W7-rvt">
+            <objects>
+                <controller identifier="ThermostatController" title="Thermostat" id="PNo-Jt-GGj" customClass="ThermostatInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="poH-3P-N4m">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="Current Temp: 22°" id="sYi-2m-Dmz"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" id="hWu-Be-qWe">
+                            <items>
+                                <label width="25" alignment="center" verticalAlignment="center" text="20°" textAlignment="center" id="NNn-l9-9yp"/>
+                                <slider width="0.80000000000000004" alignment="center" continuous="YES" value="20" minimum="10" maximum="38" steps="28" id="1m0-C6-178">
+                                    <connections>
+                                        <action selector="didUpdateTargetTemp:" destination="PNo-Jt-GGj" id="3Xx-zS-d9M"/>
+                                    </connections>
+                                </slider>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="f6p-Hl-tE9">
+                            <items>
+                                <button width="0.5" alignment="left" title="Heat" id="4Ei-dO-gp7">
+                                    <connections>
+                                        <action selector="setTargetHeating" destination="PNo-Jt-GGj" id="GIa-GB-tjV"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" alignment="left" title="Cool" id="iFS-yT-dnL">
+                                    <connections>
+                                        <action selector="setTargetCooling" destination="PNo-Jt-GGj" id="tTv-wA-duG"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="currentTempLabel" destination="sYi-2m-Dmz" id="zcy-Xz-v9k"/>
+                        <outlet property="targetTempLabel" destination="NNn-l9-9yp" id="Xd2-mC-5wI"/>
+                        <outlet property="targetTempSlider" destination="1m0-C6-178" id="c1o-jP-6Jb"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="484" y="989"/>
+        </scene>
+        <!--Garage-->
+        <scene sceneID="geF-VE-sCR">
+            <objects>
+                <controller identifier="GarageVC" title="Garage" id="Mg5-Oi-Zrd" customClass="GarageInterfaceController" customModule="HMWatch_Extension">
+                    <items>
+                        <label alignment="center" text="Current: Closed" id="67F-dL-ZWC"/>
+                        <label alignment="center" text="Lock: Unsecured" id="SUm-KS-3Pr"/>
+                        <switch width="1" alignment="left" value="YES" enabled="NO" title="Open" id="dOn-iI-Jpk">
+                            <connections>
+                                <action selector="didChangeTargetDoorState:" destination="Mg5-Oi-Zrd" id="6jw-uz-CKg"/>
+                            </connections>
+                        </switch>
+                        <switch width="1" alignment="left" value="YES" enabled="NO" title="Lock" id="RH0-EW-0GS">
+                            <connections>
+                                <action selector="didChangeTargetLockState:" destination="Mg5-Oi-Zrd" id="DTj-zk-fXS"/>
+                            </connections>
+                        </switch>
+                    </items>
+                    <connections>
+                        <outlet property="currentLockLabel" destination="SUm-KS-3Pr" id="DZx-xt-fEL"/>
+                        <outlet property="currentStateLabel" destination="67F-dL-ZWC" id="Wcz-Kx-Z1h"/>
+                        <outlet property="targetDoorStateSwitch" destination="dOn-iI-Jpk" id="vf4-qs-fcP"/>
+                        <outlet property="targetLockState" destination="RH0-EW-0GS" id="rp4-Zg-xim"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="681" y="989"/>
+        </scene>
+    </scenes>
+</document>

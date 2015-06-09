@@ -23,6 +23,25 @@
 		CC78B086197AC76900A4A443 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78B085197AC76900A4A443 /* ColorPickerViewController.swift */; };
 		CC7A2D0B19CA92E000E89F0E /* HomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */; };
 		CC970A8F1991E64400872018 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC970A8E1991E64400872018 /* UsersViewController.swift */; };
+		CCA71C441B268AC300144F40 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA71C421B268AC300144F40 /* Interface.storyboard */; };
+		CCA71C461B268AC300144F40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA71C451B268AC300144F40 /* Assets.xcassets */; };
+		CCA71C4D1B268AC300144F40 /* HMWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CCA71C4C1B268AC300144F40 /* HMWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CCA71C541B268AC300144F40 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C531B268AC300144F40 /* InterfaceController.swift */; };
+		CCA71C561B268AC300144F40 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C551B268AC300144F40 /* ExtensionDelegate.swift */; };
+		CCA71C5A1B268AC300144F40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA71C591B268AC300144F40 /* Assets.xcassets */; };
+		CCA71C5E1B268AC300144F40 /* HMWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CCA71C401B268AC300144F40 /* HMWatch.app */; };
+		CCA71C6A1B268B5900144F40 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA71C691B268B5900144F40 /* HomeKit.framework */; };
+		CCA71C6C1B268C7300144F40 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C6B1B268C7300144F40 /* Core.swift */; };
+		CCA71C771B268E5D00144F40 /* AccessoriesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C6D1B268E5D00144F40 /* AccessoriesInterfaceController.swift */; };
+		CCA71C781B268E5D00144F40 /* ErrorInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C6E1B268E5D00144F40 /* ErrorInterfaceController.swift */; };
+		CCA71C791B268E5D00144F40 /* ErrorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C6F1B268E5D00144F40 /* ErrorObject.swift */; };
+		CCA71C7A1B268E5D00144F40 /* GarageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C701B268E5D00144F40 /* GarageInterfaceController.swift */; };
+		CCA71C7B1B268E5D00144F40 /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C711B268E5D00144F40 /* HomeKitDefines.swift */; };
+		CCA71C7C1B268E5D00144F40 /* LightBulbInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C721B268E5D00144F40 /* LightBulbInterfaceController.swift */; };
+		CCA71C7D1B268E5D00144F40 /* LockMechanismInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C731B268E5D00144F40 /* LockMechanismInterfaceController.swift */; };
+		CCA71C7E1B268E5D00144F40 /* ServicesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C741B268E5D00144F40 /* ServicesInterfaceController.swift */; };
+		CCA71C7F1B268E5D00144F40 /* SingleLabelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C751B268E5D00144F40 /* SingleLabelRow.swift */; };
+		CCA71C801B268E5D00144F40 /* ThermostatInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA71C761B268E5D00144F40 /* ThermostatInterfaceController.swift */; };
 		CCA8C5B51992310A00D297CE /* ActionSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */; };
 		CCA8C5B71992354B00D297CE /* TriggersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B61992354B00D297CE /* TriggersViewController.swift */; };
 		CCA8C5B9199237E400D297CE /* ActionSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8C5B8199237E400D297CE /* ActionSetViewController.swift */; };
@@ -48,6 +67,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = CCA92309193FD1FB001BE28C;
 			remoteInfo = HomeKitDemo;
+		};
+		CCA71C4E1B268AC300144F40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCA71C4B1B268AC300144F40;
+			remoteInfo = "HMWatch Extension";
+		};
+		CCA71C5C1B268AC300144F40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCA71C3F1B268AC300144F40;
+			remoteInfo = HMWatch;
 		};
 		CCA9231F193FD1FB001BE28C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -79,35 +112,30 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
+				CCA71C5E1B268AC300144F40 /* HMWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCA71C621B268AC300144F40 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CCA71C4D1B268AC300144F40 /* HMWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZonesViewController.swift; sourceTree = "<group>"; };
-		CC02B99A1A59110600E7D950 /* ErrorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorObject.swift; sourceTree = "<group>"; };
-		CC0A72971A58F32E003318DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC0A72981A58F32E003318DC /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		CC0A729A1A58F32E003318DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CC0A72A41A58F32E003318DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC0A72A61A58F32E003318DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		CC0A72A81A58F32E003318DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CC0A72B41A58F36E003318DC /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
-		CC0A72B51A58F36E003318DC /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
-		CC0A72B61A58F36E003318DC /* AccessoriesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessoriesInterfaceController.swift; sourceTree = "<group>"; };
-		CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesInterfaceController.swift; sourceTree = "<group>"; };
-		CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightBulbInterfaceController.swift; sourceTree = "<group>"; };
-		CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatInterfaceController.swift; sourceTree = "<group>"; };
-		CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLabelRow.swift; sourceTree = "<group>"; };
-		CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorInterfaceController.swift; sourceTree = "<group>"; };
-		CC0A72C51A58F38C003318DC /* HomeKitDemo WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "HomeKitDemo WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
 		CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerCreateViewController.swift; sourceTree = "<group>"; };
 		CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersAndActionsViewController.swift; sourceTree = "<group>"; };
 		CC5367A419F0C8D500B636C6 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
-		CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMechanismInterfaceController.swift; sourceTree = "<group>"; };
 		CC78B06D197AC2A600A4A443 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
 		CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
 		CC78B06F197AC2A600A4A443 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessSlider.h; sourceTree = "<group>"; };
@@ -128,6 +156,29 @@
 		CC7A2D0A19CA92E000E89F0E /* HomesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomesViewController.swift; sourceTree = "<group>"; };
 		CC970A8E1991E64400872018 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CCA254A119934F7700E1D087 /* HomeKit_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeKit_Private.h; sourceTree = "<group>"; };
+		CCA71C401B268AC300144F40 /* HMWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA71C431B268AC300144F40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		CCA71C451B268AC300144F40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CCA71C471B268AC300144F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCA71C4C1B268AC300144F40 /* HMWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "HMWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA71C521B268AC300144F40 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CCA71C531B268AC300144F40 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C551B268AC300144F40 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		CCA71C591B268AC300144F40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CCA71C5B1B268AC300144F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCA71C681B268B4D00144F40 /* HMWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "HMWatch Extension.entitlements"; sourceTree = "<group>"; };
+		CCA71C691B268B5900144F40 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/HomeKit.framework; sourceTree = DEVELOPER_DIR; };
+		CCA71C6B1B268C7300144F40 /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		CCA71C6D1B268E5D00144F40 /* AccessoriesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessoriesInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C6E1B268E5D00144F40 /* ErrorInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C6F1B268E5D00144F40 /* ErrorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorObject.swift; sourceTree = "<group>"; };
+		CCA71C701B268E5D00144F40 /* GarageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C711B268E5D00144F40 /* HomeKitDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeKitDefines.swift; sourceTree = "<group>"; };
+		CCA71C721B268E5D00144F40 /* LightBulbInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightBulbInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C731B268E5D00144F40 /* LockMechanismInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMechanismInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C741B268E5D00144F40 /* ServicesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesInterfaceController.swift; sourceTree = "<group>"; };
+		CCA71C751B268E5D00144F40 /* SingleLabelRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLabelRow.swift; sourceTree = "<group>"; };
+		CCA71C761B268E5D00144F40 /* ThermostatInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatInterfaceController.swift; sourceTree = "<group>"; };
 		CCA8C20B197AC97D00553D5B /* HomeKitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCA8C5B41992310A00D297CE /* ActionSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetsViewController.swift; sourceTree = "<group>"; };
 		CCA8C5B61992354B00D297CE /* TriggersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersViewController.swift; sourceTree = "<group>"; };
@@ -148,12 +199,19 @@
 		CCA9233219402088001BE28C /* CharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
 		CCB4800B1992971000363818 /* TriggerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerDetailViewController.swift; sourceTree = "<group>"; };
 		CCBD291D19928D27009231C9 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		CCC300211B047A2A0047312C /* GarageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageInterfaceController.swift; sourceTree = "<group>"; };
 		CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
 		CCF6B5BC196ED2AB00E6109D /* BetterHomeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BetterHomeKit.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CCA71C491B268AC300144F40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCA71C6A1B268B5900144F40 /* HomeKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCA92307193FD1FB001BE28C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -172,54 +230,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CC0A72951A58F32E003318DC /* HomeKitDemo WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				CC0A72C51A58F38C003318DC /* HomeKitDemo WatchKit Extension.entitlements */,
-				CC0A72B41A58F36E003318DC /* HomeKitDefines.swift */,
-				CC0A72B51A58F36E003318DC /* Core.swift */,
-				CC02B99A1A59110600E7D950 /* ErrorObject.swift */,
-				CC0A72981A58F32E003318DC /* InterfaceController.swift */,
-				CC0A72B61A58F36E003318DC /* AccessoriesInterfaceController.swift */,
-				CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */,
-				CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */,
-				CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */,
-				CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */,
-				CCC300211B047A2A0047312C /* GarageInterfaceController.swift */,
-				CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */,
-				CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */,
-				CC0A729A1A58F32E003318DC /* Images.xcassets */,
-				CC0A72961A58F32E003318DC /* Supporting Files */,
-			);
-			path = "HomeKitDemo WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		CC0A72961A58F32E003318DC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CC0A72971A58F32E003318DC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CC0A72A21A58F32E003318DC /* HomeKitDemo WatchKit App */ = {
-			isa = PBXGroup;
-			children = (
-				CC0A72A51A58F32E003318DC /* Interface.storyboard */,
-				CC0A72A81A58F32E003318DC /* Images.xcassets */,
-				CC0A72A31A58F32E003318DC /* Supporting Files */,
-			);
-			path = "HomeKitDemo WatchKit App";
-			sourceTree = "<group>";
-		};
-		CC0A72A31A58F32E003318DC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CC0A72A41A58F32E003318DC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		CC78B06C197AC2A600A4A443 /* ColorPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,14 +253,57 @@
 			path = ColorPicker;
 			sourceTree = "<group>";
 		};
+		CCA71C411B268AC300144F40 /* HMWatch */ = {
+			isa = PBXGroup;
+			children = (
+				CCA71C421B268AC300144F40 /* Interface.storyboard */,
+				CCA71C451B268AC300144F40 /* Assets.xcassets */,
+				CCA71C471B268AC300144F40 /* Info.plist */,
+			);
+			path = HMWatch;
+			sourceTree = "<group>";
+		};
+		CCA71C501B268AC300144F40 /* HMWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CCA71C681B268B4D00144F40 /* HMWatch Extension.entitlements */,
+				CCA71C531B268AC300144F40 /* InterfaceController.swift */,
+				CCA71C551B268AC300144F40 /* ExtensionDelegate.swift */,
+				CCA71C6B1B268C7300144F40 /* Core.swift */,
+				CCA71C6D1B268E5D00144F40 /* AccessoriesInterfaceController.swift */,
+				CCA71C6E1B268E5D00144F40 /* ErrorInterfaceController.swift */,
+				CCA71C6F1B268E5D00144F40 /* ErrorObject.swift */,
+				CCA71C701B268E5D00144F40 /* GarageInterfaceController.swift */,
+				CCA71C711B268E5D00144F40 /* HomeKitDefines.swift */,
+				CCA71C721B268E5D00144F40 /* LightBulbInterfaceController.swift */,
+				CCA71C731B268E5D00144F40 /* LockMechanismInterfaceController.swift */,
+				CCA71C741B268E5D00144F40 /* ServicesInterfaceController.swift */,
+				CCA71C751B268E5D00144F40 /* SingleLabelRow.swift */,
+				CCA71C761B268E5D00144F40 /* ThermostatInterfaceController.swift */,
+				CCA71C591B268AC300144F40 /* Assets.xcassets */,
+				CCA71C5B1B268AC300144F40 /* Info.plist */,
+				CCA71C511B268AC300144F40 /* Supporting Files */,
+			);
+			path = "HMWatch Extension";
+			sourceTree = "<group>";
+		};
+		CCA71C511B268AC300144F40 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CCA71C521B268AC300144F40 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CCA92301193FD1FB001BE28C = {
 			isa = PBXGroup;
 			children = (
+				CCA71C691B268B5900144F40 /* HomeKit.framework */,
 				CCA9232E193FD267001BE28C /* HomeKit.framework */,
 				CCA9230C193FD1FB001BE28C /* BetterHomeKit */,
 				CCA92321193FD1FB001BE28C /* BetterHomeKitTests */,
-				CC0A72951A58F32E003318DC /* HomeKitDemo WatchKit Extension */,
-				CC0A72A21A58F32E003318DC /* HomeKitDemo WatchKit App */,
+				CCA71C411B268AC300144F40 /* HMWatch */,
+				CCA71C501B268AC300144F40 /* HMWatch Extension */,
 				CCA9230B193FD1FB001BE28C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -260,6 +313,8 @@
 			children = (
 				CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */,
 				CCA9231E193FD1FB001BE28C /* BetterHomeKitTests.xctest */,
+				CCA71C401B268AC300144F40 /* HMWatch.app */,
+				CCA71C4C1B268AC300144F40 /* HMWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -326,6 +381,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CCA71C3F1B268AC300144F40 /* HMWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCA71C631B268AC300144F40 /* Build configuration list for PBXNativeTarget "HMWatch" */;
+			buildPhases = (
+				CCA71C3E1B268AC300144F40 /* Resources */,
+				CCA71C621B268AC300144F40 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCA71C4F1B268AC300144F40 /* PBXTargetDependency */,
+			);
+			name = HMWatch;
+			productName = HMWatch;
+			productReference = CCA71C401B268AC300144F40 /* HMWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		CCA71C4B1B268AC300144F40 /* HMWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCA71C5F1B268AC300144F40 /* Build configuration list for PBXNativeTarget "HMWatch Extension" */;
+			buildPhases = (
+				CCA71C481B268AC300144F40 /* Sources */,
+				CCA71C491B268AC300144F40 /* Frameworks */,
+				CCA71C4A1B268AC300144F40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HMWatch Extension";
+			productName = "HMWatch Extension";
+			productReference = CCA71C4C1B268AC300144F40 /* HMWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		CCA92309193FD1FB001BE28C /* HomeKitDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "HomeKitDemo" */;
@@ -338,6 +427,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CCA71C5D1B268AC300144F40 /* PBXTargetDependency */,
 			);
 			name = HomeKitDemo;
 			productName = BetterHomeKit;
@@ -375,6 +465,19 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Nlr;
 				TargetAttributes = {
+					CCA71C3F1B268AC300144F40 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 7C2EXSD3YV;
+					};
+					CCA71C4B1B268AC300144F40 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 7C2EXSD3YV;
+						SystemCapabilities = {
+							com.apple.HomeKit = {
+								enabled = 1;
+							};
+						};
+					};
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 7C2EXSD3YV;
@@ -400,11 +503,30 @@
 			targets = (
 				CCA92309193FD1FB001BE28C /* HomeKitDemo */,
 				CCA9231D193FD1FB001BE28C /* BetterHomeKitTests */,
+				CCA71C3F1B268AC300144F40 /* HMWatch */,
+				CCA71C4B1B268AC300144F40 /* HMWatch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CCA71C3E1B268AC300144F40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCA71C461B268AC300144F40 /* Assets.xcassets in Resources */,
+				CCA71C441B268AC300144F40 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCA71C4A1B268AC300144F40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCA71C5A1B268AC300144F40 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCA92308193FD1FB001BE28C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,6 +547,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CCA71C481B268AC300144F40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCA71C7C1B268E5D00144F40 /* LightBulbInterfaceController.swift in Sources */,
+				CCA71C801B268E5D00144F40 /* ThermostatInterfaceController.swift in Sources */,
+				CCA71C771B268E5D00144F40 /* AccessoriesInterfaceController.swift in Sources */,
+				CCA71C6C1B268C7300144F40 /* Core.swift in Sources */,
+				CCA71C781B268E5D00144F40 /* ErrorInterfaceController.swift in Sources */,
+				CCA71C561B268AC300144F40 /* ExtensionDelegate.swift in Sources */,
+				CCA71C7E1B268E5D00144F40 /* ServicesInterfaceController.swift in Sources */,
+				CCA71C541B268AC300144F40 /* InterfaceController.swift in Sources */,
+				CCA71C7D1B268E5D00144F40 /* LockMechanismInterfaceController.swift in Sources */,
+				CCA71C791B268E5D00144F40 /* ErrorObject.swift in Sources */,
+				CCA71C7F1B268E5D00144F40 /* SingleLabelRow.swift in Sources */,
+				CCA71C7B1B268E5D00144F40 /* HomeKitDefines.swift in Sources */,
+				CCA71C7A1B268E5D00144F40 /* GarageInterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCA92306193FD1FB001BE28C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +617,16 @@
 			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
 			targetProxy = CC78B087197AC8E700A4A443 /* PBXContainerItemProxy */;
 		};
+		CCA71C4F1B268AC300144F40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCA71C4B1B268AC300144F40 /* HMWatch Extension */;
+			targetProxy = CCA71C4E1B268AC300144F40 /* PBXContainerItemProxy */;
+		};
+		CCA71C5D1B268AC300144F40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCA71C3F1B268AC300144F40 /* HMWatch */;
+			targetProxy = CCA71C5C1B268AC300144F40 /* PBXContainerItemProxy */;
+		};
 		CCA92320193FD1FB001BE28C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
@@ -493,10 +645,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CC0A72A51A58F32E003318DC /* Interface.storyboard */ = {
+		CCA71C421B268AC300144F40 /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CC0A72A61A58F32E003318DC /* Base */,
+				CCA71C431B268AC300144F40 /* Base */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -512,6 +664,94 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CCA71C601B268AC300144F40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "HMWatch Extension/HMWatch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "HMWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.oltica.HomeKitDemo.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		CCA71C611B268AC300144F40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "HMWatch Extension/HMWatch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "HMWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.oltica.HomeKitDemo.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		CCA71C641B268AC300144F40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = HMWatch_Extension;
+				INFOPLIST_FILE = HMWatch/Info.plist;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.oltica.HomeKitDemo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		CCA71C651B268AC300144F40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = HMWatch_Extension;
+				INFOPLIST_FILE = HMWatch/Info.plist;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.oltica.HomeKitDemo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		CCA92326193FD1FB001BE28C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -671,6 +911,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CCA71C5F1B268AC300144F40 /* Build configuration list for PBXNativeTarget "HMWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCA71C601B268AC300144F40 /* Debug */,
+				CCA71C611B268AC300144F40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CCA71C631B268AC300144F40 /* Build configuration list for PBXNativeTarget "HMWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCA71C641B268AC300144F40 /* Debug */,
+				CCA71C651B268AC300144F40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CCA92305193FD1FB001BE28C /* Build configuration list for PBXProject "BetterHomeKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
