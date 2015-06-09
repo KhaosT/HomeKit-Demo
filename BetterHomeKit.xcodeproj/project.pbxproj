@@ -8,27 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B0E8B5211A04C0F000DEF6E3 /* ZonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */; };
-		CC02B99B1A59110600E7D950 /* ErrorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC02B99A1A59110600E7D950 /* ErrorObject.swift */; };
-		CC0A72991A58F32E003318DC /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72981A58F32E003318DC /* InterfaceController.swift */; };
-		CC0A729B1A58F32E003318DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC0A729A1A58F32E003318DC /* Images.xcassets */; };
-		CC0A729F1A58F32E003318DC /* HomeKitDemo WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = CC0A729E1A58F32E003318DC /* HomeKitDemo WatchKit App.app */; };
-		CC0A72A71A58F32E003318DC /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0A72A51A58F32E003318DC /* Interface.storyboard */; };
-		CC0A72A91A58F32E003318DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC0A72A81A58F32E003318DC /* Images.xcassets */; };
-		CC0A72AC1A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CC0A72941A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CC0A72BC1A58F36E003318DC /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B41A58F36E003318DC /* HomeKitDefines.swift */; };
-		CC0A72BD1A58F36E003318DC /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B51A58F36E003318DC /* Core.swift */; };
-		CC0A72BE1A58F36E003318DC /* AccessoriesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B61A58F36E003318DC /* AccessoriesInterfaceController.swift */; };
-		CC0A72BF1A58F36E003318DC /* ServicesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B71A58F36E003318DC /* ServicesInterfaceController.swift */; };
-		CC0A72C01A58F36E003318DC /* LightBulbInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B81A58F36E003318DC /* LightBulbInterfaceController.swift */; };
-		CC0A72C11A58F36E003318DC /* ThermostatInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72B91A58F36E003318DC /* ThermostatInterfaceController.swift */; };
-		CC0A72C21A58F36E003318DC /* SingleLabelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72BA1A58F36E003318DC /* SingleLabelRow.swift */; };
-		CC0A72C31A58F36E003318DC /* ErrorInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0A72BB1A58F36E003318DC /* ErrorInterfaceController.swift */; };
-		CC0A72C41A58F38C003318DC /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9232E193FD267001BE28C /* HomeKit.framework */; };
 		CC130808197DEFDD0049EA96 /* HomeKitDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC130807197DEFDD0049EA96 /* HomeKitDefines.swift */; };
 		CC1BE94A198CB008008E9193 /* TriggerCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE949198CB008008E9193 /* TriggerCreateViewController.swift */; };
 		CC1BE94C198CBEF0008E9193 /* TriggersAndActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE94B198CBEF0008E9193 /* TriggersAndActionsViewController.swift */; };
 		CC5367A519F0C8D500B636C6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC5367A419F0C8D500B636C6 /* Launch Screen.xib */; };
-		CC67298F1A69D3D9005E713C /* LockMechanismInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC67298E1A69D3D9005E713C /* LockMechanismInterfaceController.swift */; };
 		CC78B07D197AC2A600A4A443 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B06E197AC2A600A4A443 /* HRBrightnessCursor.m */; };
 		CC78B07E197AC2A600A4A443 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B070197AC2A600A4A443 /* HRBrightnessSlider.m */; };
 		CC78B07F197AC2A600A4A443 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC78B072197AC2A600A4A443 /* HRColorCursor.m */; };
@@ -55,25 +38,10 @@
 		CCA9233319402088001BE28C /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9233219402088001BE28C /* CharacteristicViewController.swift */; };
 		CCB4800C1992971000363818 /* TriggerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4800B1992971000363818 /* TriggerDetailViewController.swift */; };
 		CCBD291E19928D27009231C9 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBD291D19928D27009231C9 /* Cache.swift */; };
-		CCC300221B047A2A0047312C /* GarageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC300211B047A2A0047312C /* GarageInterfaceController.swift */; };
 		CCE569E9197AA6C0003468A2 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE569E8197AA6C0003468A2 /* RoomsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CC0A72A01A58F32E003318DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CC0A729D1A58F32E003318DC;
-			remoteInfo = "HomeKitDemo WatchKit App";
-		};
-		CC0A72AA1A58F32E003318DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CC0A72931A58F32E003318DC;
-			remoteInfo = "HomeKitDemo WatchKit Extension";
-		};
 		CC78B087197AC8E700A4A443 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCA92302193FD1FB001BE28C /* Project object */;
@@ -105,15 +73,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CC0A72B31A58F32E003318DC /* Embed App Extensions */ = {
+		CC5236DD1B26607000FEA294 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
 			files = (
-				CC0A72AC1A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex in Embed App Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -121,11 +88,9 @@
 /* Begin PBXFileReference section */
 		B0E8B5201A04C0F000DEF6E3 /* ZonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZonesViewController.swift; sourceTree = "<group>"; };
 		CC02B99A1A59110600E7D950 /* ErrorObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorObject.swift; sourceTree = "<group>"; };
-		CC0A72941A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "HomeKitDemo WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0A72971A58F32E003318DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC0A72981A58F32E003318DC /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		CC0A729A1A58F32E003318DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CC0A729E1A58F32E003318DC /* HomeKitDemo WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HomeKitDemo WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0A72A41A58F32E003318DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC0A72A61A58F32E003318DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		CC0A72A81A58F32E003318DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -189,14 +154,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CC0A72911A58F32E003318DC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC0A72C41A58F38C003318DC /* HomeKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CCA92307193FD1FB001BE28C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,8 +260,6 @@
 			children = (
 				CCA9230A193FD1FB001BE28C /* HomeKitDemo.app */,
 				CCA9231E193FD1FB001BE28C /* BetterHomeKitTests.xctest */,
-				CC0A72941A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex */,
-				CC0A729E1A58F32E003318DC /* HomeKitDemo WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,39 +326,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CC0A72931A58F32E003318DC /* HomeKitDemo WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CC0A72B21A58F32E003318DC /* Build configuration list for PBXNativeTarget "HomeKitDemo WatchKit Extension" */;
-			buildPhases = (
-				CC0A72901A58F32E003318DC /* Sources */,
-				CC0A72911A58F32E003318DC /* Frameworks */,
-				CC0A72921A58F32E003318DC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CC0A72A11A58F32E003318DC /* PBXTargetDependency */,
-			);
-			name = "HomeKitDemo WatchKit Extension";
-			productName = "HomeKitDemo WatchKit Extension";
-			productReference = CC0A72941A58F32E003318DC /* HomeKitDemo WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		CC0A729D1A58F32E003318DC /* HomeKitDemo WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CC0A72B11A58F32E003318DC /* Build configuration list for PBXNativeTarget "HomeKitDemo WatchKit App" */;
-			buildPhases = (
-				CC0A729C1A58F32E003318DC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "HomeKitDemo WatchKit App";
-			productName = "HomeKitDemo WatchKit App";
-			productReference = CC0A729E1A58F32E003318DC /* HomeKitDemo WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		CCA92309193FD1FB001BE28C /* HomeKitDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCA92328193FD1FB001BE28C /* Build configuration list for PBXNativeTarget "HomeKitDemo" */;
@@ -411,12 +333,11 @@
 				CCA92306193FD1FB001BE28C /* Sources */,
 				CCA92307193FD1FB001BE28C /* Frameworks */,
 				CCA92308193FD1FB001BE28C /* Resources */,
-				CC0A72B31A58F32E003318DC /* Embed App Extensions */,
+				CC5236DD1B26607000FEA294 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CC0A72AB1A58F32E003318DC /* PBXTargetDependency */,
 			);
 			name = HomeKitDemo;
 			productName = BetterHomeKit;
@@ -450,21 +371,10 @@
 		CCA92302193FD1FB001BE28C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Nlr;
 				TargetAttributes = {
-					CC0A72931A58F32E003318DC = {
-						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 7C2EXSD3YV;
-						SystemCapabilities = {
-							com.apple.HomeKit = {
-								enabled = 1;
-							};
-						};
-					};
-					CC0A729D1A58F32E003318DC = {
-						CreatedOnToolsVersion = 6.2;
-					};
 					CCA92309193FD1FB001BE28C = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 7C2EXSD3YV;
@@ -490,31 +400,11 @@
 			targets = (
 				CCA92309193FD1FB001BE28C /* HomeKitDemo */,
 				CCA9231D193FD1FB001BE28C /* BetterHomeKitTests */,
-				CC0A72931A58F32E003318DC /* HomeKitDemo WatchKit Extension */,
-				CC0A729D1A58F32E003318DC /* HomeKitDemo WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CC0A72921A58F32E003318DC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC0A729B1A58F32E003318DC /* Images.xcassets in Resources */,
-				CC0A729F1A58F32E003318DC /* HomeKitDemo WatchKit App.app in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CC0A729C1A58F32E003318DC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC0A72A71A58F32E003318DC /* Interface.storyboard in Resources */,
-				CC0A72A91A58F32E003318DC /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CCA92308193FD1FB001BE28C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,25 +425,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CC0A72901A58F32E003318DC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC0A72BE1A58F36E003318DC /* AccessoriesInterfaceController.swift in Sources */,
-				CC0A72C21A58F36E003318DC /* SingleLabelRow.swift in Sources */,
-				CC0A72BD1A58F36E003318DC /* Core.swift in Sources */,
-				CC67298F1A69D3D9005E713C /* LockMechanismInterfaceController.swift in Sources */,
-				CC0A72BC1A58F36E003318DC /* HomeKitDefines.swift in Sources */,
-				CC0A72C31A58F36E003318DC /* ErrorInterfaceController.swift in Sources */,
-				CC0A72C01A58F36E003318DC /* LightBulbInterfaceController.swift in Sources */,
-				CC0A72C11A58F36E003318DC /* ThermostatInterfaceController.swift in Sources */,
-				CC0A72991A58F32E003318DC /* InterfaceController.swift in Sources */,
-				CC0A72BF1A58F36E003318DC /* ServicesInterfaceController.swift in Sources */,
-				CCC300221B047A2A0047312C /* GarageInterfaceController.swift in Sources */,
-				CC02B99B1A59110600E7D950 /* ErrorObject.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CCA92306193FD1FB001BE28C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -599,16 +470,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CC0A72A11A58F32E003318DC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CC0A729D1A58F32E003318DC /* HomeKitDemo WatchKit App */;
-			targetProxy = CC0A72A01A58F32E003318DC /* PBXContainerItemProxy */;
-		};
-		CC0A72AB1A58F32E003318DC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CC0A72931A58F32E003318DC /* HomeKitDemo WatchKit Extension */;
-			targetProxy = CC0A72AA1A58F32E003318DC /* PBXContainerItemProxy */;
-		};
 		CC78B088197AC8E700A4A443 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CCA92309193FD1FB001BE28C /* HomeKitDemo */;
@@ -651,80 +512,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CC0A72AD1A58F32E003318DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "HomeKitDemo WatchKit Extension/HomeKitDemo WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "HomeKitDemo WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		CC0A72AE1A58F32E003318DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "HomeKitDemo WatchKit Extension/HomeKitDemo WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = "HomeKitDemo WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		CC0A72AF1A58F32E003318DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = HomeKitDemo_WatchKit_Extension;
-				INFOPLIST_FILE = "HomeKitDemo WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		CC0A72B01A58F32E003318DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				COPY_PHASE_STRIP = NO;
-				IBSC_MODULE = HomeKitDemo_WatchKit_Extension;
-				INFOPLIST_FILE = "HomeKitDemo WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Release;
-		};
 		CCA92326193FD1FB001BE28C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -745,6 +532,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -759,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -795,7 +583,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -812,8 +600,9 @@
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.oltica.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetterHomeKit/HomeKitDemo-Bridging-Header.h";
@@ -831,8 +620,9 @@
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = BetterHomeKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.oltica.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetterHomeKit/HomeKitDemo-Bridging-Header.h";
@@ -855,6 +645,7 @@
 				INFOPLIST_FILE = BetterHomeKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.nlr.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -871,6 +662,7 @@
 				INFOPLIST_FILE = BetterHomeKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.nlr.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -879,24 +671,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CC0A72B11A58F32E003318DC /* Build configuration list for PBXNativeTarget "HomeKitDemo WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CC0A72AF1A58F32E003318DC /* Debug */,
-				CC0A72B01A58F32E003318DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CC0A72B21A58F32E003318DC /* Build configuration list for PBXNativeTarget "HomeKitDemo WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CC0A72AD1A58F32E003318DC /* Debug */,
-				CC0A72AE1A58F32E003318DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		CCA92305193FD1FB001BE28C /* Build configuration list for PBXProject "BetterHomeKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -34,7 +34,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     func updateTriggers () {
         triggers.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            triggers += currentHome.triggers as! [HMTrigger]
+            triggers += currentHome.triggers as [HMTrigger]
         }
         triggersTableview.reloadData()
     }
@@ -60,7 +60,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TriggerCell", forIndexPath: indexPath) as UITableViewCell
         
         let trigger = triggers[indexPath.row] as! HMTimerTrigger
         cell.textLabel?.text = trigger.name
@@ -80,12 +80,10 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
             detailText += "\(name) "
         }
         
-        if trigger.fireDate != nil {
-            detailText += "| Fire Date: \(dateFormatter.stringFromDate(trigger.fireDate)) "
-        }
+        detailText += "| Fire Date: \(dateFormatter.stringFromDate(trigger.fireDate)) "
         
         if trigger.lastFireDate != nil {
-            detailText += "| Last Fire: \(dateFormatter.stringFromDate(trigger.lastFireDate))"
+            detailText += "| Last Fire: \(dateFormatter.stringFromDate(trigger.lastFireDate!))"
         }
         
         cell.detailTextLabel?.text = detailText
@@ -109,7 +107,7 @@ class TriggersViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         var options = [UITableViewRowAction]()
         

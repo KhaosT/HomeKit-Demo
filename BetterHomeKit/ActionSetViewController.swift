@@ -30,11 +30,10 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
     func updateActions () {
         actions.removeAll(keepCapacity: false)
         if let currentActionSet = currentActionSet {
-            if let cActions = currentActionSet.actions{
-                var generator = cActions.generate()
-                while let act = generator.next() as? HMAction{
-                    actions.append(act)
-                }
+            let cActions = currentActionSet.actions
+            var generator = cActions.generate()
+            while let act = generator.next(){
+                actions.append(act)
             }
         }
         actionsTableView.reloadData()
@@ -42,7 +41,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBAction func executeActionSet(sender: AnyObject) {
         if let currentHome = Core.sharedInstance.currentHome {
-            currentHome.executeActionSet(currentActionSet) {
+            currentHome.executeActionSet(currentActionSet!) {
                 error in
                 if error != nil {
                     NSLog("Failed executing action set, error:\(error)")
@@ -61,7 +60,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActionCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ActionCell", forIndexPath: indexPath) as UITableViewCell
         
         let action = actions[indexPath.row] as! HMCharacteristicWriteAction
         
@@ -71,7 +70,7 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.textLabel?.text = action.characteristic.characteristicType
         }
         
-        cell.detailTextLabel?.text = "Accessory: \(action.characteristic.service.accessory.name) | Target Value: \(action.targetValue)"
+        cell.detailTextLabel?.text = "Accessory: \(action.characteristic.service!.accessory!.name) | Target Value: \(action.targetValue)"
         
         return cell
     }
@@ -81,8 +80,10 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let object = _action.characteristic
         var charDesc = object.characteristicType
-        charDesc = HomeKitUUIDs[object.characteristicType]
-        switch (object.metadata.format as NSString) {
+        if let desc = HomeKitUUIDs[object.characteristicType] {
+            charDesc = desc
+        }
+        switch (object.metadata!.format!) {
         case HMCharacteristicMetadataFormatBool:
             let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Please choose the target state for this action", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "On", style: UIAlertActionStyle.Default, handler:
@@ -115,16 +116,16 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.presentViewController(alert, animated: true, completion: nil)
             })
         case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
-            let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target state for this action from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+            let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target state for this action from \(object.metadata!.minimumValue) to \(object.metadata!.maximumValue). Unit is \(object.metadata!.units)", preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler(nil)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                 {
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as! UITextField
+                    let textField = alert.textFields![0]
                     let f = NSNumberFormatter()
                     f.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                    _action.updateTargetValue(f.numberFromString(textField.text)) {
+                    _action.updateTargetValue(f.numberFromString(textField.text!)!) {
                         error in
                         if error != nil {
                             NSLog("Failed adding action to action set, error: \(error)")
@@ -138,14 +139,14 @@ class ActionSetViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.presentViewController(alert, animated: true, completion: nil)
             })
         case HMCharacteristicMetadataFormatString:
-            let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target \(charDesc) from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+            let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target \(charDesc) from \(object.metadata!.minimumValue) to \(object.metadata!.maximumValue). Unit is \(object.metadata!.units)", preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler(nil)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                 {
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as! UITextField
-                    _action.updateTargetValue(textField.text) {
+                    let textField = alert.textFields![0]
+                    _action.updateTargetValue(textField.text!) {
                         error in
                         if error != nil {
                             NSLog("Failed adding action to action set, error: \(error)")

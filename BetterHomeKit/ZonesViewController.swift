@@ -38,9 +38,9 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
+                let textField = alert.textFields![0]
                 if let strongSelf = self {
-                    Core.sharedInstance.currentHome?.addZoneWithName(textField.text, completionHandler:
+                    Core.sharedInstance.currentHome?.addZoneWithName(textField.text!, completionHandler:
                         {
                             room,error in
                             if let error = error {
@@ -64,9 +64,9 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("zoneCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("zoneCell", forIndexPath: indexPath) as UITableViewCell
         
-        let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as! HMZone
+        let zone = Core.sharedInstance.currentHome!.zones[indexPath.row]
         
         var detailText = ""
         
@@ -88,7 +88,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("pendingRoom \(pendingRoom) name= \(pendingRoom)")
         if let room = pendingRoom {
-            let zone = Core.sharedInstance.currentHome?.zones[indexPath.row] as! HMZone
+            let zone = Core.sharedInstance.currentHome!.zones[indexPath.row]
             NSLog("zone \(zone)")
             zone.addRoom(room.toHMRoom(), completionHandler:
                 {
@@ -125,16 +125,16 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 {
                     [weak self]
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as! UITextField
-                    let zone = Core.sharedInstance.currentHome?.zones?[indexPath.row] as! HMZone
-                    zone.updateName(textField.text, completionHandler:
+                    let textField = alert.textFields![0]
+                    let zone = Core.sharedInstance.currentHome!.zones[indexPath.row]
+                    zone.updateName(textField.text!, completionHandler:
                         {
                             error in
                             if let error = error {
-                                println("Error:\(error)")
+                                print("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.zones?[indexPath.row].name
+                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.zones[indexPath.row].name
                             }
                         }
                     )
@@ -154,7 +154,7 @@ class ZonesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            if let zone = Core.sharedInstance.currentHome?.zones[indexPath.row] as? HMZone {
+            if let zone = Core.sharedInstance.currentHome?.zones[indexPath.row] {
                 Core.sharedInstance.currentHome?.removeZone(zone) {
                     [weak self]
                     error in

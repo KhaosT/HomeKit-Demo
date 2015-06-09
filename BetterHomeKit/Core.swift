@@ -21,7 +21,7 @@ class Core {
     func getAccessoryWithIdentifier(uuid: NSUUID?) -> HMAccessory? {
         if let uuid = uuid {
             if let currentHome = currentHome {
-                for accessory in currentHome.accessories as! [HMAccessory] {
+                for accessory in currentHome.accessories {
                     if accessory.identifier == uuid {
                         return accessory
                     }

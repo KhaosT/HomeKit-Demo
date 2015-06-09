@@ -62,7 +62,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath)
         cell.textLabel?.text = accessories[indexPath.row].name
         
         return cell
@@ -73,7 +73,7 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         Core.sharedInstance.currentHome?.addAccessory(accessories[indexPath.row], completionHandler:
             {
-                (error:NSError!) in
+                error in
                 if error != nil {
                     NSLog("\(error)")
                 }else{
@@ -87,25 +87,25 @@ class AddAccessoriesViewController: UIViewController,UITableViewDataSource,UITab
     {
         let accessory = accessories[indexPath.row]
         accessory.identifyWithCompletionHandler({
-                (error:NSError!) in
+                error in
                 if error != nil {
-                    println("Failed to identify \(error)")
+                    print("Failed to identify \(error)")
                 }
             })
     }
     
-    func accessoryBrowser(browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory!)
+    func accessoryBrowser(browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory)
     {
-        if !contains(accessories, accessory) {
+        if !accessories.contains(accessory) {
             accessories.insert(accessory, atIndex: 0)
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             accessoriesTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
     
-    func accessoryBrowser(browser: HMAccessoryBrowser, didRemoveNewAccessory accessory: HMAccessory!)
+    func accessoryBrowser(browser: HMAccessoryBrowser, didRemoveNewAccessory accessory: HMAccessory)
     {
-        if let index = find(accessories, accessory) {
+        if let index = accessories.indexOf(accessory) {
             accessories.removeAtIndex(index)
             accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
         }

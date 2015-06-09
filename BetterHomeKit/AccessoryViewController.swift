@@ -42,9 +42,9 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     func updateHomeAccessories() {
         if Core.sharedInstance.currentHome != nil {
             self.objects.removeAll(keepCapacity: false)
-            if let accessories = Core.sharedInstance.currentHome!.accessories as? [HMAccessory] {
+            if let accessories = Core.sharedInstance.currentHome?.accessories {
                 for accessory in accessories {
-                    if !contains(objects, accessory) {
+                    if !objects.contains(accessory) {
                         objects.insert(accessory, atIndex: 0)
                         accessory.delegate = self
                     }
@@ -56,13 +56,13 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func handleError(error: NSError) {
         if error.code == 4097 {
-            var alert = UIAlertController(title: "XPC Connection rejected!", message: "It appears that homed denies the xpc connection request from this app. This normally happens because the app doesn't have a HomeKit dev entitlement. Please may sure you have enabled the HomeKit capability in Xcode.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "XPC Connection rejected!", message: "It appears that homed denies the xpc connection request from this app. This normally happens because the app doesn't have a HomeKit dev entitlement. Please may sure you have enabled the HomeKit capability in Xcode.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
         if let errorCode = HMErrorCode(rawValue: error.code) {
-            var alert = UIAlertController(title: "Oops!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Oops!", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             switch errorCode {
             case .HomeAccessNotAuthorized:
@@ -92,7 +92,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            let indexPath = accessoriesTableView.indexPathForSelectedRow()
+            let indexPath = accessoriesTableView.indexPathForSelectedRow
             if let indexPath = indexPath {
                 let object = objects[indexPath.row] as HMAccessory
                 accessoriesTableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -101,17 +101,15 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         if segue.identifier == "presentHomes" {
-            let naviController = segue.destinationViewController as! UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let homeVC = naviController.viewControllers?[0] as! HomesViewController
+                let homeVC = naviController.viewControllers[0] as! HomesViewController
                 homeVC.homeManager = self.homeManager
             }
         }
         
         if segue.identifier == "presentRoomsVC" {
-            let naviController = segue.destinationViewController as! UINavigationController
             if let naviController = (segue.destinationViewController as? UINavigationController) {
-                let roomVC = naviController.viewControllers?[0] as! RoomsViewController
+                let roomVC = naviController.viewControllers[0] as! RoomsViewController
                 if let accessory = sender as? HMAccessory {
                     roomVC.pendingAccessory = Accessory(hmAccessory: accessory)
                 }
@@ -122,20 +120,20 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     func homeManagerDidUpdateHomes(manager: HMHomeManager)
     {
         NSLog("DidUpdateHomes:\(manager)")
-        for home in manager.homes as! [HMHome] {
+        for home in manager.homes {
             NSLog("Home:\(home)")
         }
         if manager.primaryHome == nil {
             NSLog("No Primary Home, try to setup one")
-            if manager.homes?.count > 0 {
+            if manager.homes.count > 0 {
                 NSLog("There are homes in HMHomeManager, choose the first one.")
-                manager.updatePrimaryHome(manager.homes[0] as! HMHome, completionHandler:
+                manager.updatePrimaryHome(manager.homes[0], completionHandler:
                     {
-                        (error:NSError!) in
+                        error in
                         if error != nil {
-                            self.handleError(error)
+                            self.handleError(error!)
                         }
-                        Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
+                        Core.sharedInstance.currentHome = manager.homes[0]
                         NSLog("DidSetPrimaryHome")
                 })
             }else{
@@ -146,23 +144,23 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                 alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
-                        manager.addHomeWithName(textField.text, completionHandler:
+                        let textField = alert.textFields![0]
+                        manager.addHomeWithName(textField.text!, completionHandler:
                             {
-                                (home:HMHome!, error:NSError!) in
+                                home, error in
                                 if error != nil {
                                     NSLog("Failed adding home, Error:\(error)")
-                                    self.handleError(error)
+                                    self.handleError(error!)
                                 } else {
                                     NSLog("New Home \(home)")
-                                    manager.updatePrimaryHome(home, completionHandler:
+                                    manager.updatePrimaryHome(home!, completionHandler:
                                         {
-                                            (error:NSError!) in
+                                            error in
                                             if error != nil {
                                                 NSLog("Failed updating primary home, Error: \(error)")
-                                                self.handleError(error)
+                                                self.handleError(error!)
                                             } else {
-                                                Core.sharedInstance.currentHome = manager.homes[0] as? HMHome
+                                                Core.sharedInstance.currentHome = manager.homes[0]
                                                 NSLog("DidSetPrimaryHome")
                                             }
                                         }
@@ -185,14 +183,14 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func home(home: HMHome, didAddUser user: HMUser!) {
+    func home(home: HMHome, didAddUser user: HMUser) {
         NSLog("Did Add user: \(user)")
     }
     
-    func home(home: HMHome, didAddAccessory accessory: HMAccessory!)
+    func home(home: HMHome, didAddAccessory accessory: HMAccessory)
     {
-        for accessory in Core.sharedInstance.currentHome!.accessories as! [HMAccessory] {
-            if !contains(objects, accessory) {
+        for accessory in Core.sharedInstance.currentHome!.accessories as [HMAccessory] {
+            if !objects.contains(accessory) {
                 objects.insert(accessory, atIndex: 0)
                 accessory.delegate = self
                 accessoriesTableView.insertRowsAtIndexPaths([NSIndexPath(forRow:0, inSection:0)], withRowAnimation: .Automatic)
@@ -200,10 +198,10 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func home(home: HMHome, didRemoveAccessory accessory: HMAccessory!)
+    func home(home: HMHome, didRemoveAccessory accessory: HMAccessory)
     {
-        if contains(objects, accessory) {
-            let index = find(objects, accessory)
+        if objects.contains(accessory) {
+            let index = objects.indexOf(accessory)
             objects.removeAtIndex(index!)
             accessoriesTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:index!, inSection:0)], withRowAnimation: .Fade)
         }
@@ -217,13 +215,13 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     func accessoryDidUpdateReachability(accessory: HMAccessory)
     {
         if accessory.reachable {
-            if contains(objects, accessory) {
-                for service in accessory.services as! [HMService] {
-                    for characteristic in service.characteristics as! [HMCharacteristic] {
-                        if contains(characteristic.properties as! [String], HMCharacteristicPropertyReadable as String) {
+            if objects.contains(accessory) {
+                for service in accessory.services as [HMService] {
+                    for characteristic in service.characteristics {
+                        if characteristic.properties.contains(HMCharacteristicPropertyReadable) {
                             characteristic.readValueWithCompletionHandler(
                                 {
-                                    (error:NSError!) in
+                                    error in
                                     if error != nil {
                                         NSLog("Error read Char: \(characteristic), error: \(error)")
                                     }
@@ -232,7 +230,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                         }
                     }
                 }
-                let index = find(objects, accessory)
+                let index = objects.indexOf(accessory)
                 let cell = accessoriesTableView.cellForRowAtIndexPath(NSIndexPath(forRow:index!, inSection:0))
                 if accessory.reachable {
                     if let cell = cell {
@@ -248,7 +246,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!)
+    func accessory(accessory: HMAccessory, service: HMService, didUpdateValueForCharacteristic characteristic: HMCharacteristic)
     {
         NSLog("didUpdateValueForCharacteristic:\(characteristic)")
         NSNotificationCenter.defaultCenter().postNotificationName(characteristicUpdateNotification, object: nil, userInfo: ["accessory":accessory,"service":service,"characteristic":characteristic])
@@ -265,7 +263,7 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         let object = objects[indexPath.row] as HMAccessory
         if object.reachable {
@@ -286,13 +284,13 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func removeEverything() {
         self.objects.removeAll(keepCapacity: false)
-        self.objects += (Core.sharedInstance.currentHome!.accessories as! [HMAccessory])
+        self.objects += (Core.sharedInstance.currentHome!.accessories)
         for accessory in self.objects {
             accessory.delegate = self
         }
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         var options = [UITableViewRowAction]()
         
@@ -318,11 +316,11 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                     let accessory = strongSelf.objects[indexPath.row] as HMAccessory
                     accessory.identifyWithCompletionHandler(
                         {
-                            (error:NSError!) in
+                            error in
                             if (error != nil) {
-                                println("Failed to identify \(error)")
+                                print("Failed to identify \(error)")
                             }else{
-                                println("Successfully identify accessory")
+                                print("Successfully identify accessory")
                             }
                         }
                     )
@@ -341,10 +339,10 @@ class AccessoryViewController: UIViewController, UITableViewDataSource, UITableV
                     [weak self]
                     (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
                     let isBridge = self?.objects[indexPath.row].identifiersForBridgedAccessories
-                    Core.sharedInstance.currentHome?.removeAccessory(self?.objects[indexPath.row], completionHandler:
+                    Core.sharedInstance.currentHome?.removeAccessory(self!.objects[indexPath.row], completionHandler:
                         {
                             [weak self]
-                            (error:NSError!) in
+                            error in
                             if error != nil {
                                 NSLog("Delete Accessory error: \(error)")
                             }else{

@@ -29,7 +29,7 @@ class GarageInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         if let context = context as? HMService {
             self.currentService = context
             
-            for charactertistic in self.currentService.characteristics as! [HMCharacteristic] {
+            for charactertistic in self.currentService.characteristics as [HMCharacteristic] {
                 switch charactertistic.characteristicType {
                 case HMCharacteristicTypeCurrentDoorState:
                     self.currentDoorStateChar = charactertistic
@@ -160,7 +160,7 @@ class GarageInterfaceController: WKInterfaceController, HMAccessoryDelegate {
         })
     }
     
-    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService, didUpdateValueForCharacteristic characteristic: HMCharacteristic) {
         switch characteristic {
         case self.currentDoorStateChar:
             if let value = self.currentDoorStateChar.value as? Int {

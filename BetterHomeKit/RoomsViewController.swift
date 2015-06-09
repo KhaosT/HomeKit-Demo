@@ -38,9 +38,9 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
+                let textField = alert.textFields![0]
                 if let strongSelf = self {
-                    Core.sharedInstance.currentHome?.addRoomWithName(textField.text, completionHandler:
+                    Core.sharedInstance.currentHome?.addRoomWithName(textField.text!, completionHandler:
                         {
                             room,error in
                             if let error = error {
@@ -83,22 +83,22 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("roomCell", forIndexPath: indexPath) as UITableViewCell
         
-        let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as! HMRoom
+        let room = Core.sharedInstance.currentHome?.rooms[indexPath.row]
 
-        cell.textLabel?.text = room.name
+        cell.textLabel?.text = room?.name
         
         var detailText = ""
         for(var i=0; i<Core.sharedInstance.currentHome?.zones.count; i++)
         {
-            let zone = Core.sharedInstance.currentHome?.zones[i] as! HMZone
-            if let rooms = zone.rooms
+            let zone = Core.sharedInstance.currentHome?.zones[i]
+            if let rooms = zone?.rooms
             {
                 for iroom in rooms
                 {
-                    if iroom.name == room.name {
-                        detailText += zone.name + " "
+                    if iroom.name == room?.name {
+                        detailText += zone!.name + " "
                     }
                 }
             }
@@ -110,7 +110,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let accessory = pendingAccessory {
-            let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as! HMRoom
+            let room = Core.sharedInstance.currentHome!.rooms[indexPath.row]
             Core.sharedInstance.currentHome?.assignAccessory(accessory.toHMAccessory(), toRoom: room, completionHandler:
                 {
                     [weak self]
@@ -130,18 +130,17 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                 {
-                    [weak self]
                     (action:UIAlertAction!) in
-                    let textField = alert.textFields?[0] as! UITextField
-                    let room = Core.sharedInstance.currentHome?.rooms?[indexPath.row] as! HMRoom
-                    room.updateName(textField.text, completionHandler:
+                    let textField = alert.textFields![0]
+                    let room = Core.sharedInstance.currentHome!.rooms[indexPath.row]
+                    room.updateName(textField.text!, completionHandler:
                         {
                             error in
                             if let error = error {
-                                println("Error:\(error)")
+                                print("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                cell?.textLabel?.text = Core.sharedInstance.currentHome?.rooms?[indexPath.row].name
+                                cell?.textLabel?.text = Core.sharedInstance.currentHome!.rooms[indexPath.row].name
                             }
                         }
                     )
@@ -159,7 +158,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         return true
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         var options = [UITableViewRowAction]()
     
@@ -168,7 +167,7 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
                 if let strongSelf = self {
-                    if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
+                    if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] {
                         strongSelf.performSegueWithIdentifier("presentZonesVC", sender: room)
                         tableView.setEditing(false, animated: true)
                     }
@@ -186,16 +185,14 @@ class RoomsViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 
                     [weak self]
                     (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
-                    if let strongSelf = self {
-                        if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] as? HMRoom {
-                            Core.sharedInstance.currentHome?.removeRoom(room) {
-                                [weak self]
-                                error in
-                                if error != nil {
-                                    NSLog("Failed removing room, error:\(error)")
-                                } else {
-                                    self?.roomTableView.reloadData()
-                                }
+                    if let room = Core.sharedInstance.currentHome?.rooms[indexPath.row] {
+                        Core.sharedInstance.currentHome?.removeRoom(room) {
+                            [weak self]
+                            error in
+                            if error != nil {
+                                NSLog("Failed removing room, error:\(error)")
+                            } else {
+                                self?.roomTableView.reloadData()
                             }
                         }
                     }

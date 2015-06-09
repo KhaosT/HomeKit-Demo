@@ -40,8 +40,8 @@ class ServicesInterfaceController: WKInterfaceController, HMAccessoryDelegate {
     func updateServices() {
         self.servicesTable.setNumberOfRows(self.currentAccessory.services.count, withRowType: "SingleLabelRow")
         for index in 0..<self.currentAccessory.services.count {
-            var row:SingleLabelRow = self.servicesTable.rowControllerAtIndex(index) as! SingleLabelRow
-            var service = self.currentAccessory.services[index] as! HMService
+            let row:SingleLabelRow = self.servicesTable.rowControllerAtIndex(index) as! SingleLabelRow
+            let service = self.currentAccessory.services[index] as HMService
             if let serviceDesc = HomeKitUUIDs[service.serviceType] {
                 row.textLabel.setText("\(serviceDesc)")
             }else{
@@ -56,7 +56,7 @@ class ServicesInterfaceController: WKInterfaceController, HMAccessoryDelegate {
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         NSLog("Did Select Row:\(rowIndex)")
-        var service = self.currentAccessory.services[rowIndex] as! HMService
+        let service = self.currentAccessory.services[rowIndex] as HMService
         switch service.serviceType {
         case HMServiceTypeLightbulb:
             NSLog("Light Bulb")

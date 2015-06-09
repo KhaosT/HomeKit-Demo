@@ -38,7 +38,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
         permissionTimer = nil
         if !isPresenting {
             isPresenting = true
-            var errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
+            let errorObject = ErrorObject(title: "Accept HomeKit Permission", details: "Please accept HomeKit permission on iOS side.")
             self.presentControllerWithName("ErrorInfoController", context: errorObject)
         }
     }
@@ -72,7 +72,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
                             controller.dismissController()
                             self.homes.append(home)
                             
-                            if let index = find(self.homes, home) {
+                            if let index = self.homes.indexOf(home) {
                                 self.homesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
                                 var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as! SingleLabelRow
                                 var home = self.homeManager.homes[index] as! HMHome
@@ -96,8 +96,8 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
             } else {
                 self.homesTable.setNumberOfRows(self.homes.count, withRowType: "SingleLabelRow")
                 for index in 0..<self.homes.count {
-                    var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as! SingleLabelRow
-                    var home = self.homes[index]
+                    let row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as! SingleLabelRow
+                    let home = self.homes[index]
                     row.textLabel.setText("\(home.name)")
                 }
             }
@@ -106,7 +106,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     }
     
     func presentNoHomeVC() {
-        var errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
+        let errorObject = ErrorObject(title: "No Home Available", details: "Please make sure there is at least one home in HomeKit database.")
         errorObject.actionButton = "Add Home"
         errorObject.action = self.remoteAddHome
         isPresenting = true
@@ -119,23 +119,23 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
         permissionTimer?.invalidate()
         permissionTimer = nil
         
-        self.homes = manager.homes as! [HMHome]
+        self.homes = manager.homes as [HMHome]
         self.updateHomes()
     }
     
-    func homeManager(manager: HMHomeManager, didAddHome home: HMHome!) {
+    func homeManager(manager: HMHomeManager, didAddHome home: HMHome) {
         self.homes.append(home)
         
-        if let index = find(self.homes, home) {
+        if let index = self.homes.indexOf(home) {
             self.homesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
-            var row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as! SingleLabelRow
-            var home = self.homeManager.homes[index] as! HMHome
+            let row:SingleLabelRow = self.homesTable.rowControllerAtIndex(index) as! SingleLabelRow
+            let home = self.homeManager.homes[index] as HMHome
             row.textLabel.setText("\(home.name)")
         }
     }
     
-    func homeManager(manager: HMHomeManager, didRemoveHome home: HMHome!) {
-        if let index = find(self.homes, home) {
+    func homeManager(manager: HMHomeManager, didRemoveHome home: HMHome) {
+        if let index = self.homes.indexOf(home) {
             self.homesTable.removeRowsAtIndexes(NSIndexSet(index: index))
             self.homes.removeAtIndex(index)
         }
@@ -147,7 +147,7 @@ class InterfaceController: WKInterfaceController, HMHomeManagerDelegate {
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         NSLog("Did Select Row:\(rowIndex)")
-        var home = self.homeManager.homes[rowIndex] as! HMHome
+        let home = self.homeManager.homes[rowIndex] as HMHome
         self.pushControllerWithName("AccessoriesController", context: home)
     }
 }

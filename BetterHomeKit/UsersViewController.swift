@@ -34,7 +34,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func fetchUsers() {
         usersArray.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            for user in currentHome.users as! [HMUser]{
+            for user in currentHome.users as [HMUser]{
                 usersArray.append(user)
             }
         }
@@ -63,8 +63,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             user, error in
             if error != nil {
                 NSLog("Add user failed: \(error)")
-                if error.code == 41 {
-                    var alert = UIAlertController(title: "Failed", message: "Failed to add user to home. Normally this happens because not all accessories are reachable. Please try again after all accessories are reachable.", preferredStyle: UIAlertControllerStyle.Alert)
+                if error!.code == 41 {
+                    let alert = UIAlertController(title: "Failed", message: "Failed to add user to home. Normally this happens because not all accessories are reachable. Please try again after all accessories are reachable.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
@@ -87,7 +87,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as UITableViewCell
         
         cell.textLabel?.text = usersArray[indexPath.row].name
         cell.detailTextLabel?.text = "User"

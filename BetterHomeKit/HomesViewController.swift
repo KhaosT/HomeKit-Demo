@@ -31,9 +31,9 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
+                let textField = alert.textFields?[0]
                 if let strongSelf = self {
-                    strongSelf.homeManager?.addHomeWithName(textField.text, completionHandler:
+                    strongSelf.homeManager?.addHomeWithName(textField!.text!, completionHandler:
                         {
                             room,error in
                             if let error = error {
@@ -61,9 +61,9 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
-        let home = self.homeManager?.homes?[indexPath.row] as! HMHome
+        let home = self.homeManager!.homes[indexPath.row]
         
         cell.textLabel?.text = home.name
         
@@ -71,7 +71,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let home = self.homeManager?.homes?[indexPath.row] as! HMHome
+        let home = self.homeManager!.homes[indexPath.row]
         
         Core.sharedInstance.currentHome = home
         
@@ -88,7 +88,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         var options = [UITableViewRowAction]()
         
@@ -96,7 +96,7 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
-                if let home = self?.homeManager?.homes?[indexPath.row] as? HMHome {
+                if let home = self?.homeManager?.homes[indexPath.row] {
                     self?.homeManager?.removeHome(home) {
                         error in
                         if error != nil {
@@ -122,16 +122,16 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
-                        let home = self?.homeManager?.homes?[indexPath.row] as! HMHome
-                        home.updateName(textField.text, completionHandler:
+                        let textField = alert.textFields?[0]
+                        let home = self?.homeManager!.homes[indexPath.row]
+                        home!.updateName(textField!.text!, completionHandler:
                             {
                                 error in
                                 if let error = error {
-                                    println("Error:\(error)")
+                                    print("Error:\(error)")
                                 }else{
                                     let cell = tableView.cellForRowAtIndexPath(indexPath)
-                                    cell?.textLabel?.text = self?.homeManager?.homes?[indexPath.row].name
+                                    cell?.textLabel?.text = self?.homeManager?.homes[indexPath.row].name
                                 }
                             }
                         )
@@ -146,11 +146,11 @@ class HomesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 [weak self]
                 (action:UITableViewRowAction!, indexPath:NSIndexPath!) in
-                let home = self?.homeManager?.homes?[indexPath.row] as! HMHome
-                self?.homeManager?.updatePrimaryHome(home, completionHandler: {
+                let home = self?.homeManager?.homes[indexPath.row]
+                self?.homeManager?.updatePrimaryHome(home!, completionHandler: {
                     error in
                     if let error = error {
-                        println("Error:\(error)")
+                        print("Error:\(error)")
                     } else {
                         Core.sharedInstance.currentHome = home
                         

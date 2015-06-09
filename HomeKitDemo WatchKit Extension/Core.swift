@@ -8,8 +8,10 @@
 
 import HomeKit
 
+@available(watchOSApplicationExtension 20000, *)
 private let _sharedCore = Core()
 
+@available(watchOSApplicationExtension 20000, *)
 class Core {
     class var sharedInstance : Core {
         return _sharedCore

@@ -34,17 +34,15 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
             {
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
-                self.detailItem!.updateName(textField.text, completionHandler:
-                    {
-                        (error:NSError!) in
-                        if (error == nil) {
-                            self.title = textField.text
-                        } else {
-                            NSLog("Error:\(error)")
-                        }
+                let textField = alert.textFields?[0]
+                self.detailItem!.updateName(textField!.text!, completionHandler: {
+                    error in
+                    if error != nil {
+                        NSLog("Error:\(error)")
+                    } else {
+                        self.title = textField!.text
                     }
-                )
+                })
             }))
         dispatch_async(dispatch_get_main_queue(),
             {
@@ -56,8 +54,8 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Update the user interface for the detail item.
         services.removeAll(keepCapacity: true)
         if let detailItem = detailItem {
-            for service in detailItem.services as! [HMService] {
-                if !contains(services, service) {
+            for service in detailItem.services as [HMService] {
+                if !services.contains(service) {
                     services.append(service)
                 }
             }
@@ -84,7 +82,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCharacteristic" {
-            let indexPath = servicesTableView?.indexPathForSelectedRow()
+            let indexPath = servicesTableView?.indexPathForSelectedRow
             if let indexPath = indexPath {
                 let object = services[indexPath.row] as HMService
                 servicesTableView?.deselectRowAtIndexPath(indexPath, animated: true)
@@ -109,24 +107,16 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        let object = services[indexPath.row] as HMService
-        if (object.name != nil) {
-            cell.textLabel?.text = object.name
-            if let serviceDesc = HomeKitUUIDs[object.serviceType] {
-                cell.detailTextLabel?.text = serviceDesc
-            }else{
-                cell.detailTextLabel?.text = object.serviceType
-            }
+        let object = services[indexPath.row]
+        cell.textLabel?.text = object.name
+        if let serviceDesc = HomeKitUUIDs[object.serviceType] {
+            cell.detailTextLabel?.text = serviceDesc
         }else{
-            if let serviceDesc = HomeKitUUIDs[object.serviceType] {
-                cell.detailTextLabel?.text = serviceDesc
-            }else{
-                cell.detailTextLabel?.text = object.serviceType
-            }
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = object.serviceType
         }
+        
         return cell
     }
     
@@ -134,7 +124,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         NSLog("accessoryDidUpdateName \(accessory)")
     }
     
-    func accessory(accessory: HMAccessory, didUpdateNameForService service: HMService!) {
+    func accessory(accessory: HMAccessory, didUpdateNameForService service: HMService) {
         NSLog("\(accessory) didUpdateNameForService \(service.name)")
     }
     
@@ -146,7 +136,7 @@ class ServiceViewController: UIViewController,UITableViewDataSource,UITableViewD
         NSLog("accessoryDidUpdateReachability \(accessory.reachable)")
     }
     
-    func accessory(accessory: HMAccessory, service: HMService!, didUpdateValueForCharacteristic characteristic: HMCharacteristic!) {
+    func accessory(accessory: HMAccessory, service: HMService, didUpdateValueForCharacteristic characteristic: HMCharacteristic) {
         NSLog("didUpdateValueForCharacteristic \(characteristic)")
     }
 

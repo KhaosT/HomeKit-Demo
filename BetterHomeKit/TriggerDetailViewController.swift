@@ -33,7 +33,7 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func updateActionSets () {
         actionSets.removeAll(keepCapacity: false)
         if let currentTrigger = currentTrigger {
-            actionSets += currentTrigger.actionSets as! [HMActionSet]
+            actionSets += currentTrigger.actionSets as [HMActionSet]
         }
         actionSetTableView.reloadData()
     }
@@ -63,7 +63,7 @@ class TriggerDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as UITableViewCell
         
         let actionSet = actionSets[indexPath.row] as HMActionSet
         

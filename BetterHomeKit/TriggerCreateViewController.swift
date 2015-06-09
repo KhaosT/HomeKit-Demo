@@ -24,12 +24,12 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
             nameField.text = pendingTrigger.name
             datePicker.date = pendingTrigger.fireDate
             if pendingTrigger.recurrence != nil {
-                if pendingTrigger.recurrence.minute == 5 {
+                if pendingTrigger.recurrence!.minute == 5 {
                     repeatSwitch.on = true
                     repeatDaily.enabled = false
                 }
                 
-                if pendingTrigger.recurrence.day == 1 {
+                if pendingTrigger.recurrence!.day == 1 {
                     repeatDaily.on = true
                     repeatSwitch.enabled = false
                 }
@@ -69,7 +69,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
             let triggerName = self.nameField.text
             let calendar = NSCalendar.currentCalendar()
             let selectedDate = self.datePicker.date
-            let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
+            let dateComp = calendar.components([NSCalendarUnit.Second, .Minute, .Hour, .Day, .Month, .Year, .Era] , fromDate: selectedDate)
             let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
             var recurrenceComp:NSDateComponents?
             
@@ -89,13 +89,13 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
                     NSLog("Failed updating recurrence, error:\(error)")
                 }
             }
-            pendingTrigger.updateName(triggerName) {
+            pendingTrigger.updateName(triggerName!) {
                 error in
                 if error != nil {
                     NSLog("Failed updating fire date, error:\(error)")
                 }
             }
-            pendingTrigger.updateFireDate(fireDate) {
+            pendingTrigger.updateFireDate(fireDate!) {
                 error in
                 if error != nil {
                     NSLog("Failed updating fire date, error:\(error)")
@@ -108,7 +108,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
                 let triggerName = self.nameField.text
                 let calendar = NSCalendar.currentCalendar()
                 let selectedDate = self.datePicker.date
-                let dateComp = calendar.components(NSCalendarUnit.CalendarUnitSecond | .CalendarUnitMinute | .CalendarUnitHour | .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitEra , fromDate: selectedDate)
+                let dateComp = calendar.components([NSCalendarUnit.Second, .Minute, .Hour, .Day, .Month, .Year, .Era] , fromDate: selectedDate)
                 let fireDate = calendar.dateWithEra(dateComp.era, year: dateComp.year, month: dateComp.month, day: dateComp.day, hour: dateComp.hour, minute: dateComp.minute, second: 0, nanosecond: 0)
                 
                 var recurrenceComp:NSDateComponents?
@@ -123,7 +123,7 @@ class TriggerCreateViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 
-                let trigger = HMTimerTrigger(name: triggerName, fireDate: fireDate, timeZone: nil, recurrence: recurrenceComp, recurrenceCalendar: nil)
+                let trigger = HMTimerTrigger(name: triggerName!, fireDate: fireDate!, timeZone: nil, recurrence: recurrenceComp, recurrenceCalendar: nil)
                 currentHome.addTrigger(trigger) {
                     [weak self]
                     error in

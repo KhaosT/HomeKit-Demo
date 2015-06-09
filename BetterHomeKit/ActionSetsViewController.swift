@@ -30,7 +30,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     func updateActionSets () {
         actionSets.removeAll(keepCapacity: false)
         if let currentHome = Core.sharedInstance.currentHome {
-            actionSets += currentHome.actionSets as! [HMActionSet]
+            actionSets += currentHome.actionSets as [HMActionSet]
         }
         actionSetsTableview.reloadData()
     }
@@ -43,16 +43,14 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
             {
                 [weak self]
                 (action:UIAlertAction!) in
-                let textField = alert.textFields?[0] as! UITextField
-                if let strongSelf = self {
-                    Core.sharedInstance.currentHome?.addActionSetWithName(textField.text){
-                        [weak self]
-                        (actionSet: HMActionSet!, error: NSError!) in
-                        if error != nil {
-                            NSLog("Failed to add action set, Error: \(error)")
-                        } else {
-                            self?.updateActionSets()
-                        }
+                let textField = alert.textFields![0]
+                Core.sharedInstance.currentHome?.addActionSetWithName(textField.text!){
+                    [weak self]
+                    actionSet, error in
+                    if error != nil {
+                        NSLog("Failed to add action set, Error: \(error)")
+                    } else {
+                        self?.updateActionSets()
                     }
                 }
         }))
@@ -76,7 +74,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ActionSetCell", forIndexPath: indexPath) as UITableViewCell
         
         let actionSet = actionSets[indexPath.row]
         cell.textLabel?.text = actionSet.name
@@ -101,8 +99,8 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if let pendingChar = pendingCharacteristic?.toHMCharacteristic() {
             let object = pendingChar
             var charDesc = object.characteristicType
-            charDesc = HomeKitUUIDs[object.characteristicType]
-            switch (object.metadata.format as NSString) {
+            charDesc = HomeKitUUIDs[object.characteristicType]!
+            switch (object.metadata!.format!) {
             case HMCharacteristicMetadataFormatBool:
                 let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Please choose the target state for this action", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "On", style: UIAlertActionStyle.Default, handler:
@@ -137,16 +135,16 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.presentViewController(alert, animated: true, completion: nil)
                 })
             case HMCharacteristicMetadataFormatInt,HMCharacteristicMetadataFormatFloat,HMCharacteristicMetadataFormatUInt8,HMCharacteristicMetadataFormatUInt16,HMCharacteristicMetadataFormatUInt32,HMCharacteristicMetadataFormatUInt64:
-                let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target state for this action from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+                let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target state for this action from \(object.metadata!.minimumValue) to \(object.metadata!.maximumValue). Unit is \(object.metadata!.units)", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
+                        let textField = alert.textFields?[0]
                         let f = NSNumberFormatter()
                         f.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                        let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: f.numberFromString(textField.text))
+                        let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: f.numberFromString(textField!.text!)!)
                         actionSet.addAction(writeAction) {
                             error in
                             if error != nil {
@@ -161,14 +159,14 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.presentViewController(alert, animated: true, completion: nil)
                 })
             case HMCharacteristicMetadataFormatString:
-                let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target \(charDesc) from \(object.metadata.minimumValue) to \(object.metadata.maximumValue). Unit is \(object.metadata.units)", preferredStyle: .Alert)
+                let alert:UIAlertController = UIAlertController(title: "Target \(charDesc)", message: "Enter the target \(charDesc) from \(object.metadata!.minimumValue) to \(object.metadata!.maximumValue). Unit is \(object.metadata!.units)", preferredStyle: .Alert)
                 alert.addTextFieldWithConfigurationHandler(nil)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
-                        let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: textField.text)
+                        let textField = alert.textFields?[0]
+                        let writeAction = HMCharacteristicWriteAction(characteristic: object, targetValue: textField!.text!)
                         actionSet.addAction(writeAction) {
                             error in
                             if error != nil {
@@ -196,7 +194,7 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
         return true
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         var options = [UITableViewRowAction]()
         
@@ -228,11 +226,11 @@ class ActionSetsViewController: UIViewController, UITableViewDelegate, UITableVi
                 alert.addAction(UIAlertAction(title: "Rename", style: UIAlertActionStyle.Default, handler:
                     {
                         (action:UIAlertAction!) in
-                        let textField = alert.textFields?[0] as! UITextField
-                        actionSet.updateName(textField.text) {
+                        let textField = alert.textFields?[0]
+                        actionSet.updateName(textField!.text!) {
                             error in
                             if let error = error {
-                                println("Error:\(error)")
+                                print("Error:\(error)")
                             }else{
                                 let cell = tableView.cellForRowAtIndexPath(indexPath)
                                 cell?.textLabel?.text = actionSet.name

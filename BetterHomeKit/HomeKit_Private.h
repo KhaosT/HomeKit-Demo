@@ -8,9 +8,3 @@
 
 @import Foundation;
 @import HomeKit;
-
-@interface HMCharacteristic ()
-
-- (id)characteristicTypeDescription;
-
-@end
