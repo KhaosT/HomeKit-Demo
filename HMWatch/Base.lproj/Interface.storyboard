@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.17" systemVersion="14E26a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8121.17" systemVersion="14E33b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8066.14"/>
@@ -12,7 +12,7 @@
                     <items>
                         <table alignment="center" id="Pgp-QL-ejh">
                             <items>
-                                <tableRow identifier="SingleLabelRow" id="AOv-DI-9ku" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                <tableRow identifier="SingleLabelRow" id="AOv-DI-9ku" customClass="SingleLabelRow" customModule="HMWatch_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="OUP-QK-5uj">
                                         <items>
                                             <label alignment="center" verticalAlignment="center" text="{Home}" id="nEq-33-D3s"/>
@@ -64,7 +64,7 @@
                     <items>
                         <table alignment="center" id="q8l-CN-FHL">
                             <items>
-                                <tableRow identifier="SingleLabelRow" id="Ydo-gb-KO9" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                <tableRow identifier="SingleLabelRow" id="Ydo-gb-KO9" customClass="SingleLabelRow" customModule="HMWatch_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="H8q-t5-402">
                                         <items>
                                             <label alignment="center" verticalAlignment="center" text="{Accessory}" id="Bud-3f-q26"/>
@@ -101,7 +101,7 @@
                     <items>
                         <table alignment="center" id="fYI-HW-7n6">
                             <items>
-                                <tableRow identifier="SingleLabelRow" id="VI4-uJ-8Bt" customClass="SingleLabelRow" customModule="HomeKitDemo_WatchKit_Extension">
+                                <tableRow identifier="SingleLabelRow" id="VI4-uJ-8Bt" customClass="SingleLabelRow" customModule="HMWatch_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="q8R-5m-EGe">
                                         <items>
                                             <label alignment="center" verticalAlignment="center" text="{Service}" id="94C-6Y-afL"/>
