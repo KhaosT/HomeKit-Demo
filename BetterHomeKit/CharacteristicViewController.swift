@@ -303,7 +303,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
             cell.detailTextLabel?.text = object.characteristicType
         }
         if (object.value != nil) {
-            cell.textLabel?.text = "\(object.value)"
+            cell.textLabel?.text = "\(object.value!)"
         }else{
             cell.textLabel?.text = ""
         }
@@ -394,7 +394,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                 dispatch_async(dispatch_get_main_queue(),
                                     {
                                         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                            cell.textLabel?.text = "\(object.value)"
+                                            cell.textLabel?.text = "\(object.value!)"
                                         }
                                     }
                                 )
@@ -430,7 +430,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
                                             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                                cell.textLabel?.text = "\(object.value)"
+                                                cell.textLabel?.text = "\(object.value!)"
                                             }
                                         }
                                     )
@@ -459,7 +459,7 @@ class CharacteristicViewController: UIViewController,UITableViewDataSource,UITab
                                     dispatch_async(dispatch_get_main_queue(),
                                         {
                                             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                                                cell.textLabel?.text = "\(object.value)"
+                                                cell.textLabel?.text = "\(object.value!)"
                                             }
                                         }
                                     )

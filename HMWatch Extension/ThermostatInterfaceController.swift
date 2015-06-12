@@ -16,6 +16,7 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
     @IBOutlet weak var currentTempLabel: WKInterfaceLabel!
     @IBOutlet weak var targetTempLabel: WKInterfaceLabel!
     @IBOutlet weak var targetTempSlider: WKInterfaceSlider!
+    @IBOutlet var targetTempPicker: WKInterfacePicker!
     
     var currentService:HMService!
     
@@ -42,6 +43,16 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
                     }
                 case HMCharacteristicTypeTargetTemperature:
                     self.targetTempChar = charactertistic
+                    
+                    var pickerItems = [WKPickerItem]()
+                    for i in 10 ... 38 {
+                        let item = WKPickerItem()
+                        item.title = "\(i)"
+                        pickerItems.append(item)
+                    }
+                    self.targetTempPicker.setItems(pickerItems)
+                    self.targetTempPicker.focusForCrownInput()
+                    
                     if let value = self.targetTempChar.value as? Float {
                         self.targetTempLabel.setText("\(Int(value))°")
                         self.targetTempSlider.setValue(value)
@@ -70,6 +81,13 @@ class ThermostatInterfaceController: WKInterfaceController, HMAccessoryDelegate 
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
         self.updatesCharacteristicsNotifications(false)
+    }
+    
+    @IBAction func didSelectValue(value: Int) {
+        NSLog("Select Value: \(value)")
+        let tValue = Float(value + 10)
+        self.targetTempSlider.setValue(tValue)
+        self.didUpdateTargetTemp(tValue)
     }
     
     func updatesCharacteristicsNotifications(state: Bool) {

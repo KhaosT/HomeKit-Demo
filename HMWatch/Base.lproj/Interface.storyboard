@@ -223,6 +223,11 @@
                                 <label alignment="center" verticalAlignment="center" text="Current Temp: 22°" id="sYi-2m-Dmz"/>
                             </items>
                         </group>
+                        <picker width="1" height="2" alignment="left" style="sequence" id="M5G-uS-lqu">
+                            <connections>
+                                <action selector="didSelectValue:" destination="PNo-Jt-GGj" id="CVm-KD-auS"/>
+                            </connections>
+                        </picker>
                         <group width="1" alignment="center" id="hWu-Be-qWe">
                             <items>
                                 <label width="25" alignment="center" verticalAlignment="center" text="20°" textAlignment="center" id="NNn-l9-9yp"/>
@@ -251,11 +256,12 @@
                     <connections>
                         <outlet property="currentTempLabel" destination="sYi-2m-Dmz" id="zcy-Xz-v9k"/>
                         <outlet property="targetTempLabel" destination="NNn-l9-9yp" id="Xd2-mC-5wI"/>
+                        <outlet property="targetTempPicker" destination="M5G-uS-lqu" id="7sC-pW-msi"/>
                         <outlet property="targetTempSlider" destination="1m0-C6-178" id="c1o-jP-6Jb"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="484" y="989"/>
+            <point key="canvasLocation" x="484" y="966.5"/>
         </scene>
         <!--Garage-->
         <scene sceneID="geF-VE-sCR">
