@@ -9,7 +9,7 @@ class Accessory {
     init(hmAccessory:HMAccessory) {
         internalAccessory = hmAccessory
         databaseIndex = Core.sharedInstance.versionIndex
-        accessoryIdentifier = hmAccessory.identifier.copy() as! NSUUID
+        accessoryIdentifier = hmAccessory.identifier.copy() as NSUUID
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCacheInvalidation", name: homeUpdateNotification, object: nil)
     }
@@ -47,7 +47,7 @@ class Characteristic {
         databaseIndex = Core.sharedInstance.versionIndex
 
         characteristicType = "\(hmChar.characteristicType)"
-        accessoryIdentifier = hmChar.service.accessory.identifier.copy() as! NSUUID
+        accessoryIdentifier = hmChar.service.accessory.identifier.copy() as NSUUID
         serviceName = hmChar.service.name
         serviceType = hmChar.service.serviceType
         
@@ -58,10 +58,10 @@ class Characteristic {
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Characteristic Internal Cache")
             if let accessory = Core.sharedInstance.getAccessoryWithIdentifier(accessoryIdentifier) {
-                for service in accessory.services as! [HMService] {
+                for service in accessory.services as [HMService] {
                     if service.serviceType == serviceType {
                         if service.name == serviceName {
-                            for characteristic in service.characteristics as! [HMCharacteristic] {
+                            for characteristic in service.characteristics as [HMCharacteristic] {
                                 if characteristic.characteristicType == characteristicType {
                                     NSLog("Recovered Characteristic")
                                     internalChar = characteristic
@@ -102,7 +102,7 @@ class Room {
         if databaseIndex != Core.sharedInstance.versionIndex {
             NSLog("Invalidate Room Internal Cache")
             if let currentHome = Core.sharedInstance.currentHome {
-                for room in currentHome.rooms as! [HMRoom] {
+                for room in currentHome.rooms as [HMRoom] {
                     if room.name == roomName {
                         NSLog("Recovered Room")
                         internalRoom = room

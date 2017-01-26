@@ -34,7 +34,7 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        self.accessories = self.currentHome.accessories as! [HMAccessory]
+        self.accessories = self.currentHome.accessories as [HMAccessory]
         self.updateAccessories()
     }
 
@@ -52,7 +52,7 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
         
         self.accessoriesTable.setNumberOfRows(self.accessories.count, withRowType: "SingleLabelRow")
         for index in 0..<self.accessories.count {
-            var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as! SingleLabelRow
+            var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow
             var accessory = self.accessories[index] as HMAccessory
             row.textLabel.setText("\(accessory.name)")
         }
@@ -63,8 +63,8 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
         
         if let index = find(self.accessories, accessory) {
             self.accessoriesTable.insertRowsAtIndexes(NSIndexSet(index: index), withRowType: "SingleLabelRow")
-            var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as! SingleLabelRow
-            var accessory = self.currentHome.accessories[index] as! HMAccessory
+            var row:SingleLabelRow = self.accessoriesTable.rowControllerAtIndex(index) as SingleLabelRow
+            var accessory = self.currentHome.accessories[index] as HMAccessory
             row.textLabel.setText("\(accessory.name)")
         }
         
@@ -84,7 +84,7 @@ class AccessoriesInterfaceController: WKInterfaceController, HMHomeDelegate {
 
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         NSLog("Did Select Row:\(rowIndex)")
-        var accessory = self.currentHome.accessories[rowIndex] as! HMAccessory
+        var accessory = self.currentHome.accessories[rowIndex] as HMAccessory
         self.pushControllerWithName("ServicesController", context: accessory)
     }
 }
